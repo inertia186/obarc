@@ -1,4 +1,7 @@
-# OpenBazaar API Ruby Client
+OpenBazaar API Ruby Client
+==========================
+ 
+[![Build Status](https://travis-ci.org/inertia186/obarc.svg?branch=master)](https://travis-ci.org/inertia186/obarc)
 
 A simple OpenBazaar API client for Ruby.
 
