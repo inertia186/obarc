@@ -11,6 +11,7 @@ require 'obarc'
 require 'minitest/autorun'
 # require 'webmock/minitest'
 require 'yaml'
+require "codeclimate-test-reporter"
 
 if ENV["HELL_ENABLED"]
   require "minitest/hell"
