@@ -10,13 +10,13 @@ module OBarc
     end
 
     def test_image
-      response = @session.image('04192728d0fd8dfe6663f429a5c03a7faf907930')
+      response = @session.image hash: '04192728d0fd8dfe6663f429a5c03a7faf907930'
       assert response, response
     end
     
     def test_image_missing_guid
       begin
-        response = @session.image(nil)
+        response = @session.image(hash: nil)
         fail 'Should be 404'
       rescue RestClient::ResourceNotFound => e
         # success
@@ -24,7 +24,7 @@ module OBarc
     end
     
     def test_profile
-      response = @session.profile('2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
+      response = @session.profile(guid: '2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
       assert response['profile'], response
     end
     
@@ -34,8 +34,18 @@ module OBarc
     end
     
     def test_social_accounts
+      response = @session.social_accounts(guid: '2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
+      assert response.any?, response
+    end
+    
+    def test_social_accounts_self
       response = @session.social_accounts
       assert response.any?, response
+    end
+    
+    def test_listings
+      response = @session.listings(guid: '2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
+      assert response['listings'], response
     end
     
     def test_listings_self
@@ -43,13 +53,8 @@ module OBarc
       assert response['listings'], response
     end
     
-    def test_listings
-      response = @session.listings('2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
-      assert response['listings'], response
-    end
-    
     def test_followers
-      response = @session.followers('2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
+      response = @session.followers(guid: '2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
       assert response['followers'], response
     end
     
@@ -59,7 +64,7 @@ module OBarc
     end
     
     def test_following
-      response = @session.following('2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
+      response = @session.following(guid: '2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
       assert response.empty?, response
     end
     
@@ -70,13 +75,13 @@ module OBarc
     
     # Requires WebMock
     # def test_follow
-    #   response = @session.follow('0dea93045d3beda948517a62aaab33a82213bd7b')
+    #   response = @session.follow(guid: '0dea93045d3beda948517a62aaab33a82213bd7b')
     #   assert response['success'], response
     # end
     
     # Requires WebMock
     # def test_unfollow
-    #   response = @session.unfollow('0dea93045d3beda948517a62aaab33a82213bd7b')
+    #   response = @session.unfollow(guid: '0dea93045d3beda948517a62aaab33a82213bd7b')
     #   assert response['success'], response
     # end
     
@@ -135,13 +140,13 @@ module OBarc
     
     # Requires WebMock
     # def test_contracts
-    #   response = @session.contracts('3c7c653865952abd0a308300cdd8b770bf55d84a')
+    #   response = @session.contracts(id: '3c7c653865952abd0a308300cdd8b770bf55d84a')
     #   assert response['vendor_offer'], response
     # end
     
     # Requires WebMock
     # def test_contracts_wrong_guid
-    #   response = @session.contracts('3c7c653865952abd0a308300cdd8b770bf55d84a', '664b77de3ab547e13bcebca3cf296755b788fa74')
+    #   response = @session.contracts(id: '3c7c653865952abd0a308300cdd8b770bf55d84a', guid: '664b77de3ab547e13bcebca3cf296755b788fa74')
     #   refute response['vendor_offer'], response
     # end
     
@@ -187,12 +192,12 @@ module OBarc
     
     # Requires WebMock
     # def test_delete_contract
-    #   response = @session.delete_contract '0dee4786fd02d6bc673b50309a3c831acf78ec70'
+    #   response = @session.delete_contract id: '0dee4786fd02d6bc673b50309a3c831acf78ec70'
     #   assert response['success'], response
     # end
     
     def test_delete_contract_wrong
-      response = @session.delete_contract '99'
+      response = @session.delete_contract id: '99'
       refute response['success'], response
     end
     
@@ -301,6 +306,11 @@ module OBarc
     #   assert_equal response, settings, response
     # end
     
+    def test_update_settings_empty
+      response = @session.settings = {}
+      assert response.empty?, response
+    end
+    
     def test_settings
       response = @session.settings
       assert response['terms_conditions'], response
@@ -311,6 +321,11 @@ module OBarc
       assert response['peers'], response
     end
     
+    def test_routing_table
+      response = @session.routing_table
+      assert response.first['nat_type'], response
+    end
+    
     def test_notifications
       response = @session.notifications
       assert response['notifications'], response
@@ -318,39 +333,34 @@ module OBarc
     
     # Requires WebMock
     # def test_mark_notification_as_read
-    #   response = @session.mark_notification_as_read 'c4c0bfd525a19e6a58686ff13b185ebc8b6a3e50'
+    #   response = @session.mark_notification_as_read id: 'c4c0bfd525a19e6a58686ff13b185ebc8b6a3e50'
     #   refute response['sucess'], response
     # end
     
     def test_mark_notification_as_read_already_read
-      response = @session.mark_notification_as_read 'c4c0bfd525a19e6a58686ff13b185ebc8b6a3e50'
+      response = @session.mark_notification_as_read id: 'c4c0bfd525a19e6a58686ff13b185ebc8b6a3e50'
       refute response['sucess'], response
     end
     
     def test_mark_notification_as_read_bogus
-      response = @session.mark_notification_as_read '99'
+      response = @session.mark_notification_as_read id: '99'
       refute response['sucess'], response
     end
     
     def test_mark_notification_as_read_empty
-      response = @session.mark_notification_as_read nil
+      response = @session.mark_notification_as_read
       refute response['sucess'], response
     end
     
     # Requires WebMock
     # def test_broadcast
-    #   response = @session.broadcast = broadcast = 'hello world'
+    #   response = @session.broadcast = broadcast = {message: 'hello world'}
     #   assert_equal response, broadcast, response
     # end
     
     def test_btc_price
       response = @session.btc_price
       assert response['currencyCodes'], response
-    end
-    
-    def test_routing_table
-      response = @session.routing_table
-      assert response.first['nat_type'], response
     end
   end
 end
