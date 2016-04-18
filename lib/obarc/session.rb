@@ -50,7 +50,7 @@ module OBarc
     def settings; JSON[Api::get_settings(self)]; end
     def connected_peers; JSON[Api::get_connected_peers(self)]; end
     def notifications; JSON[Api::get_notifications(self)]; end
-    def mark_notification_as_read(notification = nil); JSON[Api::post_mark_notification_as_read(notifications, self)]; end
+    def mark_notification_as_read(notification = nil); JSON[Api::post_mark_notification_as_read(notification, self)]; end
     def broadcast=(message); JSON[Api::post_broadcast(message, self)]; end
     def btc_price; JSON[Api::get_btc_price(self)]; end
     def routing_table; JSON[Api::get_routing_table(self)]; end
@@ -59,6 +59,7 @@ module OBarc
       begin
         Api::get_shutdown(self)
       rescue Errno::ECONNREFUSED => e
+        # TODO Add logging.
       end
     end
   end
