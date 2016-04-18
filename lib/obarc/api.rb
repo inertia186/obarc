@@ -82,7 +82,7 @@ module OBarc
     end
     
     # DELETE api/v1/social_accounts
-    def post_social_accounts(social_accounts, options = {})
+    def delete_social_accounts(social_accounts, options = {})
       url = "#{build_base_url(options)}/social_accounts"
       execute method: :delete, url: url, headers:
         build_headers(options).merge(params: social_accounts.compact)

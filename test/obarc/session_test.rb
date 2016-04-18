@@ -117,7 +117,7 @@ module OBarc
     
     def test_add_social_account_empty
       response = @session.add_social_account {}
-      assert response['success'], response
+      refute response['success'], response
     end
     
     # Requires WebMock
@@ -130,7 +130,7 @@ module OBarc
     
     def test_delete_social_account_empty
       response = @session.add_social_account {}
-      assert response['success'], response
+      refute response['success'], response
     end
     
     # Requires WebMock
