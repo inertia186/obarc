@@ -18,6 +18,9 @@ else
   require "minitest/pride"
 end
 
+#WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com:443')
+CodeClimate::TestReporter.start
+
 using OBarc::Utils::Helper::ObjectExtensions
 
 class OBarc::Test < MiniTest::Test
