@@ -86,6 +86,10 @@ module OBarc
     # end
     
     def test_update_profile
+      response = @session.upload_image image: AVATAR_IMAGE
+      avatar_hash = response['image_hashes'][0]
+      response = @session.upload_image image: SPAM_IMAGE
+      header_hash = response['image_hashes'][0]
       response = @session.profile = profile = {
         about: 'about',
         short_description: 'short_description',
@@ -99,8 +103,8 @@ module OBarc
         secondary_color: 15132390,
         background_color: 12832757,
         text_color: 5526612,
-        # avatar: 'avatar',
-        # header: 'header',
+        avatar: avatar_hash,
+        header: header_hash,
         pgp_key: ''
       }
       assert_equal response, profile, response

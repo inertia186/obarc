@@ -30,9 +30,8 @@ module OBarc
       when :post_contract then [:post, 'contracts', args[0], args[1]]
       when :delete_contract then [:delete, 'contracts', args[0], args[1]]
       when :post_upload_image
-        [:post, 'upload_images', args[0].select do |key|
-          [:image, :avatar, :header].include? key
-        end, args[0]]
+        elements = [:image, :avatar, :header]
+        [:post, 'upload_images', args[0].slice(*elements), args[0]]
       when :get_notifications then [:get, 'get_notifications', nil, args[0]]
       else
         verb = m.to_s.split('_')
@@ -79,7 +78,7 @@ module OBarc
       if options.kind_of? Session
         {username: options.username, password: options.password}
       else
-        options.select { |key| key == :username || key == :password }
+        options.slice(:username, :password)
       end.compact
     end
     
@@ -95,7 +94,7 @@ module OBarc
       if options.kind_of? Session
         {cookies: options.cookies}
       else
-        options.select { |key| key == :cookies }
+        options.slice(:cookies)
       end
     end
   end
