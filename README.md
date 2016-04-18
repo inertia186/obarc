@@ -1,7 +1,7 @@
 OpenBazaar API Ruby Client
 ==========================
  
-[![Build Status](https://travis-ci.org/inertia186/obarc.svg?branch=master)](https://travis-ci.org/inertia186/obarc)
+[![Build Status](https://travis-ci.org/inertia186/obarc.svg?branch=master)](https://travis-ci.org/inertia186/obarc) [![Code Climate](https://codeclimate.com/github/inertia186/obarc/badges/gpa.svg)](https://codeclimate.com/github/inertia186/obarc) [![Test Coverage](https://codeclimate.com/github/inertia186/obarc/badges/coverage.svg)](https://codeclimate.com/github/inertia186/obarc)
 
 A simple OpenBazaar API client for Ruby.
 
