@@ -6,7 +6,9 @@ A simple OpenBazaar API client for Ruby.
 
 Add the gem to your Gemfile:
 
-gem 'obarc', github: 'inertia186/obarc'
+    gem 'obarc', github: 'inertia186/obarc'
+    
+Then:
 
     $ bundle install
 
