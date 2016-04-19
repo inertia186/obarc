@@ -34,7 +34,7 @@ module OBarc
     def following(following = nil); JSON[Api::get_following(following, self)]; end
     def follow(follow); JSON[Api::post_follow(follow, self)]; end
     def unfollow(unfollow); JSON[Api::post_unfollow(unfollow, self)]; end
-    def profile=(profile = {}); JSON[Api::post_profile(profile, self)]; end
+    def update_profile(profile = {}); JSON[Api::post_profile(profile, self)]; end
     def add_social_account(social_account = {}); JSON[Api::post_social_accounts(social_account, self)]; end
     def delete_social_account(social_account = {}); JSON[Api::delete_social_accounts(social_account, self)]; end
     def contracts(contracts); JSON[Api::get_contracts(contracts, self)]; end
@@ -46,12 +46,12 @@ module OBarc
     def confirm_order(confirm_order = {}); JSON[Api::post_confirm_order(confirm_order, self)]; end
     def upload_image(image = {}); JSON[Api::post_upload_image(image.merge(cookies: cookies, base_url: base_url))]; end
     def complete_order(complete_order = {}); JSON[Api::post_complete_order(complete_order, self)]; end
-    def settings=(settings); JSON[Api::post_settings(settings, self)]; end
+    def update_settings(settings = {}); JSON[Api::post_settings(settings, self)]; end
     def settings; JSON[Api::get_settings(self)]; end
     def connected_peers; JSON[Api::get_connected_peers(self)]; end
     def notifications; JSON[Api::get_notifications(self)]; end
     def mark_notification_as_read(notification = nil); JSON[Api::post_mark_notification_as_read(notification, self)]; end
-    def broadcast=(message); JSON[Api::post_broadcast(message, self)]; end
+    def broadcast(message = {}); JSON[Api::post_broadcast(message, self)]; end
     def btc_price; JSON[Api::get_btc_price(self)]; end
     def routing_table; JSON[Api::get_routing_table(self)]; end
     
