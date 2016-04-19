@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!file.README.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'>
+<h1 id="label-OpenBazaar+API+Ruby+Client">OpenBazaar API Ruby Client</h1>
+
+<p><a href="https://travis-ci.org/inertia186/obarc"><img
+src="https://travis-ci.org/inertia186/obarc.svg?branch=master"></a> <a
+href="https://codeclimate.com/github/inertia186/obarc"><img
+src="https://codeclimate.com/github/inertia186/obarc/badges/gpa.svg"></a>
+<a href="https://codeclimate.com/github/inertia186/obarc"><img
+src="https://codeclimate.com/github/inertia186/obarc/badges/coverage.svg"></a></p>
+
+<p>A simple OpenBazaar API client for Ruby.</p>
+
+<h3 id="label-Installation">Installation</h3>
+
+<p>Add the gem to your Gemfile:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>obarc</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>github:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>inertia186/obarc</span><span class='tstring_end'>&#39;</span></span></code></pre>
+
+<p>Then:</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle install</code></pre>
+
+<h3 id="label-Usage">Usage</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>obarc</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='id identifier rubyid_session'>session</span> <span class='op'>=</span> <span class='const'>OBarc</span><span class='op'>::</span><span class='const'>Session</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>username:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>username</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>password:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>password</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_profile'>profile</span> <span class='op'>=</span> <span class='id identifier rubyid_session'>session</span><span class='period'>.</span><span class='id identifier rubyid_profile'>profile</span>
+</code></pre>
+
+<pre class="code ruby"><code class="ruby">{&quot;profile&quot;:
+  {&quot;website&quot;: &quot;website&quot;,
+   &quot;public_key&quot;: &quot;b7d8f6ee04453e1babde87d12198ecd14be00aa998e85636767d8b00d2603e6d&quot;,
+   .
+   .
+   .
+   &quot;primary_color&quot;: 16777215,
+   &quot;background_color&quot;: 12832757,
+   &quot;email&quot;: &quot;email@bogus.com&quot;}}</code></pre>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_session'>session</span><span class='period'>.</span><span class='id identifier rubyid_update_profile'>update_profile</span><span class='lparen'>(</span><span class='label'>email:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>big@vendor.com</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+</code></pre>
+
+<pre class="code ruby"><code class="ruby">{&quot;success&quot;: true}</code></pre>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_session'>session</span><span class='period'>.</span><span class='id identifier rubyid_connected_peers'>connected_peers</span>
+</code></pre>
+
+<pre class="code ruby"><code class="ruby">{&quot;peers&quot;: [[&quot;5.37.3.8&quot;, 28467]], &quot;num_peers&quot;: 1}</code></pre>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_session'>session</span><span class='period'>.</span><span class='id identifier rubyid_upload_image'>upload_image</span><span class='lparen'>(</span><span class='label'>image:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAVlpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KTMInWQAAC91JREFUWAktl3mQHOV5xn99zH3u7K1d7Uq7CEkIpNVZRhagQDjKCcaxSIJNIJTjI5XCuakKceXyHy5XnJSr</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+</code></pre>
+
+<pre class="code ruby"><code class="ruby">{&quot;image_hashes&quot;: [&quot;a89810619833ef29d373c124ce05f362a313929e&quot;], &quot;success&quot;: true}</code></pre>
+
+<h2 id="label-Get+in+touch%21">Get in touch!</h2>
+
+<p>If you&#39;re using OBarc, I&#39;d love to hear from you. Drop me a line
+and tell me what you think!</p>
+
+<h2 id="label-Licence">Licence</h2>
+
+<p>I don&#39;t believe in intellectual “property”. If you do, consider OBarc
+as licensed under a Creative Commons <a
+href="http://creativecommons.org/publicdomain/zero/1.0/"><img
+src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a> License.</p>
+</div></div>
+
+    <div id="footer">
+  Generated on Mon Apr 18 21:36:19 2016 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.1.5).
+</div>
+
+  </body>
+</html>

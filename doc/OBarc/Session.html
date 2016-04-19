@@ -1,0 +1,3386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: OBarc::Session
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!OBarc/Session.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../OBarc.html" title="OBarc (module)">OBarc</a></span></span>
+     &raquo; 
+    <span class="title">Session</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: OBarc::Session
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">OBarc::Session</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/obarc/session.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="DEFAULT_OPTIONS-constant" class="">DEFAULT_OPTIONS =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='label'>protocol:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>http</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>server_host:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>localhost</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>server_port:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>18469</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>api_version:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>v1</span><span class='tstring_end'>&#39;</span></span>
+<span class='rbrace'>}</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#base_url-instance_method" title="#base_url (instance method)">- (Object) <strong>base_url</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute base_url.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cookies-instance_method" title="#cookies (instance method)">- (Object) <strong>cookies</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute cookies.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#password-instance_method" title="#password (instance method)">- (Object) <strong>password</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute password.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#username-instance_method" title="#username (instance method)">- (Object) <strong>username</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute username.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_contract-instance_method" title="#add_contract (instance method)">- (Hash) <strong>add_contract</strong>(contract = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a listing contract, which is saved to the database and local file
+system, as well as publish the keywords in the distributed hash table.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_social_account-instance_method" title="#add_social_account (instance method)">- (Hash) <strong>add_social_account</strong>(social_account = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds a social account to the user profile data of the user.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#broadcast-instance_method" title="#broadcast (instance method)">- (Hash) <strong>broadcast</strong>(message = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sends some kind of “Twitter-like” message to all nodes that are following
+you.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#btc_price-instance_method" title="#btc_price (instance method)">- (Hash) <strong>btc_price</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Undocumented.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#complete_order-instance_method" title="#complete_order (instance method)">- (Hash) <strong>complete_order</strong>(complete_order = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sends a message with a partially signed transaction releasing funds from
+escrow to the Vendor as well as review data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#confirm_order-instance_method" title="#confirm_order (instance method)">- (Hash) <strong>confirm_order</strong>(confirm_order = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sends the order confirmation and shipping information to the Buyer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#connected_peers-instance_method" title="#connected_peers (instance method)">- (Object) <strong>connected_peers</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#contracts-instance_method" title="#contracts (instance method)">- (Hash) <strong>contracts</strong>(contracts) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the listings created by either your node or a target node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_contract-instance_method" title="#delete_contract (instance method)">- (Hash) <strong>delete_contract</strong>(contract = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Undocumented.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_social_account-instance_method" title="#delete_social_account (instance method)">- (Hash) <strong>delete_social_account</strong>(social_account = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Undocumented.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#follow-instance_method" title="#follow (instance method)">- (Hash) <strong>follow</strong>(follow) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Follows a target node and will cause you to receive notifications from that
+node after certain event (e.g. new listing, broadcast messages) and share
+some metadata (in future).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#followers-instance_method" title="#followers (instance method)">- (Hash) <strong>followers</strong>(followers = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the followers of the user’s node, or that of a target node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#following-instance_method" title="#following (instance method)">- (Hash) <strong>following</strong>(following = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the following of the user’s node, or that of a target node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#image-instance_method" title="#image (instance method)">- (Object) <strong>image</strong>(image) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the image for the hash specified.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Session) <strong>initialize</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of Session.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#listings-instance_method" title="#listings (instance method)">- (Hash) <strong>listings</strong>(listings = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the listings of the user’s node, or that of a target node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#make_moderator-instance_method" title="#make_moderator (instance method)">- (Hash) <strong>make_moderator</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets your node as a Moderator, which is discoverable on the network.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mark_notification_as_read-instance_method" title="#mark_notification_as_read (instance method)">- (Hash) <strong>mark_notification_as_read</strong>(notification = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Marks a notification as read in the database.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#notifications-instance_method" title="#notifications (instance method)">- (Hash) <strong>notifications</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retreive a history of all notifications your node has received.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#profile-instance_method" title="#profile (instance method)">- (Hash) <strong>profile</strong>(profile = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the profile data of the user’s node, or that of a target node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#purchase_contract-instance_method" title="#purchase_contract (instance method)">- (Hash) <strong>purchase_contract</strong>(purchase_contract = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Purchases a contract by sending the purchase into the Vendor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#routing_table-instance_method" title="#routing_table (instance method)">- (Hash) <strong>routing_table</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Undocumented.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#settings-instance_method" title="#settings (instance method)">- (Hash) <strong>settings</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the settings of your node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shutdown%21-instance_method" title="#shutdown! (instance method)">- (Object) <strong>shutdown!</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>API call to cleanly disconnect from connected nodes and shutsdown the
+OpenBazaar server component.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#social_accounts-instance_method" title="#social_accounts (instance method)">- (Hash) <strong>social_accounts</strong>(profile = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns just the profile&#39;s social accounts of the user’s node, or that
+of a target node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unfollow-instance_method" title="#unfollow (instance method)">- (Hash) <strong>unfollow</strong>(unfollow) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Stop following a target node, will cease to receive notifications and
+sharing metadata.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unmake_moderator-instance_method" title="#unmake_moderator (instance method)">- (Hash) <strong>unmake_moderator</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes the node as a Moderator and is no longer discoverable on the
+network as a Moderator.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_profile-instance_method" title="#update_profile (instance method)">- (Hash) <strong>update_profile</strong>(profile = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add data related to the node&#39;s profile into the database, which will be
+visible to other nodes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_settings-instance_method" title="#update_settings (instance method)">- (Hash) <strong>update_settings</strong>(settings = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Changes the settings of the node and pushes them to the database.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#upload_image-instance_method" title="#upload_image (instance method)">- (Hash) <strong>upload_image</strong>(image = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Saves the image in the file system and a pointer to it in the db.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="OBarc::Session (class)">Session</a></span></tt>) <strong>initialize</strong>(options = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a new instance of Session</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 14</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@protocol</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:protocol</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='const'>DEFAULT_OPTIONS</span><span class='lbracket'>[</span><span class='symbol'>:protocol</span><span class='rbracket'>]</span>
+  <span class='ivar'>@server_host</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:server_name</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='const'>DEFAULT_OPTIONS</span><span class='lbracket'>[</span><span class='symbol'>:server_host</span><span class='rbracket'>]</span>
+  <span class='ivar'>@server_port</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:server_port</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='const'>DEFAULT_OPTIONS</span><span class='lbracket'>[</span><span class='symbol'>:server_port</span><span class='rbracket'>]</span>
+  <span class='ivar'>@api_version</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:api_version</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='const'>DEFAULT_OPTIONS</span><span class='lbracket'>[</span><span class='symbol'>:api_version</span><span class='rbracket'>]</span>
+  <span class='ivar'>@username</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:username</span><span class='rbracket'>]</span>
+  <span class='ivar'>@password</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:password</span><span class='rbracket'>]</span>
+  <span class='ivar'>@base_url</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:base_url</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_base_url'>base_url</span>
+  <span class='ivar'>@cookies</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:cookies</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_login'>post_login</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_cookies'>cookies</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="base_url=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="base_url-instance_method">
+  
+    - (<tt>Object</tt>) <strong>base_url</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute base_url</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+5
+6
+7</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 5</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_base_url'>base_url</span>
+  <span class='ivar'>@base_url</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="cookies=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="cookies-instance_method">
+  
+    - (<tt>Object</tt>) <strong>cookies</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute cookies</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+5
+6
+7</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 5</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_cookies'>cookies</span>
+  <span class='ivar'>@cookies</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="password=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="password-instance_method">
+  
+    - (<tt>Object</tt>) <strong>password</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute password</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+5
+6
+7</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 5</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_password'>password</span>
+  <span class='ivar'>@password</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="username=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="username-instance_method">
+  
+    - (<tt>Object</tt>) <strong>username</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute username</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+5
+6
+7</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 5</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_username'>username</span>
+  <span class='ivar'>@username</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_contract-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>add_contract</strong>(contract = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a listing contract, which is saved to the database and local file
+system, as well as publish the keywords in the distributed hash table.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>contract</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing: “success” =&gt; true or false, “id” =&gt; Integer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-contracts" target="_parent" title="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-contracts">https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-contracts</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 129</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_contract'>add_contract</span><span class='lparen'>(</span><span class='id identifier rubyid_contract'>contract</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_contract'>post_contract</span><span class='lparen'>(</span><span class='id identifier rubyid_contract'>contract</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_social_account-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>add_social_account</strong>(social_account = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds a social account to the user profile data of the user.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>social_account</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>e.g.: account_type: &#39;TWITTER&#39;, username: &#39;@inertia186&#39;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing: “success” =&gt; true or false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-social_accounts" target="_parent" title="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-social_accounts">https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-social_accounts</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 107</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_social_account'>add_social_account</span><span class='lparen'>(</span><span class='id identifier rubyid_social_account'>social_account</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_social_accounts'>post_social_accounts</span><span class='lparen'>(</span><span class='id identifier rubyid_social_account'>social_account</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="broadcast-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>broadcast</strong>(message = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sends some kind of “Twitter-like” message to all nodes that are following
+you.  This call can take a while to complete.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing:</p>
+<ul><li>
+<p>“success” =&gt; true or false</p>
+</li><li>
+<p>“peers_reached” =&gt; [number reached]</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-broadcast" target="_parent" title="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-broadcast">https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-broadcast</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+233</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 233</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_broadcast'>broadcast</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_broadcast'>post_broadcast</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="btc_price-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>btc_price</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Undocumented</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+238</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 238</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_btc_price'>btc_price</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_btc_price'>get_btc_price</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="complete_order-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>complete_order</strong>(complete_order = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sends a message with a partially signed transaction releasing funds from
+escrow to the Vendor as well as review data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>complete_order</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing: “success” =&gt; true or false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-complete_order" target="_parent" title="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-complete_order">https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-complete_order</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+190</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 190</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_complete_order'>complete_order</span><span class='lparen'>(</span><span class='id identifier rubyid_complete_order'>complete_order</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_complete_order'>post_complete_order</span><span class='lparen'>(</span><span class='id identifier rubyid_complete_order'>complete_order</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="confirm_order-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>confirm_order</strong>(confirm_order = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sends the order confirmation and shipping information to the Buyer. If he’s
+offline, it will embed this data into the dht. The API call also updates
+the status of the order in the database.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>confirm_order</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing: “success” =&gt; true or false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-confirm_order" target="_parent" title="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-confirm_order">https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-confirm_order</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 170</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_confirm_order'>confirm_order</span><span class='lparen'>(</span><span class='id identifier rubyid_confirm_order'>confirm_order</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_confirm_order'>post_confirm_order</span><span class='lparen'>(</span><span class='id identifier rubyid_confirm_order'>confirm_order</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="connected_peers-instance_method">
+  
+    - (<tt>Object</tt>) <strong>connected_peers</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+204</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 204</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_connected_peers'>connected_peers</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_connected_peers'>get_connected_peers</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="contracts-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>contracts</strong>(contracts) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the listings created by either your node or a target node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>contracts</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing the:</p>
+<ul><li>
+<p>id: Unique identifier of the contract SHA256 of the JSON formatted contract
+(40 character hex string), required</p>
+</li><li>
+<p>guid: GUID of the node if the call is made to a target node.  If omitted,
+the API will search for a contract ID created by your own node</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-contracts" target="_parent" title="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-contracts">https://gist.github.com/drwasho/742505589f62f6aa98b4#get-contracts</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+121</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 121</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_contracts'>contracts</span><span class='lparen'>(</span><span class='id identifier rubyid_contracts'>contracts</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_contracts'>get_contracts</span><span class='lparen'>(</span><span class='id identifier rubyid_contracts'>contracts</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_contract-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>delete_contract</strong>(contract = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Undocumented.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+134</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 134</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_delete_contract'>delete_contract</span><span class='lparen'>(</span><span class='id identifier rubyid_contract'>contract</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_delete_contract'>delete_contract</span><span class='lparen'>(</span><span class='id identifier rubyid_contract'>contract</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_social_account-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>delete_social_account</strong>(social_account = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Undocumented.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+112</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 112</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_delete_social_account'>delete_social_account</span><span class='lparen'>(</span><span class='id identifier rubyid_social_account'>social_account</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_delete_social_accounts'>delete_social_accounts</span><span class='lparen'>(</span><span class='id identifier rubyid_social_account'>social_account</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="follow-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>follow</strong>(follow) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Follows a target node and will cause you to receive notifications from that
+node after certain event (e.g. new listing, broadcast messages) and share
+some metadata (in future).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>follow</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing the guid: of the target node, required</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing: “success” =&gt; true or false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-follow" target="_parent" title="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-follow">https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-follow</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 84</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_follow'>follow</span><span class='lparen'>(</span><span class='id identifier rubyid_follow'>follow</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_follow'>post_follow</span><span class='lparen'>(</span><span class='id identifier rubyid_follow'>follow</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="followers-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>followers</strong>(followers = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the followers of the user’s node, or that of a target node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>followers</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing the guid: of the target node, optional</p>
+<ul><li>
+<p>If the guid is omitted, the server will look for followers in your own
+node’s database.</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_followers" target="_parent" title="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_followers">https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_followers</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 67</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_followers'>followers</span><span class='lparen'>(</span><span class='id identifier rubyid_followers'>followers</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_followers'>get_followers</span><span class='lparen'>(</span><span class='id identifier rubyid_followers'>followers</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="following-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>following</strong>(following = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the following of the user’s node, or that of a target node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>following</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing the guid: of the target node, optional</p>
+<ul><li>
+<p>If the guid is omitted, the server will look for following in your own
+node’s database.</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_following" target="_parent" title="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_following">https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_following</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+75</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 75</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_following'>following</span><span class='lparen'>(</span><span class='id identifier rubyid_following'>following</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_following'>get_following</span><span class='lparen'>(</span><span class='id identifier rubyid_following'>following</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="image-instance_method">
+  
+    - (<tt>Object</tt>) <strong>image</strong>(image) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the image for the hash specified.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>image</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing the hash: of the target image, required</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The image will be returned in .jpg format.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-image" target="_parent" title="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-image">https://gist.github.com/drwasho/742505589f62f6aa98b4#get-image</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_image'>image</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_image'>get_image</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="listings-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>listings</strong>(listings = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the listings of the user’s node, or that of a target node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>listings</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing the guid: of the target node, optional</p>
+<ul><li>
+<p>If the guid is omitted, the server will look for listings in your own
+node’s database.</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_listings" target="_parent" title="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_listings">https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_listings</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 59</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_listings'>listings</span><span class='lparen'>(</span><span class='id identifier rubyid_listings'>listings</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_listings'>get_listings</span><span class='lparen'>(</span><span class='id identifier rubyid_listings'>listings</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="make_moderator-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>make_moderator</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets your node as a Moderator, which is discoverable on the network.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing: “success” =&gt; true or false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-make_moderator" target="_parent" title="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-make_moderator">https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-make_moderator</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+140</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 140</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_make_moderator'>make_moderator</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_make_moderator'>post_make_moderator</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mark_notification_as_read-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>mark_notification_as_read</strong>(notification = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Marks a notification as read in the database.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>notification</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing id:</p>
+<ul><li>
+<p>40 character hex string</p>
+</li><li>
+<p>Every notification has an ID that must be referenced in order to mark as
+read</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing: “success” =&gt; true or false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-mark_notification_as_read" target="_parent" title="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-mark_notification_as_read">https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-mark_notification_as_read</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+224</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 224</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_mark_notification_as_read'>mark_notification_as_read</span><span class='lparen'>(</span><span class='id identifier rubyid_notification'>notification</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_mark_notification_as_read'>post_mark_notification_as_read</span><span class='lparen'>(</span><span class='id identifier rubyid_notification'>notification</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="notifications-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>notifications</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retreive a history of all notifications your node has received.
+Notifications can be sent due to:</p>
+<ul><li>
+<p>A node following you</p>
+</li><li>
+<p>Events related to a purchase or sale</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>FIXME</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>not yet supported, future: limit-[number of most recent notifications]</p>
+<ul><li>
+<p>Default is unlimited</p>
+</li><li>
+<p>Counts from most recent</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-notifications" target="_parent" title="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-notifications">https://gist.github.com/drwasho/742505589f62f6aa98b4#get-notifications</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+215</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 215</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_notifications'>notifications</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_notifications'>get_notifications</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="profile-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>profile</strong>(profile = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the profile data of the user’s node, or that of a target node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>profile</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing the guid: of the target node, optional</p>
+<ul><li>
+<p>The global unique identifier (guid; 40 character hex string) of the node to
+get the profile data from</p>
+</li><li>
+<p>If the guid is omitted, your own node’s profile will be returned</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-profile" target="_parent" title="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-profile">https://gist.github.com/drwasho/742505589f62f6aa98b4#get-profile</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_profile'>profile</span><span class='lparen'>(</span><span class='id identifier rubyid_profile'>profile</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_profile'>get_profile</span><span class='lparen'>(</span><span class='id identifier rubyid_profile'>profile</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="purchase_contract-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>purchase_contract</strong>(purchase_contract = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Purchases a contract by sending the purchase into the Vendor. The Buyer
+waits for a response to indicate whether the purchase is successful or not.
+If successful, the Buyer needs to fund the direct or multisig address.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>purchase_contract</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing:</p>
+<ul><li>
+<p>“success” =&gt; true or false</p>
+</li><li>
+<p>“address” =&gt; “bitcoin address to fund”</p>
+</li><li>
+<p>“amount” =&gt; “amount to fund”</p>
+</li><li>
+<p>“order_id” =&gt; “purchase order id”</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-purchase_contract" target="_parent" title="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-purchase_contract">https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-purchase_contract</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+161</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 161</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_purchase_contract'>purchase_contract</span><span class='lparen'>(</span><span class='id identifier rubyid_purchase_contract'>purchase_contract</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_purchase_contract'>post_purchase_contract</span><span class='lparen'>(</span><span class='id identifier rubyid_purchase_contract'>purchase_contract</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="routing_table-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>routing_table</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Undocumented</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+243</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 243</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_routing_table'>routing_table</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_routing_table'>get_routing_table</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="settings-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>settings</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the settings of your node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-settings" target="_parent" title="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-settings">https://gist.github.com/drwasho/742505589f62f6aa98b4#get-settings</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+203</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 203</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_settings'>settings</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_settings'>get_settings</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shutdown!-instance_method">
+  
+    - (<tt>Object</tt>) <strong>shutdown!</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>API call to cleanly disconnect from connected nodes and shutsdown the
+OpenBazaar server component.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-shutdown" target="_parent" title="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-shutdown">https://gist.github.com/drwasho/742505589f62f6aa98b4#get-shutdown</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+249
+250
+251
+252
+253
+254
+255</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 249</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_shutdown!'>shutdown!</span>
+  <span class='kw'>begin</span>
+    <span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_shutdown'>get_shutdown</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='kw'>rescue</span> <span class='const'>Errno</span><span class='op'>::</span><span class='const'>ECONNREFUSED</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+    <span class='comment'># TODO Add logging.
+</span>  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="social_accounts-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>social_accounts</strong>(profile = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns just the profile&#39;s social accounts of the user’s node, or that
+of a target node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>profile</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing the guid: of the target node, optional</p>
+<ul><li>
+<p>The global unique identifier (guid; 40 character hex string) of the node to
+get the profile data from</p>
+</li><li>
+<p>If the guid is omitted, your own node’s social accounts will be returned</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-profile" target="_parent" title="https://gist.github.com/drwasho/742505589f62f6aa98b4#get-profile">https://gist.github.com/drwasho/742505589f62f6aa98b4#get-profile</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_social_accounts'>social_accounts</span><span class='lparen'>(</span><span class='id identifier rubyid_profile'>profile</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_profile'>get_profile</span><span class='lparen'>(</span><span class='id identifier rubyid_profile'>profile</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>profile</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>social_accounts</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unfollow-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>unfollow</strong>(unfollow) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Stop following a target node, will cease to receive notifications and
+sharing metadata.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unfollow</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing the guid: of the target node, required</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing: “success” =&gt; true or false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-unfollow" target="_parent" title="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-unfollow">https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-unfollow</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 92</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_unfollow'>unfollow</span><span class='lparen'>(</span><span class='id identifier rubyid_unfollow'>unfollow</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_unfollow'>post_unfollow</span><span class='lparen'>(</span><span class='id identifier rubyid_unfollow'>unfollow</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unmake_moderator-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>unmake_moderator</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes the node as a Moderator and is no longer discoverable on the
+network as a Moderator.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing: “success” =&gt; true or false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post--unmake_moderator" target="_parent" title="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post--unmake_moderator">https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post--unmake_moderator</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 147</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_unmake_moderator'>unmake_moderator</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_unmake_moderator'>post_unmake_moderator</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_profile-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>update_profile</strong>(profile = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add data related to the node&#39;s profile into the database, which will be
+visible to other nodes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>profile</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing: “success” =&gt; true or false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-profile" target="_parent" title="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-profile">https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-profile</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+100</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 100</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_profile'>update_profile</span><span class='lparen'>(</span><span class='id identifier rubyid_profile'>profile</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_profile'>post_profile</span><span class='lparen'>(</span><span class='id identifier rubyid_profile'>profile</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_settings-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>update_settings</strong>(settings = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Changes the settings of the node and pushes them to the database.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>settings</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing: “success” =&gt; true or false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-settings" target="_parent" title="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-settings">https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-settings</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+197</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 197</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_settings'>update_settings</span><span class='lparen'>(</span><span class='id identifier rubyid_settings'>settings</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_settings'>post_settings</span><span class='lparen'>(</span><span class='id identifier rubyid_settings'>settings</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="upload_image-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>upload_image</strong>(image = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Saves the image in the file system and a pointer to it in the db.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>image</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing:</p>
+<ul><li>
+<p>image: a list of product images to upload (LIST of images in base64. data
+only, no base64 prefix)</p>
+</li><li>
+<p>avatar: use this if uploading an avatar image (base64 image)</p>
+</li><li>
+<p>header: use this if uploading a header image (base64 image)</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>containing:</p>
+<ul><li>
+<p>“success” =&gt; true or false</p>
+</li><li>
+<p>“image_hashes” =&gt; [list_of_image_hashes]</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-upload_image" target="_parent" title="https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-upload_image">https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-upload_image</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+182</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 182</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_upload_image'>upload_image</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_upload_image'>post_upload_image</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>cookies:</span> <span class='id identifier rubyid_cookies'>cookies</span><span class='comma'>,</span> <span class='label'>base_url:</span> <span class='id identifier rubyid_base_url'>base_url</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Mon Apr 18 21:36:20 2016 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.1.5).
+</div>
+
+  </body>
+</html>

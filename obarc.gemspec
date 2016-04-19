@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'webmock', '~> 1.24'
   spec.add_development_dependency 'simplecov', '~> 0.10.0'
   spec.add_development_dependency 'codeclimate-test-reporter', '~> 0.4.8'
+  spec.add_development_dependency 'yard', '~> 0.8.7.6'
   
   spec.add_dependency('rest-client', '~> 1.8.0')
 end

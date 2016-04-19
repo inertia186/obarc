@@ -40,6 +40,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
+    yard (0.8.7.6)
 
 PLATFORMS
   ruby
@@ -52,6 +53,7 @@ DEPENDENCIES
   rake (~> 10.0)
   simplecov (~> 0.10.0)
   webmock (~> 1.24)
+  yard (~> 0.8.7.6)
 
 BUNDLED WITH
    1.11.2
