@@ -1,0 +1,28 @@
+{
+    "listings": [
+        {
+            "contract_hash": "3c7c653865952abd0a308300cdd8b770bf55d84a",
+            "category": "",
+            "nsfw": false,
+            "title": "Mr. Slow",
+            "thumbnail_hash": "f24b957ebf41851c1636adeb443034262fe754d5",
+            "price": 99,
+            "origin": "UNITED_STATES",
+            "currency_code": "BTC",
+            "ships_to": [
+                "ALL"
+            ]
+        },
+        {
+            "contract_hash": "55cd6ac16edaf7c22a2e41c1951ed26ea4d126f1",
+            "category": "category",
+            "nsfw": false,
+            "title": "title",
+            "thumbnail_hash": "99eb4bfb999cbe257559d0783e87d5ce27da5b98",
+            "price": 1,
+            "origin": "NA",
+            "currency_code": "USD",
+            "ships_to": []
+        }
+    ]
+}

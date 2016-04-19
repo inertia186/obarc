@@ -1,0 +1,31 @@
+{
+    "blocked_guids": [
+        ""
+    ],
+    "refund_address": "mmqcyagCJgCKwSDZmRxLS8N9yUW4unM3Qs",
+    "refund_policy": "No refund policy",
+    "notifications": true,
+    "seed": "ef9779b249698a973a70d35874a14985f2e4b0d0de432bf06e58cdf9ce1da4e9",
+    "resolver": "https://resolver.onename.com/",
+    "terms_conditions": "No terms or conditions",
+    "language": "en-US",
+    "shipping_addresses": [
+        ""
+    ],
+    "country": "UNITED_STATES",
+    "network_connection": "Open",
+    "time_zone": "-7",
+    "moderators": [
+        {
+            "fee": 0,
+            "handle": "",
+            "name": "MonetaryUnit",
+            "short_description": "MonetaryUnit Developer",
+            "avatar_hash": "af35a47b12309e0a8f933634bea11730b650496e",
+            "guid": "2d48aef1b80affc7ba05d28d8e6b1001be023ba3"
+        }
+    ],
+    "transaction_fee": 15000,
+    "libbitcoin_server": null,
+    "currency_code": "BTC"
+}

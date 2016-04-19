@@ -1,0 +1,57 @@
+{
+    "vendor_offer": {
+        "signatures": {
+            "guid": "zy+6WCNz9suCk7pWYFs/+wE3N5tKKOX2OkDmP0EiV25xHW5SVtGduFk6FlDrEn1TqRNFstgPp3GqpvaN/wqSCA==",
+            "bitcoin": "H5vVZC2GNxqdMHD7SayqSrIQmnaRe6+Evu7udRBlNi/fVKRhrloV7JsECOPkcdo3boP/VNJ8xGxkwZjlz4LQL6w="
+        },
+        "listing": {
+            "contract_id": "3c7c653865952abd0a308300cdd8b770bf55d84a",
+            "shipping": {
+                "flat_fee": {
+                    "bitcoin": {
+                        "international": "0",
+                        "domestic": "0"
+                    }
+                },
+                "shipping_regions": [
+                    "ALL"
+                ],
+                "est_delivery": {
+                    "international": "",
+                    "domestic": ""
+                },
+                "shipping_origin": "UNITED_STATES",
+                "free": false
+            },
+            "item": {
+                "description": "<p>Mr. Slow for sale.</p>",
+                "price_per_unit": {
+                    "bitcoin": 99
+                },
+                "title": "Mr. Slow",
+                "process_time": "3 Business Days",
+                "image_hashes": [
+                    "f24b957ebf41851c1636adeb443034262fe754d5"
+                ],
+                "nsfw": false,
+                "keywords": [
+                    "mrslow"
+                ],
+                "condition": "New"
+            },
+            "id": {
+                "pubkeys": {
+                    "guid": "b7d8f6ee04453e1babde87d12198ecd14be00aa998e85636767d8b00d2603e6d",
+                    "bitcoin": "03f04724590b30511d7ac90c6f1fb2960bbee692a0a8ae75b472bd4f4a0da9cc90"
+                },
+                "guid": "664b77de3ab547e13bcebca3cf296755b788fa74"
+            },
+            "metadata": {
+                "category": "physical good",
+                "version": "1",
+                "category_sub": "fixed price",
+                "expiry": "2016-04-30T21:14 UTC"
+            }
+        }
+    }
+}

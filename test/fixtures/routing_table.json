@@ -1,0 +1,37 @@
+[
+    {
+        "nat_type": "FULL_CONE",
+        "ip": "68.35.9.15",
+        "guid": "e0a5036f18b96aa846bf7e948049b6913454da0e",
+        "vendor": false,
+        "port": 28467
+    },
+    {
+        "nat_type": "FULL_CONE",
+        "ip": "4.3.19.2",
+        "guid": "2d48aef1b80affc7ba05d28d8e6b1001be023ba3",
+        "vendor": true,
+        "port": 28467
+    },
+    {
+        "nat_type": "FULL_CONE",
+        "ip": "18.9.8.7",
+        "guid": "e511ebf5834822f7ad4df5d9af742632717649fa",
+        "vendor": false,
+        "port": 28467
+    },
+    {
+        "nat_type": "FULL_CONE",
+        "ip": "5.17.3.9",
+        "guid": "e300f38692212fbf5a3c4b359725287918e04540",
+        "vendor": false,
+        "port": 28467
+    },
+    {
+        "nat_type": "FULL_CONE",
+        "ip": "11.8.20.15",
+        "guid": "74fe188e96447c7e1fc1a36cb0f909ab8348dd68",
+        "vendor": false,
+        "port": 8000
+    }
+]

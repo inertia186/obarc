@@ -1,0 +1,34 @@
+{
+    "profile": {
+        "website": "website",
+        "public_key": "b7d8f6ee04453e1babde87d12198ecd14be00aa998e85636767d8b00d2603e6d",
+        "about": "about",
+        "guid": "664b77de3ab547e13bcebca3cf296755b788fa74",
+        "vendor": true,
+        "name": "inertia",
+        "social_accounts": {
+            "twitter": {
+                "username": "TWITTER",
+                "proof_url": ""
+            },
+            "facebook": {
+                "username": "facebook",
+                "proof_url": ""
+            }
+        },
+        "header_hash": "99eb4bfb999cbe257559d0783e87d5ce27da5b98",
+        "secondary_color": 15132390,
+        "moderation_fee": 0,
+        "moderator": false,
+        "text_color": 5526612,
+        "pgp_key": "",
+        "nsfw": false,
+        "location": "UNITED_STATES",
+        "avatar_hash": "e472b11c362f5f6b89ffce08d5ed3a51f156bd1c",
+        "short_description": "short_description",
+        "handle": "",
+        "primary_color": 16777215,
+        "background_color": 12832757,
+        "email": "email"
+    }
+}

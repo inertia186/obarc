@@ -1,0 +1,20 @@
+{
+    "following": [
+        {
+            "handle": "",
+            "name": "MonetaryUnit",
+            "nsfw": false,
+            "short_description": "MonetaryUnit Developer",
+            "avatar_hash": "af35a47b12309e0a8f933634bea11730b650496e",
+            "guid": "2d48aef1b80affc7ba05d28d8e6b1001be023ba3"
+        },
+        {
+            "handle": "",
+            "name": "SpoofTel Ltd.",
+            "nsfw": false,
+            "short_description": "World's Leader in Caller ID Spoofing",
+            "avatar_hash": "563bfa4a1b59efdc94ed2d52f3fa2109c791eaaa",
+            "guid": "f3b7527c9f2035971730eac302ca45c0d0725196"
+        }
+    ]
+}
