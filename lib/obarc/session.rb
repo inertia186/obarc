@@ -127,12 +127,12 @@ module OBarc
     #
     # @param contract [Hash] containing:
     #    * expiration_date: [UTC] Formatted string.  The date the contract should expire in string formatted UTC datetime.  Example:
-    #        * expiration_date: "2015-11-01T00:00 UTC"
-    #        * expiration_date: "" # if the contract never expires
+    #        * "2015-11-01T00:00 UTC"
+    #        * "" if the contract never expires
     #    * metadata_category: [category] Formatted string.  Select from:
-    #        * metadata_category: "physical good"
-    #        * metadata_category: "digital good"
-    #        * metadata_category: "service"
+    #        * physical good
+    #        * digital good
+    #        * service
     #    * title: [title text] String.  Title of the product for sale
     #    * description: [description text] String.  Description of the item, content or service
     #    * currency_code: [code] Formatted string.  The currency the product is priced in. may either be “btc” or a currency from this list
@@ -179,6 +179,7 @@ module OBarc
         
         urls.each do |url|
           tempfile = Tempfile.new(url.gsub(/[^a-zA-Z0-9]/, '_'))
+          tempfile.binmode
           tempfile.write open(url).read
           tempfile.rewind
           next unless tempfile.size > 0
