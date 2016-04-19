@@ -54,6 +54,9 @@ session.upload_image(image: 'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXN
 {"image_hashes": ["a89810619833ef29d373c124ce05f362a313929e"], "success": true}
 ```
 
+## Docmentation
+  * [Session](http://www.rubydoc.info/github/inertia186/obarc/master/OBarc/Session) - Most of what you need in your app is explained here.
+
 ## Get in touch!
 
 If you're using OBarc, I'd love to hear from you.  Drop me a line and tell me what you think!
