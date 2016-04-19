@@ -1,4 +1,6 @@
 require 'obarc/api'
+require 'open-uri'
+require 'base64'
 
 module OBarc
   class Session
@@ -118,15 +120,78 @@ module OBarc
     #   * guid: GUID of the node if the call is made to a target node.  If omitted, the API will search for a contract ID created by your own node
     # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-contracts
     # @return [Hash]
-    def contracts(contracts); JSON[Api::get_contracts(contracts, self)]; end
+    def contracts(contracts = {}); JSON[Api::get_contracts(contracts, self)]; end
     
     # Creates a listing contract, which is saved to the database and local file
     # system, as well as publish the keywords in the distributed hash table.
     #
-    # @param contract [Hash]
+    # @param contract [Hash] containing:
+    #    * expiration_date: [UTC] Formatted string.  The date the contract should expire in string formatted UTC datetime.  Example:
+    #        * expiration_date: "2015-11-01T00:00 UTC"
+    #        * expiration_date: "" # if the contract never expires
+    #    * metadata_category: [category] Formatted string.  Select from:
+    #        * metadata_category: "physical good"
+    #        * metadata_category: "digital good"
+    #        * metadata_category: "service"
+    #    * title: [title text] String.  Title of the product for sale
+    #    * description: [description text] String.  Description of the item, content or service
+    #    * currency_code: [code] Formatted string.  The currency the product is priced in. may either be “btc” or a currency from this list
+    #    * price: [value] String.  The price per unit in the same currency as currency_code.
+    #    * process_time: [time] String.  The time it will take to prepare the item for shipping
+    #    * nsfw: [true/false] Boolean.  Is the item not suitable for work (i.e. 18+)
+    #    * shipping_origin: [country/region] Formatted string.  Required and only applicable if the metadata_category is a physical good
+    #        * Where the item ships from
+    #        * Must be a formatted string from this list
+    #    * shipping_regions: [locations] Formatted string.  Required and only applicable if the metadata_category is a physical good.
+    #        * A list of countries/regions where the product will ship to
+    #        * Each item in the list must be formatted from this list
+    #    * est_delivery_domestic: [time] Estimated delivery time for domestic shipments
+    #    * est_delivery_international: [time] String.  Estimated delivery time for international shipments.
+    #    * terms_conditions: [terms and conditions text] String.  Any terms or conditions the user wishes to include.
+    #    * returns: [returns policy text] String.  Return policy.
+    #    * shipping_currency_code: [currency code] Formatted string.  The currency code used to price shipping. may either be “btc” or a currency from this list.
+    #    * shipping_domestic: [price] String.  The price of domestic shipping in the selected currency code.
+    #    * shipping_international: [price] String.  The price of nternational shipping in the selected currency code.
+    #    * keywords: [keyword text] String.  A list of string search terms for the listing.  Must be fewer than 10.
+    #    * category: [category text] Sting.  A user-generated category for this product.  Will show in store’s category list.
+    #    * condition: [condition text] The condition of the product
+    #    * sku: [sku text] String.  Stock keeping unit (sku) for the listing.
+    #    * images: [String, Array<String>] 40 character hex string.  A list of SHA256 image hashes.  The images should be uploaded using the upload_image api call.
+    #        * images: '04192728d0fd8dfe6663f429a5c03a7faf907930'
+    #        * images: ['04192728d0fd8dfe6663f429a5c03a7faf907930', '0dee4786fd02d6bc673b50309a3c831acf78ec70']
+    #    * image_urls: [Array<String>] An image URL for OBarc to first download then automatically store to this record.
+    #        * image_urls: 'http://i.imgur.com/YHBh57j.gif'
+    #        * image_urls: ['http://i.imgur.com/uC2KUQ6.png', 'http://i.imgur.com/RliU8Gn.jpg']
+    #    * free_shipping: [boolean] "true" or "false"
+    #    * moderators: [guids] GUID: 40 character hex string.  A list of moderator GUIDs that the vendor wishes to use
+    #        * Note: the moderator must have been previously returned by the get_moderators websocket call.
+    #        * Given the UI workflow, this call should always be made before the contract is set.
+    #    * options: [options text] String.  A list of options for the product.  Example: “size”, “color”
+    #        * option: [option text] String.
+    #            * For each option in the options list, another argument should be added using that option name and a list of value
+    #            * For example, given “color” in the options list, choose from "red", "green", "purple" etc
     # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-contracts
     # @return [Hash] containing: "success" => true or false, "id" => Integer
-    def add_contract(contract = {}); JSON[Api::post_contract(contract, self)]; end
+    def add_contract(contract = {})
+      if !!contract[:image_urls] && contract[:image_urls].any?
+        urls = contract.delete(:image_urls)
+        hashes = []
+        
+        urls.each do |url|
+          tempfile = Tempfile.new(url.gsub(/[^a-zA-Z0-9]/, '_'))
+          tempfile.write open(url).read
+          tempfile.rewind
+          next unless tempfile.size > 0
+          
+          response = upload_image(image: tempfile)
+          hashes += response['image_hashes'] if response['success']
+        end
+        
+        contract[:images] = hashes
+      end
+      
+      JSON[Api::post_contract(contract, self)]
+    end
     
     # Undocumented.
     #

@@ -176,6 +176,12 @@ module OBarc
       assert response['vendor_offer'], response
     end
     
+    def test_contracts_empty
+      stub_get_contracts
+      response = @session.contracts
+      assert response['vendor_offer'], response
+    end
+    
     def test_contracts_wrong_guid
       stub_get_generic_empty_hash as: :contracts
       response = @session.contracts(id: '3c7c653865952abd0a308300cdd8b770bf55d84a', guid: '664b77de3ab547e13bcebca3cf296755b788fa74')
@@ -208,7 +214,7 @@ module OBarc
       response = @session.upload_image image: SPAM_IMAGE
       image_hashes = response['image_hashes']
       response = @session.add_contract(
-        expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%R %Z'),
+        expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%H:%M'), # Format: 2016-04-19T11:50 or empty string
         metadata_category: 'metadata_category',
         title: 'title',
         description: 'description',
@@ -230,6 +236,46 @@ module OBarc
         condition: 'New',
         sku: '736B75',
         images: image_hashes[0],
+        free_shipping: true,
+        # options: 'options',
+        # moderators: 'moderators',
+        # contract_id: 'contract_id'
+      )
+      assert response['success'], response
+    end
+    
+    def test_add_contract_with_image_urls
+      stub_post_upload_image
+      stub_post_generic_success as: :contracts
+      stub_request(:get, /imgur/).
+        to_return(status: 200, body: fixture('04192728d0fd8dfe6663f429a5c03a7faf907930.jpg'), headers: {})
+  
+      response = @session.add_contract(
+        expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%H:%M'), # Format: 2016-04-19T11:50 or empty string
+        metadata_category: 'metadata_category',
+        title: 'title',
+        description: 'description',
+        currency_code: 'USD',
+        price: '1.00',
+        process_time: '3 Business Days',
+        nsfw: false,
+        # shipping_origin: 'shipping_origin',
+        ships_to: 'ships_to',
+        est_delivery_domestic: 'est_delivery_domestic',
+        est_delivery_international: 'est_delivery_international',
+        terms_conditions: 'terms_conditions',
+        returns: 'returns',
+        shipping_currency_code: 'shipping_currency_code',
+        shipping_domestic: 'shipping_domestic',
+        shipping_international: 'shipping_international',
+        keywords: 'keyword1 keyword2',
+        category: 'category',
+        condition: 'New',
+        sku: '736B75',
+        image_urls: [
+          'http://i.imgur.com/uC2KUQ6.png',
+          'http://i.imgur.com/RliU8Gn.jpg'
+        ],
         free_shipping: true,
         # options: 'options',
         # moderators: 'moderators',

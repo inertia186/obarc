@@ -1,5 +1,6 @@
 require 'obarc/utils/helper'
 require 'obarc/utils/exceptions'
+require 'uri'
 
 module OBarc
   module Api
@@ -71,7 +72,18 @@ module OBarc
     end
   private
     def execute(options = {})
-      RestClient::Request.execute(options.merge(timeout: DEFAULT_TIMEOUT))
+      if !!options[:headers][:params]
+        params = options[:headers].delete(:params)
+        if params.values.map(&:class).include? Array
+          # Dropping to a lower level for parameters since they're more
+          # complicated due to the presense of an Array.  Note that these
+          # parameters go # outside the header.
+          options[:url] += "?#{URI::encode_www_form params}"
+        else
+          options[:headers][:params] = params
+        end
+      end
+      RestClient::Request.execute(options.merge(timeout: DEFAULT_TIMEOUT, multipart: true))
     end
     
     def build_authentication(options = {})
