@@ -1,6 +1,7 @@
 require 'obarc/utils/helper'
 require 'obarc/utils/exceptions'
 require 'uri'
+require 'base64'
 
 module OBarc
   module Api
@@ -32,7 +33,17 @@ module OBarc
       when :delete_contract then [:delete, 'contracts', args[0], args[1]]
       when :post_upload_image
         elements = [:image, :avatar, :header]
-        [:post, 'upload_images', args[0].slice(*elements), args[0]]
+        params = args[0].slice(*elements)
+        params.each do |k, v|
+          params[k] = if v.kind_of? String
+            v
+          elsif v.respond_to? :read
+            Base64.encode64(v.read)
+          else
+            puts "Skipped upload image, don't know what to do with: #{v.inspect}"
+          end
+        end
+        [:post, 'upload_images', params, args[0]]
       when :get_notifications then [:get, 'get_notifications', nil, args[0]]
       else
         verb = m.to_s.split('_')
