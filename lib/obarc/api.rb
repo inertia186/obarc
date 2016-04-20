@@ -31,19 +31,6 @@ module OBarc
       when :get_following then [:get, 'get_following', args[0], args[1]]
       when :post_contract then [:post, 'contracts', args[0], args[1]]
       when :delete_contract then [:delete, 'contracts', args[0], args[1]]
-      when :post_upload_image
-        elements = [:image, :avatar, :header]
-        params = args[0].slice(*elements)
-        params.each do |k, v|
-          params[k] = if v.kind_of? String
-            v
-          elsif v.respond_to? :read
-            Base64.encode64(v.read)
-          else
-            puts "Skipped upload image, don't know what to do with: #{v.inspect}"
-          end
-        end
-        [:post, 'upload_images', params, args[0]]
       when :get_notifications then [:get, 'get_notifications', nil, args[0]]
       else
         verb = m.to_s.split('_')
@@ -64,6 +51,17 @@ module OBarc
       end
           
       super
+    end
+    
+    # POST api/v1/upload_image
+    def post_upload_image(options = {})
+      elements = [:image, :avatar, :header]
+      params = options.slice(*elements)
+      options = options.delete_if { |k, v| elements.include? k }
+      
+      url = "#{build_base_url(options)}/upload_images"
+      execute method: :post, url: url, headers:
+        build_headers(options).merge(params: params.compact)
     end
     
     # GET api/v1/contracts
@@ -90,11 +88,20 @@ module OBarc
           # complicated due to the presense of an Array.  Note that these
           # parameters go # outside the header.
           options[:url] += "?#{URI::encode_www_form params}"
+        elsif params.values.map(&:class).any? { |c| [Tempfile, File].include?(c) }
+          # Handling (possibly) large files.
+          options[:payload] = {multipart: true}
+          params.each do |k, v|
+            options[:payload][k] = Base64.strict_encode64(v.read)
+          end
         else
           options[:headers][:params] = params
         end
       end
-      RestClient::Request.execute(options.merge(timeout: DEFAULT_TIMEOUT, multipart: true))
+      
+      RestClient::Request.execute(options.merge(timeout: DEFAULT_TIMEOUT))
+    rescue RestClient::ServerBrokeConnection
+      # TODO Log?
     end
     
     def build_authentication(options = {})

@@ -67,7 +67,7 @@ class OBarc::Test < MiniTest::Test
 private
   def fixture(fixture)
     if File.exists?(File.join(fixture_path, fixture))
-      File.read(File.join(fixture_path, fixture))
+      File.open(File.join(fixture_path, fixture), 'rb')
     end
   end
   

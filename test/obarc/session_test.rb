@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'base64'
 
 module OBarc
   class SessionTest < OBarc::Test
@@ -235,7 +236,7 @@ module OBarc
         category: 'category',
         condition: 'New',
         sku: '736B75',
-        images: image_hashes[0],
+        images: image_hashes,
         free_shipping: true,
         # options: 'options',
         # moderators: 'moderators',
@@ -355,7 +356,21 @@ module OBarc
     
     def test_upload_image_image
       stub_post_upload_image
-      response = @session.upload_image image: AVATAR_IMAGE
+      response = @session.upload_image image: SPAM_IMAGE
+      assert response['success'], response
+      refute response['image_hashes'].empty?, response
+    end
+    
+    def test_upload_image_small_file
+      stub_post_upload_image
+      response = @session.upload_image image: fixture('5d03c41f9ebe3984e312f846bcb1db5b37e9b5ae68f34b5bb468dfe7cb6fc02c90a7172cb8bd6a21.jpg')
+      assert response['success'], response
+      refute response['image_hashes'].empty?, response
+    end
+    
+    def test_upload_image_medium_file
+      stub_post_upload_image
+      response = @session.upload_image image: fixture('04192728d0fd8dfe6663f429a5c03a7faf907930.jpg')
       assert response['success'], response
       refute response['image_hashes'].empty?, response
     end

@@ -1,6 +1,5 @@
 require 'obarc/api'
 require 'open-uri'
-require 'base64'
 
 module OBarc
   class Session
@@ -15,7 +14,7 @@ module OBarc
     
     def initialize(options = {})
       @protocol = options[:protocol] || DEFAULT_OPTIONS[:protocol]
-      @server_host = options[:server_name] || DEFAULT_OPTIONS[:server_host]
+      @server_host = options[:server_host] || DEFAULT_OPTIONS[:server_host]
       @server_port = options[:server_port] || DEFAULT_OPTIONS[:server_port]
       @api_version = options[:api_version] || DEFAULT_OPTIONS[:api_version]
       @username = options[:username]
@@ -178,13 +177,7 @@ module OBarc
         hashes = []
         
         urls.each do |url|
-          tempfile = Tempfile.new(url.gsub(/[^a-zA-Z0-9]/, '_'))
-          tempfile.binmode
-          tempfile.write open(url).read
-          tempfile.rewind
-          next unless tempfile.size > 0
-          
-          response = upload_image(image: tempfile)
+          response = upload_image(image: open(url, 'rb'))
           hashes += response['image_hashes'] if response['success']
         end
         
