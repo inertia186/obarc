@@ -72,17 +72,17 @@ module OBarc
       assert response['listings'], response
     end
     
-    def test_find_listings
+    def test_query_listings
       stub_get_listings
       stub_get_contracts
-      response = @session.find_listings(pattern: /slow/i)
+      response = @session.query_listings(pattern: /slow/i)
       assert response['listings'], response
       assert response['listings'].any?, response
     end
     
-    def test_find_listings_empty
+    def test_query_listings_empty
       stub_get_listings
-      response = @session.find_listings
+      response = @session.query_listings
       assert response['listings'], response
       assert response['listings'].any?, response
     end
