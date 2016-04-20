@@ -5,3 +5,5 @@ script: TESTOPTS="--verbose" bundle exec rake test
 addons:
   code_climate:
     repo_token: 107a9abd0cb88b0d6ef17f6429daadbf620adc9631bd9d00208914120fedffb6
+notifications:
+  slack: galacticaactual:rhAXgZ68aoikbxBBA05xIUVC
