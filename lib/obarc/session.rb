@@ -59,6 +59,51 @@ module OBarc
     # @return [Hash]
     def listings(listings = nil); JSON[Api::get_listings(listings, self)]; end
     
+    # Finds the listings of the user’s node, or that of a target node.
+    #
+    # @param listings [Hash] containing:
+    #     * guid: of the target node, optional
+    #         *If the guid is omitted, the server will look for listings in your own node’s database.
+    #     * pattern: [String] search phrase
+    # @return [Hash]
+    def query_listings(options = {})
+      pattern = options.delete(:pattern)
+      all_listings = JSON[Api::get_listings(options, self)]
+      listings = all_listings['listings']
+      
+      if !!pattern
+        listings = listings.select do |listing|
+          listing['contract_hash'] =~ pattern ||
+          listing['category'] =~ pattern ||
+          listing['title'] =~ pattern ||
+          listing['price'].to_s =~ pattern ||
+          listing['origin'] =~ pattern ||
+          listing['currency_code'] =~ pattern ||
+          listing['ships_to'].join =~ pattern
+        end
+      end
+      
+      unless listings === all_listings
+        @contracts_cache ||= {}
+        (all_listings['listings'] - listings).each do |listing|
+          contract_hash = listing['contract_hash']
+          contract = @contracts_cache[contract_hash] ||= contracts(options.merge(id: listing['contract_hash']))
+          next unless !!contract
+          
+          contract_listing = contract['vendor_offer']['listing']
+          
+          if contract_listing['item']['category'] =~ pattern ||
+            contract_listing['item']['sku'] =~ pattern ||
+            contract_listing['item']['description'] =~ pattern ||
+            contract_listing['item']['keywords'].join =~ pattern
+            listings << listing && next
+          end
+        end
+      end
+      
+      {'listings' => listings}
+    end
+    
     # Returns the followers of the user’s node, or that of a target node.
     #
     # @param followers [Hash] containing the guid: of the target node, optional

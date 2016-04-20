@@ -72,6 +72,21 @@ module OBarc
       assert response['listings'], response
     end
     
+    def test_find_listings
+      stub_get_listings
+      stub_get_contracts
+      response = @session.find_listings(pattern: /slow/i)
+      assert response['listings'], response
+      assert response['listings'].any?, response
+    end
+    
+    def test_find_listings_empty
+      stub_get_listings
+      response = @session.find_listings
+      assert response['listings'], response
+      assert response['listings'].any?, response
+    end
+    
     def test_followers
       stub_get_followers
       response = @session.followers(guid: '2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
