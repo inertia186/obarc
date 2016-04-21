@@ -27,6 +27,17 @@ module OBarc
       "#{@protocol}://#{@server_host}:#{@server_port}/api/#{@api_version}"
     end
     
+    # Check if there's a valid session.
+    #
+    # @return [Boolean] True if the session is valid.
+    def ping
+      return false if !(json = Api::ping(self))
+      !!JSON[json]['num_peers']
+    rescue
+      # TODO log?
+      false
+    end
+    
     # Returns the image for the hash specified.
     # @param image [Hash] containing the hash: of the target image, required
     # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-image

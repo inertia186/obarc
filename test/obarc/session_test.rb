@@ -19,6 +19,18 @@ module OBarc
         # success
       end
     end
+    
+    def test_ping
+      stub_get_connected_peers
+      assert @session.ping, 'expect ping to work'
+    end
+
+    def test_ping_bad_session
+      stub_post_generic_failure as: :login
+      stub_get_generic_failure as: :connected_peers
+      bad_session = Session.new(username: 'WRONG', password: 'WRONG')
+      refute bad_session.ping, 'did not expect ping to work'
+    end
 
     def test_image
       stub_get_image(hash: '04192728d0fd8dfe6663f429a5c03a7faf907930')

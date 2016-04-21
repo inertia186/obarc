@@ -20,6 +20,10 @@ module OBarc
       execute method: :post, url: url, headers: {params: auth}
     end
     
+    def ping(options = {})
+      execute(method: :get, url: "#{build_base_url(options)}/connected_peers?_=#{Time.now.to_i}", headers: build_headers(options))
+    end
+    
     def method_missing(m, *args, &block)
       # Many of the calls to restapi.py are uniform enough for DRY code, but the
       # ones that aren't are mapped here.
@@ -100,8 +104,6 @@ module OBarc
       end
       
       RestClient::Request.execute(options.merge(timeout: DEFAULT_TIMEOUT))
-    rescue RestClient::ServerBrokeConnection
-      # TODO Log?
     end
     
     def build_authentication(options = {})
