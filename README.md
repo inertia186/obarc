@@ -56,7 +56,7 @@ session.upload_image(image: 'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXN
 ```
 You can also add a new listing with image URLs in the hash.  The client will upload them and save the image hashes to the contract.
 ```ruby
-session.add_contract(
+session.create_contract(
   expiration_date: '',
   metadata_category: 'physical good',
   title: 'Black Dress',

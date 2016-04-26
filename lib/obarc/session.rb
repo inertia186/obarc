@@ -72,7 +72,7 @@ module OBarc
     
     # Finds the listings of the user’s node, or that of a target node.
     #
-    # @param listings [Hash] containing:
+    # @param options [Hash] containing:
     #     * guid: of the target node, optional
     #         *If the guid is omitted, the server will look for listings in your own node’s database.
     #     * pattern: [String] search phrase
@@ -95,6 +95,13 @@ module OBarc
       end
       
       unless listings === all_listings
+        start = Time.now.to_i
+        @cache_timestamp = if (start - (@cache_timestamp || 0)) > 300
+          @contracts_cache = {}
+          start
+        else
+          @cache_timestamp
+        end
         @contracts_cache ||= {}
         (all_listings['listings'] - listings).each do |listing|
           contract_hash = listing['contract_hash']
@@ -103,9 +110,11 @@ module OBarc
           
           contract_listing = contract['vendor_offer']['listing']
           
-          if contract_listing['item']['category'] =~ pattern ||
+          if contract_listing['metadata']['expiry'] =~ pattern ||
+            contract_listing['item']['category'] =~ pattern ||
             contract_listing['item']['sku'] =~ pattern ||
             contract_listing['item']['description'] =~ pattern ||
+            contract_listing['item']['process_time'] =~ pattern ||
             contract_listing['item']['keywords'].join =~ pattern
             listings << listing && next
           end
@@ -227,7 +236,10 @@ module OBarc
     #            * For example, given “color” in the options list, choose from "red", "green", "purple" etc
     # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-contracts
     # @return [Hash] containing: "success" => true or false, "id" => Integer
-    def add_contract(contract = {})
+    def create_contract(contract = {})
+      # Note, passing contract_id appears to create a clone that re-uses the
+      # original contract_id.
+      
       if !!contract[:image_urls] && contract[:image_urls].any?
         urls = contract.delete(:image_urls)
         hashes = []

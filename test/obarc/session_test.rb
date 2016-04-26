@@ -236,12 +236,12 @@ module OBarc
       end
     end
     
-    def test_add_contract
+    def test_create_contract
       stub_post_upload_image
       stub_post_generic_success as: :contracts
       response = @session.upload_image image: SPAM_IMAGE
       image_hashes = response['image_hashes']
-      response = @session.add_contract(
+      response = @session.create_contract(
         expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%H:%M'), # Format: 2016-04-19T11:50 or empty string
         metadata_category: 'metadata_category',
         title: 'title',
@@ -272,13 +272,13 @@ module OBarc
       assert response['success'], response
     end
     
-    def test_add_contract_with_image_urls
+    def test_create_contract_with_image_urls
       stub_post_upload_image
       stub_post_generic_success as: :contracts
       stub_request(:get, /imgur/).
         to_return(status: 200, body: fixture('04192728d0fd8dfe6663f429a5c03a7faf907930.jpg'), headers: {})
   
-      response = @session.add_contract(
+      response = @session.create_contract(
         expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%H:%M'), # Format: 2016-04-19T11:50 or empty string
         metadata_category: 'metadata_category',
         title: 'title',
@@ -312,9 +312,46 @@ module OBarc
       assert response['success'], response
     end
     
-    def test_add_contract_empty
+    # def test_create_contract_borked
+    #   stub_post_upload_image
+    #   stub_post_generic_success as: :contracts
+    #   response = @session.upload_image image: SPAM_IMAGE
+    #   image_hashes = response['image_hashes']
+    #   response = @session.create_contract(
+    #     expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%H:%M'), # Format: 2016-04-19T11:50 or empty string
+    #     metadata_category: 'metadata_category',
+    #     title: 'title',
+    #     #description: "<div class=\"heading\"></div>", # <-- Borked
+    #     currency_code: 'USD',
+    #     price: '1.00',
+    #     process_time: '3 Business Days',
+    #     nsfw: false,
+    #     # shipping_origin: 'shipping_origin',
+    #     ships_to: 'ships_to',
+    #     est_delivery_domestic: 'est_delivery_domestic',
+    #     est_delivery_international: 'est_delivery_international',
+    #     terms_conditions: 'terms_conditions',
+    #     returns: 'returns',
+    #     shipping_currency_code: 'shipping_currency_code',
+    #     shipping_domestic: 'shipping_domestic',
+    #     shipping_international: 'shipping_international',
+    #     keywords: 'keyword1 keyword2',
+    #     category: 'category',
+    #     condition: 'New',
+    #     sku: '736B75',
+    #     images: image_hashes,
+    #     free_shipping: true,
+    #     # options: 'options',
+    #     # moderators: 'moderators',
+    #     # contract_id: 'contract_id'
+    #   )
+    #   assert response['success'], response
+    #   assert @session.contracts(id: response['id']), 'expect a valid new contract'
+    # end
+        
+    def test_create_contract_empty
       stub_post_generic_failure as: :contracts
-      response = @session.add_contract
+      response = @session.create_contract
       refute response['success'], response
     end
     

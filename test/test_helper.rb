@@ -23,18 +23,24 @@ else
   require "minitest/pride"
 end
 
-WebMock.disable_net_connect!(allow_localhost: false, allow: 'codeclimate.com:443')
+if defined? WebMock
+  WebMock.disable_net_connect!(allow_localhost: false, allow: 'codeclimate.com:443')
+end
 
 using OBarc::Utils::Helper::ObjectExtensions
 
 class OBarc::Test < MiniTest::Test
   def stub_post_login
+    return unless defined? WebMock
+    
     @stub_login ||= stub_request(:post, /login/).
       to_return(status: 200, body: '{"success": true}', headers: {'Set-Cookie' => 'TWISTED_SESSION=e564e3329ec7a205ee588bfc32c98ac3; Path=/'})
   end
   
   def method_missing(m, *args, &block)
     if m =~ /^stub_/
+      return unless defined? WebMock
+      
       verb = m.to_s.split('_')
       method = verb[1].to_sym
       json_file = action = verb[2..-1].join('_')
