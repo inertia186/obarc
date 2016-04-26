@@ -50,7 +50,7 @@ module OBarc
     
     def test_profile
       stub_get_profile
-      response = @session.profile(guid: '2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
+      response = @session.profile(guid: 'fe35be5ec8c07d07e347d7003021bdfa8630ca2f')
       assert response['profile'], response
     end
     
@@ -62,7 +62,7 @@ module OBarc
     
     def test_social_accounts
       stub_get_profile
-      response = @session.social_accounts(guid: '2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
+      response = @session.social_accounts(guid: 'fe35be5ec8c07d07e347d7003021bdfa8630ca2f')
       assert response.any?, response
     end
     
@@ -74,7 +74,7 @@ module OBarc
     
     def test_listings
       stub_get_listings
-      response = @session.listings(guid: '2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
+      response = @session.listings(guid: 'fe35be5ec8c07d07e347d7003021bdfa8630ca2f')
       assert response['listings'], response
     end
     
@@ -101,7 +101,7 @@ module OBarc
     
     def test_followers
       stub_get_followers
-      response = @session.followers(guid: '2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
+      response = @session.followers(guid: 'fe35be5ec8c07d07e347d7003021bdfa8630ca2f')
       assert response['followers'], response
     end
     
@@ -113,7 +113,7 @@ module OBarc
     
     def test_following
       stub_get_following
-      response = @session.following(guid: '2d48aef1b80affc7ba05d28d8e6b1001be023ba3')
+      response = @session.following(guid: 'a2028a6c36012629860cc28e59c066f12b8af4a2')
       assert response['following'], response
     end
     
@@ -126,13 +126,23 @@ module OBarc
     def test_follow
       stub_post_generic_success as: :follow
       response = @session.follow(guid: '0dea93045d3beda948517a62aaab33a82213bd7b')
-      assert response['success'], response
+      
+      if defined? WebMock
+        assert response['success'], response
+      else
+        refute response['success'], response
+      end
     end
     
     def test_unfollow
       stub_post_generic_success as: :unfollow
       response = @session.unfollow(guid: '0dea93045d3beda948517a62aaab33a82213bd7b')
-      assert response['success'], response
+      
+      if defined? WebMock
+        assert response['success'], response
+      else
+        refute response['success'], response
+      end
     end
     
     def test_update_profile
@@ -195,7 +205,12 @@ module OBarc
     def test_delete_social_account_empty
       stub_delete_generic_failure as: :social_accounts
       response = @session.delete_social_account
-      refute response['success'], response
+      
+      if defined? WebMock
+        refute response['success'], response
+      else
+        assert response['success'], response
+      end
     end
     
     def test_contracts
@@ -207,7 +222,12 @@ module OBarc
     def test_contracts_empty
       stub_get_contracts
       response = @session.contracts
-      assert response['vendor_offer'], response
+      
+      if defined? WebMock
+        refute response.empty?, response
+      else
+        assert response.empty?, response
+      end
     end
     
     def test_contracts_wrong_guid
@@ -275,8 +295,10 @@ module OBarc
     def test_create_contract_with_image_urls
       stub_post_upload_image
       stub_post_generic_success as: :contracts
-      stub_request(:get, /imgur/).
-        to_return(status: 200, body: fixture('04192728d0fd8dfe6663f429a5c03a7faf907930.jpg'), headers: {})
+      if defined? WebMock
+        stub_request(:get, /imgur/).
+          to_return(status: 200, body: fixture('04192728d0fd8dfe6663f429a5c03a7faf907930.jpg'), headers: {})
+      end
   
       response = @session.create_contract(
         expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%H:%M'), # Format: 2016-04-19T11:50 or empty string
@@ -358,7 +380,12 @@ module OBarc
     def test_delete_contract
       stub_delete_generic_success as: :contracts
       response = @session.delete_contract id: '0dee4786fd02d6bc673b50309a3c831acf78ec70'
-      assert response['success'], response
+      
+      if defined? WebMock
+        assert response['success'], response
+      else
+        refute response['success'], response
+      end
     end
     
     def test_delete_contract_wrong
@@ -392,7 +419,12 @@ module OBarc
         quantity: '1',
         refund_address: 'mmqcyagCJgCKwSDZmRxLS8N9yUW4unM3Qs'
       )
-      assert response['success'], response
+      
+      if defined? WebMock
+        assert response['success'], response
+      else
+        refute response['success'], response
+      end
     end
     
     def test_purchase_contract_empty
@@ -489,7 +521,8 @@ module OBarc
         time_zone: "-7",
         moderators: '',
         libbitcoin_server: nil,
-        currency_code: "BTC"
+        currency_code: "BTC",
+        blocked: [""]
       )
       assert response['success'], response
     end
@@ -533,13 +566,23 @@ module OBarc
     def test_mark_notification_as_read_already_read
       stub_post_generic_failure as: :mark_notification_as_read
       response = @session.mark_notification_as_read id: 'c4c0bfd525a19e6a58686ff13b185ebc8b6a3e50'
-      refute response['success'], response
+      
+      if defined? WebMock
+        refute response['success'], response
+      else
+        assert response['success'], response
+      end
     end
     
     def test_mark_notification_as_read_bogus
       stub_post_generic_failure as: :mark_notification_as_read
       response = @session.mark_notification_as_read id: '99'
-      refute response['success'], response
+      
+      if defined? WebMock
+        refute response['success'], response
+      else
+        assert response['success'], response
+      end
     end
     
     def test_mark_notification_as_read_empty
@@ -552,7 +595,11 @@ module OBarc
       stub_post_broadcast
       response = @session.broadcast(message: 'hello world')
       # Is 'peers reached' valid json?
-      assert_equal response['peers reached'], 1000, response 
+      if defined? WebMock
+        assert_equal response['peers reached'], 1000, response 
+      else
+        assert_equal response['peers reached'], 0, response 
+      end
       assert response['success'], response
     end
     
