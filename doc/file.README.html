@@ -112,10 +112,32 @@ src="https://codeclimate.com/github/inertia186/obarc/badges/coverage.svg"></a></
 
 <pre class="code ruby"><code class="ruby">{&quot;peers&quot;: [[&quot;5.37.3.8&quot;, 28467]], &quot;num_peers&quot;: 1}</code></pre>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_session'>session</span><span class='period'>.</span><span class='id identifier rubyid_upload_image'>upload_image</span><span class='lparen'>(</span><span class='label'>image:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAVlpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KTMInWQAAC91JREFUWAktl3mQHOV5xn99zH3u7K1d7Uq7CEkIpNVZRhagQDjKCcaxSIJNIJTjI5XCuakKceXyHy5XnJSr</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
-</code></pre>
-
-<pre class="code ruby"><code class="ruby">{&quot;image_hashes&quot;: [&quot;a89810619833ef29d373c124ce05f362a313929e&quot;], &quot;success&quot;: true}</code></pre>
+<p>If you want to manually upload an image, this will return the image hash.
+<code>ruby session.upload_image(image:
+&#39;iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAVlpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KTMInWQAAC91JREFUWAktl3mQHOV5xn99zH3u7K1d7Uq7CEkIpNVZRhagQDjKCcaxSIJNIJTjI5XCuakKceXyHy5XnJSr&#39;)
+</code> <code>json {&quot;image_hashes&quot;:
+[&quot;a89810619833ef29d373c124ce05f362a313929e&quot;],
+&quot;success&quot;: true} </code> You can also add a new listing with
+image URLs in the hash. The client will upload them and save the image
+hashes to the contract. <code>ruby session.create_contract(  
+expiration_date: &#39;&#39;,   metadata_category: &#39;physical good&#39;, 
+title: &#39;Black Dress&#39;,   description: &#39;A pretty black
+dress.&#39;,   currency_code: &#39;USD&#39;,   price: &#39;19.95&#39;,  
+process_time: &#39;3 Business Days&#39;,   nsfw: &#39;false&#39;,  
+shipping_origin: &#39;UNITED_STATES&#39;,   ships_to:
+&#39;UNITED_STATES&#39;,   est_delivery_domestic: &#39;5-7 Business
+Days&#39;,   est_delivery_international: &#39;&#39;,   terms_conditions:
+&quot;We cannot ship to PO Boxes/APO&#39;s\n * We cannot combine
+shipping.\n * No Local Pickup.&quot;,   returns: &quot;Your satisfaction is
+guaranteed! If for any reason you are unhappy with your item, we can
+arrange a return within 14 days for a full refund, minus shipping cost.
+Please contact us prior to initiating a return so that we can issue you a
+refund authorization.&quot;,   shipping_currency_code: &#39;USD&#39;,  
+shipping_domestic: true,   shipping_international: false,   keywords:
+&#39;dress&#39;,   category: &#39;&#39;,   condition: &#39;New&#39;,   sku:
+&#39;123456789&#39;,   image_urls:
+[&#39;http://i.imgur.com/2KXXHSt.jpg&#39;],   free_shipping: true ) </code>
+<code>json {&quot;success&quot;: true} </code></p>
 
 <h2 id="label-Docmentation">Docmentation</h2>
 <ul><li>
@@ -138,7 +160,7 @@ src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a> License.</p>
 </div></div>
 
     <div id="footer">
-  Generated on Tue Apr 19 13:49:34 2016 by
+  Generated on Mon Apr 25 20:29:53 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.1.5).
 </div>
