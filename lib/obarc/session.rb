@@ -3,13 +3,14 @@ require 'open-uri'
 
 module OBarc
   class Session
-    attr_accessor :cookies, :base_url, :username, :password
+    attr_accessor :cookies, :base_url, :username, :password, :verify_ssl
     
     DEFAULT_OPTIONS = {
       protocol: 'http',
       server_host: 'localhost',
       server_port: '18469',
-      api_version: 'v1'
+      api_version: 'v1',
+      verify_ssl: true
     }
     
     def initialize(options = {})
@@ -21,6 +22,12 @@ module OBarc
       @password = options[:password]
       @base_url = options[:base_url] || base_url
       @cookies = options[:cookies] || Api::post_login(self).cookies
+      
+      @verify_ssl = if options.keys.include?(:verify_ssl)
+        options[:verify_ssl]
+      else
+        DEFAULT_OPTIONS[:verify_ssl]
+      end
     end
     
     def base_url
@@ -306,7 +313,7 @@ module OBarc
     # @return [Hash] containing:
     #    * "success" => true or false
     #    * "image_hashes" => [list_of_image_hashes]
-    def upload_image(image = {}); JSON[Api::post_upload_image(image.merge(cookies: cookies, base_url: base_url))]; end
+    def upload_image(image = {}); JSON[Api::post_upload_image(image.merge(cookies: cookies, base_url: base_url, verify_ssl: verify_ssl))]; end
     
     # Sends a message with a partially signed transaction releasing funds from
     # escrow to the Vendor as well as review data.

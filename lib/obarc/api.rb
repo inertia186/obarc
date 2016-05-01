@@ -17,11 +17,14 @@ module OBarc
       
       raise Utils::Exceptions::OBarcError, 'Login username and password required.' if auth.empty?
 
-      execute method: :post, url: url, headers: {params: auth}
+      execute method: :post, url: url, headers: {params: auth},
+        verify_ssl: build_verify_ssl(options)
     end
     
     def ping(options = {})
-      execute(method: :get, url: "#{build_base_url(options)}/connected_peers?_=#{Time.now.to_i}", headers: build_headers(options))
+      execute(method: :get,
+        url: "#{build_base_url(options)}/connected_peers?_=#{Time.now.to_i}",
+        headers: build_headers(options), verify_ssl: build_verify_ssl(options))
     end
     
     def method_missing(m, *args, &block)
@@ -51,7 +54,8 @@ module OBarc
       if !!rest_method && !!url && !!options
         headers = build_headers(options)
         headers = headers.merge(params: params.compact) if !!params
-        return execute method: rest_method, url: url, headers: headers
+        return execute method: rest_method, url: url, headers: headers,
+          verify_ssl: build_verify_ssl(options)
       end
           
       super
@@ -64,8 +68,9 @@ module OBarc
       options = options.delete_if { |k, v| elements.include? k }
       
       url = "#{build_base_url(options)}/upload_images"
-      execute method: :post, url: url, headers:
-        build_headers(options).merge(params: params.compact)
+      execute method: :post, url: url,
+        headers: build_headers(options).merge(params: params.compact),
+        verify_ssl: build_verify_ssl(options)
     end
     
     # GET api/v1/contracts
@@ -80,8 +85,9 @@ module OBarc
       end
       
       url = "#{build_base_url(options)}/contracts"
-      execute method: :get, url: url, headers:
-        build_headers(options).merge(params: contracts.compact)
+      execute method: :get, url: url,
+        headers: build_headers(options).merge(params: contracts.compact),
+        verify_ssl: build_verify_ssl(options)
     end
   private
     def execute(options = {})
@@ -127,6 +133,14 @@ module OBarc
         {cookies: options.cookies}
       else
         options.slice(:cookies)
+      end
+    end
+    
+    def build_verify_ssl(options = {})
+      if options.kind_of? Session
+        !!options.verify_ssl
+      else
+        !!options[:verify_ssl]
       end
     end
   end

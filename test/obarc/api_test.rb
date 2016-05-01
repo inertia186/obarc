@@ -10,6 +10,7 @@ module OBarc
         server_host: 'localhost',
         server_port: '18469',
         api_version: 'v1',
+        verify_ssl: true,
         username: 'username',
         password: 'password'
       }

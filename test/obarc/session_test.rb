@@ -32,6 +32,12 @@ module OBarc
       refute bad_session.ping, 'did not expect ping to work'
     end
 
+    def test_ping_no_verify_ssl
+      stub_get_connected_peers
+      @session.verify_ssl = false
+      assert @session.ping, 'expect ping to work'
+    end
+
     def test_image
       stub_get_image(hash: '04192728d0fd8dfe6663f429a5c03a7faf907930')
       response = @session.image hash: '04192728d0fd8dfe6663f429a5c03a7faf907930'
