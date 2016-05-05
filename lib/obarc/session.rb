@@ -259,6 +259,18 @@ module OBarc
         contract[:images] = hashes
       end
       
+      if !!contract[:image_data] && contract[:image_data].any?
+        images = contract.delete(:image_data)
+        hashes = []
+        
+        images.each do |image|
+          response = upload_image(image: image)
+          hashes += response['image_hashes'] if response['success']
+        end
+        
+        contract[:images] = hashes
+      end
+      
       JSON[Api::post_contract(contract, self)]
     end
     
