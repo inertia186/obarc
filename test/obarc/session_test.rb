@@ -415,7 +415,34 @@ module OBarc
     #   assert response['success'], response
     #   assert @session.contracts(id: response['id']), 'expect a valid new contract'
     # end
-        
+    
+    # Currently, the API responds incorrectly with:
+    #
+    # {"reason"=>"", "success"=>false}
+    #
+    # Update this test when the API behavior is fixed.
+    #
+    # @see https://github.com/OpenBazaar/OpenBazaar-Server/issues/329#issuecomment-217754902
+    def test_create_contract_issue_329
+      stub_post_upload_image
+      stub_post_issue_329_response as: :contracts
+      response = @session.upload_image image: SPAM_IMAGE
+      image_hashes = response['image_hashes']
+      response = @session.create_contract(
+        expiration_date: '',
+        metadata_category: 'physical good',
+        title: 'TestProduct',
+        description: 'This is a test proudct do not buy it',
+        currency_code: 'USD',
+        price: '9.99',
+        nsfw: '',
+        process_time: '1-2 business days'
+      )
+      refute response['success'], response
+      skip 'api currently responds incorrectly with an empty id'
+      assert @session.contracts(id: response['id']), 'expect a valid new contract'
+    end
+    
     def test_create_contract_empty
       stub_post_generic_failure as: :contracts
       response = @session.create_contract
