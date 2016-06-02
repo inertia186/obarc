@@ -1,1 +1,4 @@
-{ "peers reached": 1000, "success": true }
+{
+    "reason": "Truncated message.",
+    "success": false
+}

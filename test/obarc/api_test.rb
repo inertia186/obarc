@@ -54,7 +54,8 @@ module OBarc
     def test_routing_table
       stub_get_routing_table
       response = OBarc::Api.get_routing_table(@session)
-      assert response.body['nat_type'], response.body
+      
+      response != '[]' and assert response.body['nat_type'], response.body
     end
     
     def test_settings

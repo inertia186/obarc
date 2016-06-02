@@ -1,0 +1,199 @@
+<div>
+  <style type="text/css">
+    div.error {
+      color: red;
+      font-family: Verdana, Arial, helvetica, sans-serif;
+      font-weight: bold;
+    }
+
+    div {
+      font-family: Verdana, Arial, helvetica, sans-serif;
+    }
+
+    div.stackTrace {
+    }
+
+    div.frame {
+      padding: 1em;
+      background: white;
+      border-bottom: thin black dashed;
+    }
+
+    div.frame:first-child {
+      padding: 1em;
+      background: white;
+      border-top: thin black dashed;
+      border-bottom: thin black dashed;
+    }
+
+    div.location {
+    }
+
+    span.function {
+      font-weight: bold;
+      font-family: "Courier New", courier, monospace;
+    }
+
+    div.snippet {
+      margin-bottom: 0.5em;
+      margin-left: 1em;
+      background: #FFFFDD;
+    }
+
+    div.snippetHighlightLine {
+      color: red;
+    }
+
+    span.code {
+      font-family: "Courier New", courier, monospace;
+    }
+  </style>
+
+  <div class="error">
+    <span>exceptions.TypeError</span>: <span>Odd-length string</span>
+  </div>
+  <div class="stackTrace">
+    <div class="frame">
+      <div class="location">
+        <span>site-packages/twisted/web/server.py</span>:<span>178</span> in
+        <span class="function">process</span>
+      </div>
+      <div class="snippet">
+        <div class="snippetLine">
+          <span class="lineno">177</span>
+          <code class="code"></code>
+        </div><div class="snippetHighlightLine">
+          <span class="lineno">178</span>
+          <code class="code"></code>
+        </div><div class="snippetLine">
+          <span class="lineno">179</span>
+          <code class="code"></code>
+        </div>
+      </div>
+    </div><div class="frame">
+      <div class="location">
+        <span>site-packages/twisted/web/server.py</span>:<span>739</span> in
+        <span class="function">getResourceFor</span>
+      </div>
+      <div class="snippet">
+        <div class="snippetLine">
+          <span class="lineno">738</span>
+          <code class="code"></code>
+        </div><div class="snippetHighlightLine">
+          <span class="lineno">739</span>
+          <code class="code"></code>
+        </div><div class="snippetLine">
+          <span class="lineno">740</span>
+          <code class="code"></code>
+        </div>
+      </div>
+    </div><div class="frame">
+      <div class="location">
+        <span>site-packages/twisted/web/resource.py</span>:<span>98</span> in
+        <span class="function">getChildForRequest</span>
+      </div>
+      <div class="snippet">
+        <div class="snippetLine">
+          <span class="lineno">97</span>
+          <code class="code"></code>
+        </div><div class="snippetHighlightLine">
+          <span class="lineno">98</span>
+          <code class="code"></code>
+        </div><div class="snippetLine">
+          <span class="lineno">99</span>
+          <code class="code"></code>
+        </div>
+      </div>
+    </div><div class="frame">
+      <div class="location">
+        <span>site-packages/twisted/web/resource.py</span>:<span>201</span> in
+        <span class="function">getChildWithDefault</span>
+      </div>
+      <div class="snippet">
+        <div class="snippetLine">
+          <span class="lineno">200</span>
+          <code class="code"></code>
+        </div><div class="snippetHighlightLine">
+          <span class="lineno">201</span>
+          <code class="code"></code>
+        </div><div class="snippetLine">
+          <span class="lineno">202</span>
+          <code class="code"></code>
+        </div>
+      </div>
+    </div><div class="frame">
+      <div class="location">
+        <span>site-packages/txrestapi/resource.py</span>:<span>63</span> in
+        <span class="function">getChild</span>
+      </div>
+      <div class="snippet">
+        <div class="snippetLine">
+          <span class="lineno">62</span>
+          <code class="code"></code>
+        </div><div class="snippetHighlightLine">
+          <span class="lineno">63</span>
+          <code class="code"></code>
+        </div><div class="snippetLine">
+          <span class="lineno">64</span>
+          <code class="code"></code>
+        </div>
+      </div>
+    </div><div class="frame">
+      <div class="location">
+        <span>site-packages/txrestapi/resource.py</span>:<span>19</span> in
+        <span class="function">inner</span>
+      </div>
+      <div class="snippet">
+        <div class="snippetLine">
+          <span class="lineno">18</span>
+          <code class="code"></code>
+        </div><div class="snippetHighlightLine">
+          <span class="lineno">19</span>
+          <code class="code"></code>
+        </div><div class="snippetLine">
+          <span class="lineno">20</span>
+          <code class="code"></code>
+        </div>
+      </div>
+    </div><div class="frame">
+      <div class="location">
+        <span>api/restapi.py</span>:<span>55</span> in
+        <span class="function">_authenticate</span>
+      </div>
+      <div class="snippet">
+        <div class="snippetLine">
+          <span class="lineno">54</span>
+          <code class="code"></code>
+        </div><div class="snippetHighlightLine">
+          <span class="lineno">55</span>
+          <code class="code"></code>
+        </div><div class="snippetLine">
+          <span class="lineno">56</span>
+          <code class="code"></code>
+        </div>
+      </div>
+    </div><div class="frame">
+      <div class="location">
+        <span>api/restapi.py</span>:<span>206</span> in
+        <span class="function">get_profile</span>
+      </div>
+      <div class="snippet">
+        <div class="snippetLine">
+          <span class="lineno">205</span>
+          <code class="code"></code>
+        </div><div class="snippetHighlightLine">
+          <span class="lineno">206</span>
+          <code class="code"></code>
+        </div><div class="snippetLine">
+          <span class="lineno">207</span>
+          <code class="code"></code>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="error">
+    <span>exceptions.TypeError</span>: <span>Odd-length string</span>
+  </div>
+</div>
+
+</body></html>
