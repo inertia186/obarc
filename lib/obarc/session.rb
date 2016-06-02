@@ -267,7 +267,7 @@ module OBarc
         end
                  
         response['image_hashes'] if response['success']
-      end
+      end.flatten
     end
     
     # Undocumented.
