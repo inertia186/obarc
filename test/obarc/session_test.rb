@@ -15,7 +15,7 @@ module OBarc
       begin
         @session.bogus
         fail 'did not expect missing method not to be missing'
-      rescue NoMethodError => e
+      rescue NoMethodError => _
         # success
       end
     end
@@ -47,9 +47,9 @@ module OBarc
     def test_image_wrong_hash
       stub_get_image(hash: 'WRONG')
       begin
-        response = @session.image(hash: 'WRONG')
+        _ = @session.image(hash: 'WRONG')
         fail 'Should be 404'
-      rescue RestClient::ResourceNotFound => e
+      rescue RestClient::ResourceNotFound => _
         # success
       end
     end
@@ -245,9 +245,9 @@ module OBarc
     def test_contracts_short_id
       stub_get_generic_empty_hash as: :contracts
       begin
-        response = @session.contracts(id: '123')
+        _ = @session.contracts(id: '123')
         fail 'did not expect short id to work'
-      rescue OBarc::Utils::Exceptions::OBarcError => e
+      rescue OBarc::Utils::Exceptions::OBarcError => _
         # success
       end
     end
@@ -255,9 +255,9 @@ module OBarc
     def test_contracts_short_guid
       stub_get_generic_empty_hash as: :contracts
       begin
-        response = @session.contracts(guid: '123')
+        _ = @session.contracts(guid: '123')
         fail 'did not expect short guid to work'
-      rescue OBarc::Utils::Exceptions::OBarcError => e
+      rescue OBarc::Utils::Exceptions::OBarcError => _
         # success
       end
     end
@@ -427,7 +427,6 @@ module OBarc
       stub_post_upload_image
       stub_post_issue_329_response as: :contracts
       response = @session.upload_image image: SPAM_IMAGE
-      image_hashes = response['image_hashes']
       response = @session.create_contract(
         expiration_date: '',
         metadata_category: 'physical good',

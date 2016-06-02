@@ -29,7 +29,7 @@ module OBarc
       begin
         OBarc::Api.bogus
         fail 'did not expect missing method not to be missing'
-      rescue NoMethodError => e
+      rescue NoMethodError => _
         # success
       end
     end

@@ -6,6 +6,11 @@ Rake::TestTask.new(:test) do |t|
   t.libs << 'test'
   t.libs << 'lib'
   t.test_files = FileList['test/**/*_test.rb']
+  t.ruby_opts << if ENV['HELL_ENABLED']
+    '-W2'
+  else
+    '-W1'
+  end
 end
 
 YARD::Rake::YardocTask.new do |t|

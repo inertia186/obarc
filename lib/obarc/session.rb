@@ -3,7 +3,8 @@ require 'open-uri'
 
 module OBarc
   class Session
-    attr_accessor :cookies, :base_url, :username, :password, :verify_ssl
+    attr_accessor :cookies, :username, :password, :verify_ssl
+    attr_writer :base_url
     
     DEFAULT_OPTIONS = {
       protocol: 'http',
@@ -31,7 +32,7 @@ module OBarc
     end
     
     def base_url
-      "#{@protocol}://#{@server_host}:#{@server_port}/api/#{@api_version}"
+      @base_url ||= "#{@protocol}://#{@server_host}:#{@server_port}/api/#{@api_version}"
     end
     
     # Check if there's a valid session.
@@ -103,7 +104,7 @@ module OBarc
       
       unless listings === all_listings
         start = Time.now.to_i
-        @cache_timestamp = if (start - (@cache_timestamp || 0)) > 300
+        @cache_timestamp = if (start - (@cache_timestamp ||= 0)) > 300
           @contracts_cache = {}
           start
         else
