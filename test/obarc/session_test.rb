@@ -21,117 +21,150 @@ module OBarc
     end
     
     def test_ping
-      stub_get_connected_peers
-      assert @session.ping, 'expect ping to work'
+      stub_get_connected_peers do
+        assert @session.ping, 'expect ping to work'
+      end
     end
 
     def test_ping_bad_session
-      stub_post_generic_failure as: :login
-      stub_get_generic_failure as: :connected_peers
-      bad_session = Session.new(username: 'WRONG', password: 'WRONG')
-      refute bad_session.ping, 'did not expect ping to work'
+      stub_post_generic_failure as: :login, times: 2 do
+        stub_get_generic_failure as: :connected_peers do
+          bad_session = Session.new(username: 'WRONG', password: 'WRONG')
+          refute bad_session.ping, 'did not expect ping to work'
+        end
+      end
     end
 
     def test_ping_no_verify_ssl
-      stub_get_connected_peers
-      @session.verify_ssl = false
-      assert @session.ping, 'expect ping to work'
+      stub_get_connected_peers do
+        @session.verify_ssl = false
+        assert @session.ping, 'expect ping to work'
+      end
     end
 
     def test_image
-      stub_get_image(hash: '04192728d0fd8dfe6663f429a5c03a7faf907930')
-      response = @session.image hash: '04192728d0fd8dfe6663f429a5c03a7faf907930'
+      response = stub_get_image(hash: '04192728d0fd8dfe6663f429a5c03a7faf907930') do
+        @session.image hash: '04192728d0fd8dfe6663f429a5c03a7faf907930'
+      end
+        
       assert response, response
     end
     
     def test_image_wrong_hash
-      stub_get_image(hash: 'WRONG')
-      begin
-        _ = @session.image(hash: 'WRONG')
-        fail 'Should be 404'
-      rescue RestClient::ResourceNotFound => _
-        # success
+      stub_get_image(hash: 'WRONG') do
+        begin
+          _ = @session.image(hash: 'WRONG')
+          fail 'Should be 404'
+        rescue RestClient::ResourceNotFound => _
+          # success
+        end
       end
     end
     
     def test_profile
-      stub_get_profile
-      response = @session.profile(guid: 'fe35be5ec8c07d07e347d7003021bdfa8630ca2f')
+      response = stub_get_profile do
+        @session.profile(guid: 'fe35be5ec8c07d07e347d7003021bdfa8630ca2f')
+      end
+        
       assert response['profile'], response
     end
     
     def test_profile_self
-      stub_get_profile
-      response = @session.profile
+      response = stub_get_profile do 
+        @session.profile
+      end
+      
       assert response['profile'], response
     end
     
     def test_social_accounts
-      stub_get_profile
-      response = @session.social_accounts(guid: 'fe35be5ec8c07d07e347d7003021bdfa8630ca2f')
+      response = stub_get_profile do
+        @session.social_accounts(guid: 'fe35be5ec8c07d07e347d7003021bdfa8630ca2f')
+      end
+      
       assert response.any?, response
     end
     
     def test_social_accounts_self
-      stub_get_profile
-      response = @session.social_accounts
+      response = stub_get_profile do
+        @session.social_accounts
+      end
+      
       assert response.any?, response
     end
     
     def test_listings
-      stub_get_listings
-      response = @session.listings(guid: 'fe35be5ec8c07d07e347d7003021bdfa8630ca2f')
+      response = stub_get_listings do
+        @session.listings(guid: 'fe35be5ec8c07d07e347d7003021bdfa8630ca2f')
+      end
+      
       assert response['listings'], response
     end
     
     def test_listings_self
-      stub_get_listings
-      response = @session.listings
+      response  = stub_get_listings do
+        @session.listings
+      end
+      
       assert response['listings'], response
     end
     
     def test_query_listings
-      stub_get_listings
-      stub_get_contracts
-      response = @session.query_listings(pattern: /slow/i)
+      response = stub_get_listings do
+        stub_get_contracts do
+          @session.query_listings(pattern: /slow/i)
+        end
+      end
+        
       assert response['listings'], response
       assert response['listings'].any?, response
     end
     
     def test_query_listings_empty
-      stub_get_listings
-      response = @session.query_listings
+      response  = stub_get_listings do
+        @session.query_listings
+      end
+      
       assert response['listings'], response
       assert response['listings'].any?, response
     end
     
     def test_followers
-      stub_get_followers
-      response = @session.followers(guid: 'fe35be5ec8c07d07e347d7003021bdfa8630ca2f')
+      response = stub_get_followers do
+        @session.followers(guid: 'fe35be5ec8c07d07e347d7003021bdfa8630ca2f')
+      end
+      
       assert response['followers'], response
     end
     
     def test_followers_self
-      stub_get_followers
-      response = @session.followers
+      response = stub_get_followers do
+        @session.followers
+      end
+      
       assert response['followers'], response
     end
     
     def test_following
-      stub_get_following
-      response = @session.following(guid: 'a2028a6c36012629860cc28e59c066f12b8af4a2')
+      response = stub_get_following do
+        @session.following(guid: 'a2028a6c36012629860cc28e59c066f12b8af4a2')
+      end
+      
       assert response['following'], response
     end
     
     def test_following_self
-      stub_get_following
-      response = @session.following
+      response = stub_get_following do
+        @session.following
+      end
+      
       assert response['following'], response
     end
     
     def test_follow
-      stub_post_generic_success as: :follow
-      response = @session.follow(guid: '0dea93045d3beda948517a62aaab33a82213bd7b')
+      response = stub_post_generic_success as: :follow do
+        @session.follow(guid: '0dea93045d3beda948517a62aaab33a82213bd7b')
+      end
       
       if defined? WebMock
         assert response['success'], response
@@ -141,8 +174,9 @@ module OBarc
     end
     
     def test_unfollow
-      stub_post_generic_success as: :unfollow
-      response = @session.unfollow(guid: '0dea93045d3beda948517a62aaab33a82213bd7b')
+      response = stub_post_generic_success as: :unfollow do
+        @session.unfollow(guid: '0dea93045d3beda948517a62aaab33a82213bd7b')
+      end
       
       if defined? WebMock
         assert response['success'], response
@@ -152,65 +186,75 @@ module OBarc
     end
     
     def test_update_profile
-      stub_post_upload_image
-      stub_post_generic_success as: :profile
-      response = @session.upload_image image: AVATAR_IMAGE
-      avatar_hash = response['image_hashes'][0]
-      response = @session.upload_image image: SPAM_IMAGE
-      header_hash = response['image_hashes'][0]
-      response = @session.update_profile(
-        about: 'about',
-        short_description: 'short_description',
-        nsfw: 'false',
-        vendor: 'true',
-        moderator: 'false',
-        moderation_fee: '0.00',
-        website: 'website',
-        email: 'email',
-        primary_color: '16777215',
-        secondary_color: '15132390',
-        background_color: '12832757',
-        text_color: '5526612',
-        avatar: avatar_hash,
-        header: header_hash,
-        pgp_key: ''
-      )
+      response = stub_post_generic_success as: :profile do
+        avatar_hash, header_hash = stub_post_upload_image times: 2 do
+          r1 = @session.upload_image image: AVATAR_IMAGE
+          r2 = @session.upload_image image: SPAM_IMAGE
+          [r1['image_hashes'][0], r2['image_hashes'][0]]
+        end
+        
+        @session.update_profile(
+          about: 'about',
+          short_description: 'short_description',
+          nsfw: 'false',
+          vendor: 'true',
+          moderator: 'false',
+          moderation_fee: '0.00',
+          website: 'website',
+          email: 'email',
+          primary_color: '16777215',
+          secondary_color: '15132390',
+          background_color: '12832757',
+          text_color: '5526612',
+          avatar: avatar_hash,
+          header: header_hash,
+          pgp_key: ''
+        )
+      end
+      
       assert response['success'], response
     end
     
     def test_update_profile_empty
-      stub_post_generic_success as: :profile
-      response = @session.update_profile {}
+      response = stub_post_generic_success as: :profile do
+        @session.update_profile {}
+      end
+      
       assert response['success'], response
     end
     
     def test_add_social_account
-      stub_post_generic_success as: :social_accounts
-      response = @session.add_social_account(
-        account_type: 'TWITTER',
-        username: 'TWITTER',
-        proof: nil
-      )
+      response = stub_post_generic_success as: :social_accounts do
+        @session.add_social_account(
+          account_type: 'TWITTER',
+          username: 'TWITTER',
+          proof: nil
+        )
+      end
+      
       assert response['success'], response
     end
     
     def test_add_social_account_empty
-      stub_post_generic_failure as: :social_accounts
-      response = @session.add_social_account {}
+      response = stub_post_generic_failure as: :social_accounts do
+        @session.add_social_account {}
+      end
+      
       refute response['success'], response
     end
     
     def test_delete_social_account
-      stub_delete_generic_success as: :social_accounts
-      response = @session.delete_social_account(
-        account_type: 'TWITTER',
-      )
+      response = stub_delete_generic_success as: :social_accounts do
+        @session.delete_social_account account_type: 'TWITTER'
+      end
+      
       assert response['success'], response
     end
     
     def test_delete_social_account_empty
-      stub_delete_generic_failure as: :social_accounts
-      response = @session.delete_social_account
+      response = stub_delete_generic_failure as: :social_accounts do
+        @session.delete_social_account
+      end
       
       if defined? WebMock
         refute response['success'], response
@@ -220,14 +264,17 @@ module OBarc
     end
     
     def test_contracts
-      stub_get_contracts
-      response = @session.contracts(id: '3c7c653865952abd0a308300cdd8b770bf55d84a')
+      response = stub_get_contracts do
+        @session.contracts(id: '3c7c653865952abd0a308300cdd8b770bf55d84a')
+      end
+      
       assert response['vendor_offer'], response
     end
     
     def test_contracts_empty
-      stub_get_contracts
-      response = @session.contracts
+      response = stub_get_contracts do
+        @session.contracts
+      end
       
       if defined? WebMock
         refute response.empty?, response
@@ -237,181 +284,195 @@ module OBarc
     end
     
     def test_contracts_wrong_guid
-      stub_get_generic_empty_hash as: :contracts
-      response = @session.contracts(id: '3c7c653865952abd0a308300cdd8b770bf55d84a', guid: '664b77de3ab547e13bcebca3cf296755b788fa74')
+      response = stub_get_generic_empty_hash as: :contracts do
+        @session.contracts(id: '3c7c653865952abd0a308300cdd8b770bf55d84a', guid: '664b77de3ab547e13bcebca3cf296755b788fa74')
+      end
+      
       refute response['vendor_offer'], response
     end
     
     def test_contracts_short_id
-      stub_get_generic_empty_hash as: :contracts
-      begin
-        _ = @session.contracts(id: '123')
-        fail 'did not expect short id to work'
-      rescue OBarc::Utils::Exceptions::OBarcError => _
-        # success
+      stub_get_generic_empty_hash as: :contracts, times: 0 do
+        begin
+          _ = @session.contracts(id: '123')
+          fail 'did not expect short id to work'
+        rescue OBarc::Utils::Exceptions::OBarcError => _
+          # success
+        end
       end
     end
     
     def test_contracts_short_guid
-      stub_get_generic_empty_hash as: :contracts
-      begin
-        _ = @session.contracts(guid: '123')
-        fail 'did not expect short guid to work'
-      rescue OBarc::Utils::Exceptions::OBarcError => _
-        # success
+      stub_get_generic_empty_hash as: :contracts, times: 0 do
+        begin
+          _ = @session.contracts(guid: '123')
+          fail 'did not expect short guid to work'
+        rescue OBarc::Utils::Exceptions::OBarcError => _
+          # success
+        end
       end
     end
     
     def test_create_contract
-      stub_post_upload_image
-      stub_post_generic_success as: :contracts
-      response = @session.upload_image image: SPAM_IMAGE
-      image_hashes = response['image_hashes']
-      response = @session.create_contract(
-        expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%H:%M'), # Format: 2016-04-19T11:50 or empty string
-        metadata_category: 'metadata_category',
-        title: 'title',
-        description: 'description',
-        currency_code: 'USD',
-        price: '1.00',
-        process_time: '3 Business Days',
-        nsfw: false,
-        # shipping_origin: 'shipping_origin',
-        ships_to: 'ships_to',
-        est_delivery_domestic: 'est_delivery_domestic',
-        est_delivery_international: 'est_delivery_international',
-        terms_conditions: 'terms_conditions',
-        returns: 'returns',
-        shipping_currency_code: 'shipping_currency_code',
-        shipping_domestic: 'shipping_domestic',
-        shipping_international: 'shipping_international',
-        keywords: 'keyword1 keyword2',
-        category: 'category',
-        condition: 'New',
-        sku: '736B75',
-        images: image_hashes,
-        free_shipping: true,
-        # options: 'options',
-        # moderators: 'moderators',
-        # contract_id: 'contract_id'
-      )
+      response = stub_post_generic_success as: :contracts do
+        image_hashes = stub_post_upload_image do
+          r = @session.upload_image image: SPAM_IMAGE
+          image_hashes = r['image_hashes']
+        end
+          
+        @session.create_contract(
+          expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%H:%M'), # Format: 2016-04-19T11:50 or empty string
+          metadata_category: 'metadata_category',
+          title: 'title',
+          description: 'description',
+          currency_code: 'USD',
+          price: '1.00',
+          process_time: '3 Business Days',
+          nsfw: false,
+          # shipping_origin: 'shipping_origin',
+          ships_to: 'ships_to',
+          est_delivery_domestic: 'est_delivery_domestic',
+          est_delivery_international: 'est_delivery_international',
+          terms_conditions: 'terms_conditions',
+          returns: 'returns',
+          shipping_currency_code: 'shipping_currency_code',
+          shipping_domestic: 'shipping_domestic',
+          shipping_international: 'shipping_international',
+          keywords: 'keyword1 keyword2',
+          category: 'category',
+          condition: 'New',
+          sku: '736B75',
+          images: image_hashes,
+          free_shipping: true,
+          # options: 'options',
+          # moderators: 'moderators',
+          # contract_id: 'contract_id'
+        )
+      end
+        
       assert response['success'], response
     end
     
     def test_create_contract_with_image_urls
-      stub_post_upload_image
-      stub_post_generic_success as: :contracts
-      if defined? WebMock
+      stub = if defined? WebMock
         stub_request(:get, /imgur/).
           to_return(status: 200, body: fixture('04192728d0fd8dfe6663f429a5c03a7faf907930.jpg'), headers: {})
       end
-  
-      response = @session.create_contract(
-        expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%H:%M'), # Format: 2016-04-19T11:50 or empty string
-        metadata_category: 'metadata_category',
-        title: 'title',
-        description: 'description',
-        currency_code: 'USD',
-        price: '1.00',
-        process_time: '3 Business Days',
-        nsfw: false,
-        # shipping_origin: 'shipping_origin',
-        ships_to: 'ships_to',
-        est_delivery_domestic: 'est_delivery_domestic',
-        est_delivery_international: 'est_delivery_international',
-        terms_conditions: 'terms_conditions',
-        returns: 'returns',
-        shipping_currency_code: 'shipping_currency_code',
-        shipping_domestic: 'shipping_domestic',
-        shipping_international: 'shipping_international',
-        keywords: 'keyword1 keyword2',
-        category: 'category',
-        condition: 'New',
-        sku: '736B75',
-        image_urls: [
-          'http://i.imgur.com/uC2KUQ6.png',
-          'http://i.imgur.com/RliU8Gn.jpg'
-        ],
-        free_shipping: true,
-        # options: 'options',
-        # moderators: 'moderators',
-        # contract_id: 'contract_id'
-      )
+      
+      response = stub_post_generic_success as: :contracts do
+        stub_post_upload_image times: 2 do
+          @session.create_contract(
+            expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%H:%M'), # Format: 2016-04-19T11:50 or empty string
+            metadata_category: 'metadata_category',
+            title: 'title',
+            description: 'description',
+            currency_code: 'USD',
+            price: '1.00',
+            process_time: '3 Business Days',
+            nsfw: false,
+            # shipping_origin: 'shipping_origin',
+            ships_to: 'ships_to',
+            est_delivery_domestic: 'est_delivery_domestic',
+            est_delivery_international: 'est_delivery_international',
+            terms_conditions: 'terms_conditions',
+            returns: 'returns',
+            shipping_currency_code: 'shipping_currency_code',
+            shipping_domestic: 'shipping_domestic',
+            shipping_international: 'shipping_international',
+            keywords: 'keyword1 keyword2',
+            category: 'category',
+            condition: 'New',
+            sku: '736B75',
+            image_urls: [
+              'http://i.imgur.com/uC2KUQ6.png',
+              'http://i.imgur.com/RliU8Gn.jpg'
+            ],
+            free_shipping: true,
+            # options: 'options',
+            # moderators: 'moderators',
+            # contract_id: 'contract_id'
+          )
+        end
+      end
+      
       assert response['success'], response
+      assert_requested stub, times: 2 and remove_request_stub stub if !!stub
     end
     
     def test_create_contract_with_image_data
-      stub_post_upload_image
-      stub_post_generic_success as: :contracts
-      if defined? WebMock
-        stub_request(:get, /imgur/).
-          to_return(status: 200, body: fixture('04192728d0fd8dfe6663f429a5c03a7faf907930.jpg'), headers: {})
+      response = stub_post_generic_success as: :contracts do
+        stub_post_upload_image times: 2 do
+          @session.create_contract(
+            expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%H:%M'), # Format: 2016-04-19T11:50 or empty string
+            metadata_category: 'metadata_category',
+            title: 'title',
+            description: 'description',
+            currency_code: 'USD',
+            price: '1.00',
+            process_time: '3 Business Days',
+            nsfw: false,
+            # shipping_origin: 'shipping_origin',
+            ships_to: 'ships_to',
+            est_delivery_domestic: 'est_delivery_domestic',
+            est_delivery_international: 'est_delivery_international',
+            terms_conditions: 'terms_conditions',
+            returns: 'returns',
+            shipping_currency_code: 'shipping_currency_code',
+            shipping_domestic: 'shipping_domestic',
+            shipping_international: 'shipping_international',
+            keywords: 'keyword1 keyword2',
+            category: 'category',
+            condition: 'New',
+            sku: '736B75',
+            image_data: [SPAM_IMAGE, AVATAR_IMAGE],
+            free_shipping: true,
+            # options: 'options',
+            # moderators: 'moderators',
+            # contract_id: 'contract_id'
+          )
+        end
       end
-  
-      response = @session.create_contract(
-        expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%H:%M'), # Format: 2016-04-19T11:50 or empty string
-        metadata_category: 'metadata_category',
-        title: 'title',
-        description: 'description',
-        currency_code: 'USD',
-        price: '1.00',
-        process_time: '3 Business Days',
-        nsfw: false,
-        # shipping_origin: 'shipping_origin',
-        ships_to: 'ships_to',
-        est_delivery_domestic: 'est_delivery_domestic',
-        est_delivery_international: 'est_delivery_international',
-        terms_conditions: 'terms_conditions',
-        returns: 'returns',
-        shipping_currency_code: 'shipping_currency_code',
-        shipping_domestic: 'shipping_domestic',
-        shipping_international: 'shipping_international',
-        keywords: 'keyword1 keyword2',
-        category: 'category',
-        condition: 'New',
-        sku: '736B75',
-        image_data: [SPAM_IMAGE, AVATAR_IMAGE],
-        free_shipping: true,
-        # options: 'options',
-        # moderators: 'moderators',
-        # contract_id: 'contract_id'
-      )
+        
       assert response['success'], response
     end
     
     # def test_create_contract_borked
-    #   stub_post_upload_image
-    #   stub_post_generic_success as: :contracts
-    #   response = @session.upload_image image: SPAM_IMAGE
-    #   image_hashes = response['image_hashes']
-    #   response = @session.create_contract(
-    #     expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%H:%M'), # Format: 2016-04-19T11:50 or empty string
-    #     metadata_category: 'metadata_category',
-    #     title: 'title',
-    #     #description: "<div class=\"heading\"></div>", # <-- Borked
-    #     currency_code: 'USD',
-    #     price: '1.00',
-    #     process_time: '3 Business Days',
-    #     nsfw: false,
-    #     # shipping_origin: 'shipping_origin',
-    #     ships_to: 'ships_to',
-    #     est_delivery_domestic: 'est_delivery_domestic',
-    #     est_delivery_international: 'est_delivery_international',
-    #     terms_conditions: 'terms_conditions',
-    #     returns: 'returns',
-    #     shipping_currency_code: 'shipping_currency_code',
-    #     shipping_domestic: 'shipping_domestic',
-    #     shipping_international: 'shipping_international',
-    #     keywords: 'keyword1 keyword2',
-    #     category: 'category',
-    #     condition: 'New',
-    #     sku: '736B75',
-    #     images: image_hashes,
-    #     free_shipping: true,
-    #     # options: 'options',
-    #     # moderators: 'moderators',
-    #     # contract_id: 'contract_id'
-    #   )
+    #   response = stub_post_generic_success as: :contracts do
+    #     image_hashes = stub_post_upload_image do
+    #       r = @session.upload_image image: SPAM_IMAGE
+    #       r['image_hashes']
+    #     end
+    #     
+    #     @session.create_contract(
+    #       expiration_date: (Time.now + 30).utc.strftime('%Y-%m-%dT%H:%M'), # Format: 2016-04-19T11:50 or empty string
+    #       metadata_category: 'metadata_category',
+    #       title: 'title',
+    #       #description: "<div class=\"heading\"></div>", # <-- Borked
+    #       currency_code: 'USD',
+    #       price: '1.00',
+    #       process_time: '3 Business Days',
+    #       nsfw: false,
+    #       # shipping_origin: 'shipping_origin',
+    #       ships_to: 'ships_to',
+    #       est_delivery_domestic: 'est_delivery_domestic',
+    #       est_delivery_international: 'est_delivery_international',
+    #       terms_conditions: 'terms_conditions',
+    #       returns: 'returns',
+    #       shipping_currency_code: 'shipping_currency_code',
+    #       shipping_domestic: 'shipping_domestic',
+    #       shipping_international: 'shipping_international',
+    #       keywords: 'keyword1 keyword2',
+    #       category: 'category',
+    #       condition: 'New',
+    #       sku: '736B75',
+    #       images: image_hashes,
+    #       free_shipping: true,
+    #       # options: 'options',
+    #       # moderators: 'moderators',
+    #       # contract_id: 'contract_id'
+    #     )
+    #   end
+    #   
     #   assert response['success'], response
     #   assert @session.contracts(id: response['id']), 'expect a valid new contract'
     # end
@@ -424,33 +485,40 @@ module OBarc
     #
     # @see https://github.com/OpenBazaar/OpenBazaar-Server/issues/329#issuecomment-217754902
     def test_create_contract_issue_329
-      stub_post_upload_image
-      stub_post_issue_329_response as: :contracts
-      response = @session.upload_image image: SPAM_IMAGE
-      response = @session.create_contract(
-        expiration_date: '',
-        metadata_category: 'physical good',
-        title: 'TestProduct',
-        description: 'This is a test proudct do not buy it',
-        currency_code: 'USD',
-        price: '9.99',
-        nsfw: '',
-        process_time: '1-2 business days'
-      )
+      response = stub_post_issue_329_response as: :contracts do
+        stub_post_upload_image do
+          @session.upload_image image: SPAM_IMAGE
+        end
+        
+        @session.create_contract(
+          expiration_date: '',
+          metadata_category: 'physical good',
+          title: 'TestProduct',
+          description: 'This is a test proudct do not buy it',
+          currency_code: 'USD',
+          price: '9.99',
+          nsfw: '',
+          process_time: '1-2 business days'
+        )
+      end
+      
       refute response['success'], response
       skip 'api currently responds incorrectly with an empty id'
       assert @session.contracts(id: response['id']), 'expect a valid new contract'
     end
     
     def test_create_contract_empty
-      stub_post_generic_failure as: :contracts
-      response = @session.create_contract
+      response = stub_post_generic_failure as: :contracts do
+        @session.create_contract
+      end
+      
       refute response['success'], response
     end
     
     def test_delete_contract
-      stub_delete_generic_success as: :contracts
-      response = @session.delete_contract id: '0dee4786fd02d6bc673b50309a3c831acf78ec70'
+      response = stub_delete_generic_success as: :contracts do
+        @session.delete_contract id: '0dee4786fd02d6bc673b50309a3c831acf78ec70'
+      end
       
       if defined? WebMock
         assert response['success'], response
@@ -460,20 +528,26 @@ module OBarc
     end
     
     def test_delete_contract_wrong
-      stub_delete_generic_failure as: :contracts
-      response = @session.delete_contract id: '99'
+      response = stub_delete_generic_failure as: :contracts do
+        @session.delete_contract id: '99'
+      end
+      
       refute response['success'], response
     end
     
     def test_shutdown
-      stub_get_generic_nil_response as: :shutdown
-      response = @session.shutdown!
+      response = stub_get_generic_nil_response as: :shutdown do
+        @session.shutdown!
+      end
+      
       assert response.nil? || response.empty?, "did not expect response after shutdown, got: #{response}"
     end
     
     def test_make_moderator
-      stub_post_generic_success as: :make_moderator
-      response = @session.make_moderator
+      response = stub_post_generic_success as: :make_moderator do
+        @session.make_moderator
+      end
+      
       assert response['success'], response
     end
     
@@ -484,12 +558,13 @@ module OBarc
     end
     
     def test_purchase_contract
-      stub_post_generic_success as: :purchase_contract
-      response = @session.purchase_contract(
-        id: '664b77de3ab547e13bcebca3cf296755b788fa74',
-        quantity: '1',
-        refund_address: 'mmqcyagCJgCKwSDZmRxLS8N9yUW4unM3Qs'
-      )
+      response = stub_post_generic_success as: :purchase_contract do
+        @session.purchase_contract(
+          id: '664b77de3ab547e13bcebca3cf296755b788fa74',
+          quantity: '1',
+          refund_address: 'mmqcyagCJgCKwSDZmRxLS8N9yUW4unM3Qs'
+        )
+      end
       
       if defined? WebMock
         assert response['success'], response
@@ -499,8 +574,10 @@ module OBarc
     end
     
     def test_purchase_contract_empty
-      stub_post_generic_failure as: :purchase_contract
-      response = @session.purchase_contract {}
+      response = stub_post_generic_failure as: :purchase_contract do
+        @session.purchase_contract {}
+      end
+      
       refute response['success'], response
     end
     
@@ -516,49 +593,64 @@ module OBarc
     # end
     
     def test_confirm_order_empty
-      stub_post_generic_failure as: :confirm_order
-      response = @session.confirm_order {}
+      response = stub_post_generic_failure as: :confirm_order do
+        @session.confirm_order {}
+      end
+      
       refute response['success'], response
     end
     
     def test_upload_image_image
-      stub_post_upload_image
-      response = @session.upload_image image: SPAM_IMAGE
+      response = stub_post_upload_image do
+        @session.upload_image image: SPAM_IMAGE
+      end
+      
       assert response['success'], response
       refute response['image_hashes'].empty?, response
     end
     
     def test_upload_image_small_file
-      stub_post_upload_image
-      response = @session.upload_image image: fixture('5d03c41f9ebe3984e312f846bcb1db5b37e9b5ae68f34b5bb468dfe7cb6fc02c90a7172cb8bd6a21.jpg')
+      response = stub_post_upload_image do
+        @session.upload_image image: fixture('5d03c41f9ebe3984e312f846bcb1db5b37e9b5ae68f34b5bb468dfe7cb6fc02c90a7172cb8bd6a21.jpg')
+      end
+      
       assert response['success'], response
       refute response['image_hashes'].empty?, response
     end
     
     def test_upload_image_medium_file
-      stub_post_upload_image
-      response = @session.upload_image image: fixture('04192728d0fd8dfe6663f429a5c03a7faf907930.jpg')
+      response = stub_post_upload_image do
+        @session.upload_image image: fixture('04192728d0fd8dfe6663f429a5c03a7faf907930.jpg')
+      end
+      
       assert response['success'], response
       refute response['image_hashes'].empty?, response
     end
     
     def test_upload_image_avatar
-      stub_post_upload_image
-      response = @session.upload_image avatar: AVATAR_IMAGE
+      response = stub_post_upload_image do
+        @session.upload_image avatar: AVATAR_IMAGE
+      end
+      
       assert response['success'], response
       refute response['image_hashes'].empty?, response
     end
     
     def test_upload_image_header
-      stub_post_upload_image
-      response = @session.upload_image header: AVATAR_IMAGE
+      response = stub_post_upload_image do
+        @session.upload_image header: AVATAR_IMAGE
+      end
+      
       assert response['success'], response
       refute response['image_hashes'].empty?, response
     end
     
     def test_upload_image_empty
-      stub_post_upload_image_empty as: :upload_image # Weird corner case?
-      response = @session.upload_image
+      response = stub_post_upload_image_empty as: :upload_image do
+        # Weird corner case?
+        @session.upload_image
+      end
+      
       assert response['success'], response
       assert response['image_hashes'].empty?, response
     end
@@ -579,64 +671,78 @@ module OBarc
     # end
     
     def test_update_settings
-      stub_post_generic_success as: :settings
-      response = @session.update_settings(
-        refund_address: "mmqcyagCJgCKwSDZmRxLS8N9yUW4unM3Qs",
-        refund_policy: "No refund policy",
-        notifications: true,
-        resolver: "https://resolver.onename.com/",
-        terms_conditions: "No terms or conditions",
-        language: "en-US",
-        shipping_addresses: [""],
-        country: "UNITED_STATES",
-        time_zone: "-7",
-        moderators: '',
-        libbitcoin_server: nil,
-        currency_code: "BTC",
-        blocked: [""]
-      )
+      response = stub_post_generic_success as: :settings do
+        @session.update_settings(
+          refund_address: "mmqcyagCJgCKwSDZmRxLS8N9yUW4unM3Qs",
+          refund_policy: "No refund policy",
+          notifications: true,
+          resolver: "https://resolver.onename.com/",
+          terms_conditions: "No terms or conditions",
+          language: "en-US",
+          shipping_addresses: [""],
+          country: "UNITED_STATES",
+          time_zone: "-7",
+          moderators: '',
+          libbitcoin_server: nil,
+          currency_code: "BTC",
+          blocked: [""]
+        )
+      end
+        
       assert response['success'], response
     end
     
     def test_update_settings_empty
-      stub_post_generic_failure as: :settings
-      response = @session.update_settings
+      response = stub_post_generic_failure as: :settings do
+        @session.update_settings
+      end
+      
       refute response['success'], response
     end
     
     def test_settings
-      stub_get_settings
-      response = @session.settings
+      response = stub_get_settings do
+        @session.settings
+      end
+      
       assert response['terms_conditions'], response
     end
     
     def test_connected_peers
-      stub_get_connected_peers
-      response = @session.connected_peers
+      response = stub_get_connected_peers do
+        @session.connected_peers
+      end
+      
       assert response['peers'], response
     end
     
     def test_routing_table
-      stub_get_routing_table
-      response = @session.routing_table
+      response = stub_get_routing_table do
+        @session.routing_table
+      end
       assert response.first['nat_type'], response
     end
     
     def test_notifications
-      stub_get_notifications
-      response = @session.notifications
+      response = stub_get_notifications do
+        @session.notifications
+      end
+      
       assert response['notifications'], response
     end
     
     def test_mark_notification_as_read
-      stub_post_generic_success as: :mark_notification_as_read
-      response = @session.mark_notification_as_read id: 'c4c0bfd525a19e6a58686ff13b185ebc8b6a3e50'
+      response = stub_post_generic_success as: :mark_notification_as_read do
+        @session.mark_notification_as_read id: 'c4c0bfd525a19e6a58686ff13b185ebc8b6a3e50'
+      end
+      
       assert response['success'], response
     end
     
     def test_mark_notification_as_read_already_read
-      stub_post_generic_failure as: :mark_notification_as_read
-      response = @session.mark_notification_as_read id: 'c4c0bfd525a19e6a58686ff13b185ebc8b6a3e50'
+      response = stub_post_generic_failure as: :mark_notification_as_read do
+        @session.mark_notification_as_read id: 'c4c0bfd525a19e6a58686ff13b185ebc8b6a3e50'
+      end
       
       if defined? WebMock
         refute response['success'], response
@@ -646,8 +752,9 @@ module OBarc
     end
     
     def test_mark_notification_as_read_bogus
-      stub_post_generic_failure as: :mark_notification_as_read
-      response = @session.mark_notification_as_read id: '99'
+      response = stub_post_generic_failure as: :mark_notification_as_read do
+        @session.mark_notification_as_read id: '99'
+      end
       
       if defined? WebMock
         refute response['success'], response
@@ -657,15 +764,19 @@ module OBarc
     end
     
     def test_mark_notification_as_read_empty
-      stub_post_generic_failure as: :mark_notification_as_read
-      response = @session.mark_notification_as_read
+      response = stub_post_generic_failure as: :mark_notification_as_read do
+        @session.mark_notification_as_read
+      end
+      
       refute response['success'], response
     end
     
     def test_broadcast
-      stub_post_broadcast
-      response = @session.broadcast(message: 'hello world')
-      # Is 'peers reached' valid json?
+      response = stub_post_broadcast do
+        @session.broadcast(message: 'hello world')
+        # Is 'peers reached' valid json?
+      end
+      
       if defined? WebMock
         assert_equal response['peers reached'], 1000, response 
       else
@@ -675,14 +786,18 @@ module OBarc
     end
     
     def test_broadcast_empty
-      stub_post_generic_failure as: :broadcast
-      response = @session.broadcast
+      response = stub_post_generic_failure as: :broadcast do
+        @session.broadcast
+      end
+      
       refute response['success'], response
     end
     
     def test_btc_price
-      stub_get_btc_price
-      response = @session.btc_price
+      response = stub_get_btc_price do
+        @session.btc_price
+      end
+      
       assert response['currencyCodes'], response
     end
   end
