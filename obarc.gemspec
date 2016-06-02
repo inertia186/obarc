@@ -18,11 +18,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 1.11'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'minitest', '~> 5.0'
-  spec.add_development_dependency 'webmock', '~> 1.24'
-  spec.add_development_dependency 'simplecov', '~> 0.10.0'
-  spec.add_development_dependency 'codeclimate-test-reporter', '~> 0.4.8'
+  spec.add_development_dependency 'rake', '~> 11.1.2'
+  spec.add_development_dependency 'minitest', '~> 5.9.0'
+  spec.add_development_dependency 'webmock', '~> 2.0.3'
+  spec.add_development_dependency 'simplecov', '~> 0.11.2'
+  spec.add_development_dependency 'codeclimate-test-reporter', '~> 0.5.0'
   spec.add_development_dependency 'yard', '~> 0.8.7.6'
   
   spec.add_dependency('rest-client', '~> 1.8.0')
