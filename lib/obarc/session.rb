@@ -231,9 +231,12 @@ module OBarc
     #    * images: [String, Array<String>] 40 character hex string.  A list of SHA256 image hashes.  The images should be uploaded using the upload_image api call.
     #        * images: '04192728d0fd8dfe6663f429a5c03a7faf907930'
     #        * images: ['04192728d0fd8dfe6663f429a5c03a7faf907930', '0dee4786fd02d6bc673b50309a3c831acf78ec70']
-    #    * image_urls: [Array<String>] An image URL for OBarc to first download then automatically store to this record.
+    #    * image_urls: [Array<String>] An array of image URLs for OBarc to first download then automatically store to this record.
     #        * image_urls: 'http://i.imgur.com/YHBh57j.gif'
     #        * image_urls: ['http://i.imgur.com/uC2KUQ6.png', 'http://i.imgur.com/RliU8Gn.jpg']
+    #    * image_data: [Array<String>] An array of Base64 images for OBarc to automatically store to this record.
+    #        * image_data: <String>
+    #        * image_data: [<String>, <String>]
     #    * free_shipping: [boolean] "true" or "false"
     #    * moderators: [guids] GUID: 40 character hex string.  A list of moderator GUIDs that the vendor wishes to use
     #        * Note: the moderator must have been previously returned by the get_moderators websocket call.
@@ -248,31 +251,23 @@ module OBarc
       # Note, passing contract_id appears to create a clone that re-uses the
       # original contract_id.
       
-      if !!contract[:image_urls] && contract[:image_urls].any?
-        urls = contract.delete(:image_urls)
-        hashes = []
-        
-        urls.each do |url|
-          response = upload_image(image: open(url, 'rb'))
-          hashes += response['image_hashes'] if response['success']
-        end
-        
-        contract[:images] = hashes
-      end
-      
-      if !!contract[:image_data] && contract[:image_data].any?
-        images = contract.delete(:image_data)
-        hashes = []
-        
-        images.each do |image|
-          response = upload_image(image: image)
-          hashes += response['image_hashes'] if response['success']
-        end
-        
-        contract[:images] = hashes
+      %i(image_urls image_data).each do |symbol|
+        upload_contract_images_with(symbol, contract) if !!contract[symbol]
       end
       
       JSON[Api::post_contract(contract, self)]
+    end
+
+    def upload_contract_images_with(symbol, contract = {})
+      contract[:images] = [contract.delete(symbol)].flatten.map do |image|
+        response = if image =~ URI::regexp
+          upload_image(image: open(image, 'rb'))
+        else
+          upload_image(image: image )
+        end
+                 
+        response['image_hashes'] if response['success']
+      end
     end
     
     # Undocumented.
