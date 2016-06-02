@@ -66,16 +66,24 @@ module OBarc
     # @param profile [Hash] containing the guid: of the target node, optional
     #   * The global unique identifier (guid; 40 character hex string) of the node to get the profile data from
     #   * If the guid is omitted, your own node’s social accounts will be returned
-    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-profile
     # @return [Hash]
-    def social_accounts(profile = nil); JSON[Api::get_profile(profile, self)]['profile']['social_accounts']; end
+    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-profile
+    def social_accounts(profile = nil)
+      result = JSON[Api::get_profile(profile, self)]
+      
+      if !!result && !!result['profile']
+        result['profile']['social_accounts']
+      else
+        []
+      end
+    end
     
     # Returns the listings of the user’s node, or that of a target node.
     #
     # @param listings [Hash] containing the guid: of the target node, optional
     #   * If the guid is omitted, the server will look for listings in your own node’s database.
-    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_listings
     # @return [Hash]
+    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_listings
     def listings(listings = nil); JSON[Api::get_listings(listings, self)]; end
     
     # Finds the listings of the user’s node, or that of a target node.
