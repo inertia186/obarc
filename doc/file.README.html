@@ -139,6 +139,20 @@ shipping_domestic: true,   shipping_international: false,   keywords:
 [&#39;http://i.imgur.com/2KXXHSt.jpg&#39;],   free_shipping: true ) </code>
 <code>json {&quot;success&quot;: true} </code></p>
 
+<h2 id="label-Tests">Tests</h2>
+
+<p>Basic tests can be invoked as follows:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_rake'>rake</span></code></pre>
+
+<p>To run tests with parallelization and local code coverage:</p>
+
+<pre class="code ruby"><code class="ruby">HELL_ENABLED=true rake</code></pre>
+
+<p>To run tests against a testnet server:</p>
+
+<pre class="code ruby"><code class="ruby">TEST_NET=true OB_SERVER_HOST=localhost OB_USERNAME=username OB_PASSWORD=password rake</code></pre>
+
 <h2 id="label-Docmentation">Docmentation</h2>
 <ul><li>
 <p><a
@@ -160,7 +174,7 @@ src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a> License.</p>
 </div></div>
 
     <div id="footer">
-  Generated on Mon Apr 25 20:29:53 2016 by
+  Generated on Thu Jun  2 13:37:53 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.1.5).
 </div>
