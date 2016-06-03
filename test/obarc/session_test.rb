@@ -117,7 +117,7 @@ module OBarc
     
     def test_social_accounts_invalid
       begin
-        response = stub_500_error_odd_string_length :get, /profile/ do
+        stub_500_error_odd_string_length :get, /profile/ do
           @session.social_accounts(guid: 'INVALID')
           fail 'did not expect short guid to work'
         end
@@ -815,6 +815,78 @@ module OBarc
       assert response['notifications'], response
     end
     
+    def test_chat_messages
+      response = stub_get_chat_messages do
+        @session.chat_messages(guid: 'fe35be5ec8c07d07e347d7003021bdfa8630ca2f')
+      end
+      
+      assert response.empty?, response
+    end
+    
+    def test_chat_conversations
+      response = stub_get_chat_conversations do
+        @session.chat_conversations
+      end
+      
+      assert response.empty?, response
+    end
+    
+    def test_delete_chat_conversation
+      response = stub_delete_generic_success as: :chat_conversation do
+        @session.delete_chat_conversation(guid: 'fe35be5ec8c07d07e347d7003021bdfa8630ca2f')
+      end
+      
+      assert response['success'], response
+    end
+    
+    def test_sales
+      response = stub_get_sales do
+        @session.sales
+      end
+      
+      assert response.empty?, response
+    end
+    
+    def test_purchases
+      response = stub_get_purchases do
+        @session.purchases
+      end
+      
+      assert response.empty?, response
+    end
+    
+    def test_order_bogus
+      response = stub_get_order do
+        @session.order(order_id: '99')
+      end
+      
+      assert response.empty?, response
+    end
+    
+    def test_cases
+      response = stub_get_cases do
+        @session.cases
+      end
+      
+      assert response.empty?, response
+    end
+    
+    def test_order_messages
+      response = stub_get_order_messages do
+        @session.order_messages(order_id: '99')
+      end
+      
+      assert response.empty?, response
+    end
+    
+    def test_ratings
+      response = stub_get_ratings do
+        @session.ratings(contract_id: '99')
+      end
+      
+      assert response.empty?, response
+    end
+    
     def test_mark_notification_as_read
       response = stub_post_generic_success as: :mark_notification_as_read do
         @session.mark_notification_as_read id: 'c4c0bfd525a19e6a58686ff13b185ebc8b6a3e50'
@@ -853,6 +925,98 @@ module OBarc
       end
       
       refute response['success'], response
+    end
+    
+    def test_mark_chat_message_as_read
+      response = stub_post_generic_success as: :mark_chat_message_as_read do
+        @session.mark_chat_message_as_read guid: 'c4c0bfd525a19e6a58686ff13b185ebc8b6a3e50'
+      end
+      
+      assert response['success'], response
+    end
+    
+    def test_check_for_payment
+      response = stub_post_generic_success as: :check_for_payment do
+        @session.check_for_payment(order_id: '99')
+      end
+      
+      assert response['success'], response
+    end
+    
+    def test_dispute_contract
+      response = stub_post_generic_success as: :dispute_contract do
+        @session.dispute_contract(order_id: '99')
+      end
+      
+      assert response['success'], response
+    end
+    
+    def test_close_dispute_empty
+      response = stub_post_generic_failure as: :close_dispute do
+        @session.close_dispute
+      end
+      
+      refute response['success'], response
+    end
+    
+    def test_close_dispute_bogus
+      response = stub_post_generic_failure as: :close_dispute do
+        @session.close_dispute(
+          order_id: '99',
+          resolution: 'Nevermind',
+          buyer_percentage: '0.0',
+          vendor_percentage: '0.0',
+          moderator_percentage: '0.0',
+          # Bitcoin TestNet Address http://tpfaucet.appspot.com/
+          moderator_address: 'n2eMqTT929pb1RDNuqEnxdaLau1rxy3efi'
+        )
+      end
+      
+      refute response['success'], response
+      if defined? WebMock
+        # Generic failure is a little crude.
+        assert_equal "RTFM!!", response['message'], response
+      else
+        assert_equal "", response['reason'], response
+      end
+    end
+    
+    def test_release_funds_bogus
+      response = stub_post_generic_failure as: :release_funds do
+        @session.release_funds(order_id: '99')
+      end
+      
+      refute response['success'], response
+      if defined? WebMock
+        # Generic failure is a little crude.
+        assert_equal "RTFM!!", response['message'], response
+      else
+        assert_equal "local variable 'file_path' referenced before assignment", response['reason'], response
+      end
+    end
+    
+    def test_refund_bogus
+      response = stub_post_generic_failure as: :refund do
+        @session.refund(order_id: '99')
+      end
+      
+      refute response['success'], response
+      if defined? WebMock
+        # Generic failure is a little crude.
+        assert_equal "RTFM!!", response['message'], response
+      else
+        assert_equal "expected string or buffer", response['reason'], response
+      end
+    end
+    
+    def test_mark_discussion_as_read
+      skip "Not implemented yet." unless defined? WebMock
+      
+      response = stub_post_generic_success as: :mark_discussion_as_read do
+        @session.mark_discussion_as_read id: 'c4c0bfd525a19e6a58686ff13b185ebc8b6a3e50'
+      end
+      
+      assert response['success'], response
     end
     
     def test_broadcast

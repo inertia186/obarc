@@ -39,6 +39,11 @@ module OBarc
       when :post_contract then [:post, 'contracts', args[0], args[1]]
       when :delete_contract then [:delete, 'contracts', args[0], args[1]]
       when :get_notifications then [:get, 'get_notifications', nil, args[0]]
+      when :get_chat_conversations then [:get, 'get_chat_conversations', nil, args[0]]
+      when :get_sales then [:get, 'get_sales', nil, args[0]]
+      when :get_purchases then [:get, 'get_purchases', nil, args[0]]
+      when :get_cases then [:get, 'get_cases', nil, args[0]]
+      when :get_ratings then [:get, 'get_ratings', args[0], args[1]]
       else
         verb = m.to_s.split('_')
         a = [verb[0].to_sym, verb[1..-1].join('_')]
@@ -89,10 +94,43 @@ module OBarc
         headers: build_headers(options).merge(params: contracts.compact),
         verify_ssl: build_verify_ssl(options)
     end
+    
+    # GET api/v1/get_chat_messages
+    def get_chat_messages(chat_messages, options = {})
+      guid = chat_messages[:guid]
+      
+      if guid.nil? || guid.size != 40
+        raise Utils::Exceptions::OBarcError, "guid must be present, 40 characters (was: #{guid.inspect})"
+      end
+      
+      url = "#{build_base_url(options)}/get_chat_messages"
+      execute method: :get, url: url,
+        headers: build_headers(options).merge(params: chat_messages.compact),
+        verify_ssl: build_verify_ssl(options)
+    end
+    
+    # GET api/v1/get_order
+    def get_order(order, options = {})
+      order_id = order[:order_id]
+      
+      if order_id.nil?
+        raise Utils::Exceptions::OBarcError, 'order_id must be present'
+      end
+      
+      url = "#{build_base_url(options)}/get_order"
+      execute method: :get, url: url,
+        headers: build_headers(options).merge(params: order.compact),
+        verify_ssl: build_verify_ssl(options)
+    end
   private
     def execute(options = {})
+      if options[:method] == :post
+        options[:headers][:content_type] = 'application/x-www-form-urlencoded'
+      end
+        
       if !!options[:headers][:params]
         params = options[:headers].delete(:params)
+        
         if params.values.map(&:class).include? Array
           # Dropping to a lower level for parameters since they're more
           # complicated due to the presense of an Array.  Note that these

@@ -48,8 +48,8 @@ module OBarc
     
     # Returns the image for the hash specified.
     # @param image [Hash] containing the hash: of the target image, required
-    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-image
     # @return [Object] The image will be returned in .jpg format.
+    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-image
     def image(image); Api::get_image(image, self); end
     
     # Returns the profile data of the user’s node, or that of a target node.
@@ -57,8 +57,8 @@ module OBarc
     # @param profile [Hash] containing the guid: of the target node, optional
     #   * The global unique identifier (guid; 40 character hex string) of the node to get the profile data from
     #   * If the guid is omitted, your own node’s profile will be returned
-    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-profile
     # @return [Hash]
+    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-profile
     def profile(profile = nil); JSON[Api::get_profile(profile, self)]; end
     
     # Returns just the profile's social accounts of the user’s node, or that of a target node.
@@ -144,16 +144,16 @@ module OBarc
     #
     # @param followers [Hash] containing the guid: of the target node, optional
     #   * If the guid is omitted, the server will look for followers in your own node’s database.
-    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_followers
     # @return [Hash]
+    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_followers
     def followers(followers = nil); JSON[Api::get_followers(followers, self)]; end
     
     # Returns the following of the user’s node, or that of a target node.
     #
     # @param following [Hash] containing the guid: of the target node, optional
     #   * If the guid is omitted, the server will look for following in your own node’s database.
-    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_following
     # @return [Hash]
+    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_following
     def following(following = nil); JSON[Api::get_following(following, self)]; end
     
     # Follows a target node and will cause you to receive notifications from
@@ -161,31 +161,31 @@ module OBarc
     # share some metadata (in future).
     #
     # @param follow [Hash] containing the guid: of the target node, required
-    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-follow
     # @return [Hash] containing: "success" => true or false
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-follow
     def follow(follow); JSON[Api::post_follow(follow, self)]; end
     
     # Stop following a target node, will cease to receive notifications and
     # sharing metadata.
     #
     # @param unfollow [Hash] containing the guid: of the target node, required
-    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-unfollow
     # @return [Hash] containing: "success" => true or false
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-unfollow
     def unfollow(unfollow); JSON[Api::post_unfollow(unfollow, self)]; end
     
     # Add data related to the node's profile into the database, which will be
     # visible to other nodes.
     #
     # @param profile [Hash]
-    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-profile
     # @return [Hash] containing: "success" => true or false
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-profile
     def update_profile(profile = {}); JSON[Api::post_profile(profile, self)]; end
     
     # Adds a social account to the user profile data of the user.
     #
     # @param social_account [Hash] e.g.: account_type: 'TWITTER', username: '@inertia186'
-    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-social_accounts
     # @return [Hash] containing: "success" => true or false
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-social_accounts
     def add_social_account(social_account = {}); JSON[Api::post_social_accounts(social_account, self)]; end
     
     # Undocumented.
@@ -198,8 +198,8 @@ module OBarc
     # @param contracts [Hash] containing the:
     #   * id: Unique identifier of the contract SHA256 of the JSON formatted contract (40 character hex string), required
     #   * guid: GUID of the node if the call is made to a target node.  If omitted, the API will search for a contract ID created by your own node
-    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-contracts
     # @return [Hash]
+    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-contracts
     def contracts(contracts = {}); JSON[Api::get_contracts(contracts, self)]; end
     
     # Creates a listing contract, which is saved to the database and local file
@@ -253,8 +253,8 @@ module OBarc
     #        * option: [option text] String.
     #            * For each option in the options list, another argument should be added using that option name and a list of value
     #            * For example, given “color” in the options list, choose from "red", "green", "purple" etc
-    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-contracts
     # @return [Hash] containing: "success" => true or false, "id" => Integer
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-contracts
     def create_contract(contract = {})
       # Note, passing contract_id appears to create a clone that re-uses the
       # original contract_id.
@@ -285,15 +285,15 @@ module OBarc
     
     # Sets your node as a Moderator, which is discoverable on the network.
     #
-    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-make_moderator
     # @return [Hash] containing: "success" => true or false
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-make_moderator
     def make_moderator; JSON[Api::post_make_moderator(self)]; end
     
     # Removes the node as a Moderator and is no longer discoverable on the
     # network as a Moderator.
     #
-    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post--unmake_moderator
     # @return [Hash] containing: "success" => true or false
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post--unmake_moderator
     def unmake_moderator; JSON[Api::post_unmake_moderator(self)]; end
     
     # Purchases a contract by sending the purchase into the Vendor. The Buyer
@@ -302,12 +302,12 @@ module OBarc
     # address.
     #
     # @param purchase_contract [Hash]
-    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-purchase_contract
     # @return [Hash] containing:
     #   * "success" => true or false
     #   * "address" => "bitcoin address to fund"
     #   * "amount" => "amount to fund"
     #   * "order_id" => "purchase order id"
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-purchase_contract
     def purchase_contract(purchase_contract = {}); JSON[Api::post_purchase_contract(purchase_contract, self)]; end
     
     # Sends the order confirmation and shipping information to the Buyer. If
@@ -315,8 +315,8 @@ module OBarc
     # updates the status of the order in the database.
     #
     # @param confirm_order [Hash]
-    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-confirm_order
     # @return [Hash] containing: "success" => true or false
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-confirm_order
     def confirm_order(confirm_order = {}); JSON[Api::post_confirm_order(confirm_order, self)]; end
     
     # Saves the image in the file system and a pointer to it in the db.
@@ -325,32 +325,36 @@ module OBarc
     #     * image: a list of product images to upload (LIST of images in base64. data only, no base64 prefix)
     #     * avatar: use this if uploading an avatar image (base64 image)
     #     * header: use this if uploading a header image (base64 image)
-    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-upload_image
     # @return [Hash] containing:
     #    * "success" => true or false
     #    * "image_hashes" => [list_of_image_hashes]
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-upload_image
     def upload_image(image = {}); JSON[Api::post_upload_image(image.merge(cookies: cookies, base_url: base_url, verify_ssl: verify_ssl))]; end
     
     # Sends a message with a partially signed transaction releasing funds from
     # escrow to the Vendor as well as review data.
     #
     # @param complete_order [Hash]
-    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-complete_order
     # @return [Hash] containing: "success" => true or false
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-complete_order
     def complete_order(complete_order = {}); JSON[Api::post_complete_order(complete_order, self)]; end
     
     # Changes the settings of the node and pushes them to the database.
     #
     # @param settings [Hash]
-    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-settings
     # @return [Hash] containing: "success" => true or false
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-settings
     def update_settings(settings = {}); JSON[Api::post_settings(settings, self)]; end
     
     # Returns the settings of your node.
     #
-    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-settings
     # @return [Hash]
+    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-settings
     def settings; JSON[Api::get_settings(self)]; end
+    
+    # Undocumented
+    #
+    # @return [Hash]
     def connected_peers; JSON[Api::get_connected_peers(self)]; end
     
     # Retreive a history of all notifications your node has received. Notifications can be sent due to:
@@ -360,26 +364,79 @@ module OBarc
     # @param FIXME not yet supported, future: limit-[number of most recent notifications]
     #   * Default is unlimited
     #   * Counts from most recent
-    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-notifications
     # @return [Hash]
+    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-notifications
     def notifications; JSON[Api::get_notifications(self)]; end
+    
+    # Retrieves all chat message received from other nodes.
+    #
+    # @param chat_messages [Hash] containing:
+    #   * guid [String] target node, required
+    #   * limit [Integer] max number of chat messages to return (ignored)
+    #   * start [FIXME] the starting point in the message list
+    # @return [Hash]
+    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_chat_messages
+    def chat_messages(chat_messages = {}); JSON[Api::get_chat_messages(chat_messages, self)]; end
+    
+    # Retreives a list of outstandng conversations.
+    #
+    # @return [Hash]
+    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_chat_conversations
+    def chat_conversations; JSON[Api::get_chat_conversations(self)]; end
+    
+    # Undocumented
+    #
+    # @return [Hash]
+    def delete_chat_conversation(delete_chat_conversation); JSON[Api::delete_chat_conversation(delete_chat_conversation, self)]; end
+    
+    # Retrieves any sales made by the node.
+    #
+    # @return [Hash]
+    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_sales
+    def sales; JSON[Api::get_sales(self)]; end
+    
+    # Retrieves any purchases made by the node.
+    #
+    # @return [Hash]
+    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-get_purchases
+    def purchases; JSON[Api::get_purchases(self)]; end
+    
+    # Undocumented
+    #
+    # @return [Hash]
+    def order(order); JSON[Api::get_order(order, self)]; end
+    
+    # Undocumented
+    #
+    # @return [Hash]
+    def cases; JSON[Api::get_cases(self)]; end
+    
+    # Undocumented
+    #
+    # @return [Hash]
+    def order_messages(order_messages); JSON[Api::get_order_messages(order_messages, self)]; end
+    
+    # Undocumented
+    #
+    # @return [Hash]
+    def ratings(ratings); JSON[Api::get_ratings(ratings, self)]; end
     
     # Marks a notification as read in the database.
     #
     # @param notification [Hash] containing id:
     #     * 40 character hex string
     #     * Every notification has an ID that must be referenced in order to mark as read
-    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-mark_notification_as_read
     # @return [Hash] containing: "success" => true or false
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-mark_notification_as_read
     def mark_notification_as_read(notification = nil); JSON[Api::post_mark_notification_as_read(notification, self)]; end
     
     # Sends some kind of "Twitter-like" message to all nodes that are following
     # you.  This call can take a while to complete.
     #
-    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-broadcast
     # @return [Hash] containing:
     #    * "success" => true or false
     #    * "peers_reached" => [number reached]
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-broadcast
     def broadcast(message = {}); JSON[Api::post_broadcast(message, self)]; end
     
     # Undocumented
@@ -392,10 +449,62 @@ module OBarc
     # @return [Hash]
     def routing_table; JSON[Api::get_routing_table(self)]; end
     
+    # Marks all chat messages with a specific node as read in the database.
+    #
+    # @param chat_message_as_read [Hash] containing:
+    #   * guid [String] GUID of the party you are chatting with
+    # @return [Hash] containing:
+    #    * "success" => true or false
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-mark_chat_message_as_read
+    def mark_chat_message_as_read(mark_chat_message_as_read = nil); JSON[Api::post_mark_chat_message_as_read(mark_chat_message_as_read, self)]; end
+    
+    # Sends a Twitter-like message to all nodes that are following you.
+    #
+    # @param check_for_payment [Hash] containing:
+    #   * order_id [Integer]
+    # @return [Hash] containing:
+    #    * "success" => true or false
+    # @see https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f#post-check_for_payment
+    def check_for_payment(check_for_payment); JSON[Api::post_check_for_payment(check_for_payment, self)]; end
+    
+    # Undocumented
+    #
+    # @param dispute_contract [Hash] containing:
+    #   * order_id [Integer]
+    # @return [Hash] 
+    def dispute_contract(dispute_contract = nil); JSON[Api::post_dispute_contract(dispute_contract, self)]; end
+    
+    # Undocumented
+    #
+    # @param dispute_contract [Hash] containing:
+    #   * order_id [Integer]
+    #   * resolution [String]
+    #   * buyer_percentage [Float]
+    #   * vendor_percentage [Float]
+    #   * moderator_percentage [Float]
+    #   * moderator_address [String]
+    # @return [Hash] 
+    def close_dispute(close_dispute = nil); JSON[Api::post_close_dispute(close_dispute, self)]; end
+    
+    # Undocumented
+    #
+    # @return [Hash] 
+    def release_funds(release_funds = nil); JSON[Api::post_release_funds(release_funds, self)]; end
+    
+    # Undocumented
+    #
+    # @return [Hash] 
+    def refund(refund = nil); JSON[Api::post_refund(refund, self)]; end
+    
+    # Undocumented
+    #
+    # @return [Hash] 
+    def mark_discussion_as_read(mark_discussion_as_read = nil); JSON[Api::post_mark_discussion_as_read(mark_discussion_as_read, self)]; end
+    
     # API call to cleanly disconnect from connected nodes and shutsdown the OpenBazaar server component.
     #
-    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-shutdown
     # @return nil
+    # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-shutdown
     def shutdown!
       begin
         Api::get_shutdown(self)
