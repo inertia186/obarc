@@ -4,6 +4,9 @@ require 'logging'
 
 module OBarc
   class Session
+    OPTIONS_KEYS = %i(protocol server_host server_port api_version username
+      password base_url logger cookies verify_ssl)
+    
     attr_accessor :cookies, :username, :password, :verify_ssl
     attr_writer :base_url, :logger
     
@@ -16,21 +19,13 @@ module OBarc
     }
     
     def initialize(options = {})
-      @protocol = options[:protocol] || DEFAULT_OPTIONS[:protocol]
-      @server_host = options[:server_host] || DEFAULT_OPTIONS[:server_host]
-      @server_port = options[:server_port] || DEFAULT_OPTIONS[:server_port]
-      @api_version = options[:api_version] || DEFAULT_OPTIONS[:api_version]
-      @username = options[:username]
-      @password = options[:password]
-      @base_url = options[:base_url] || base_url
-      @logger = options[:logger] || logger
-      @cookies = options[:cookies] || Api::post_login(self).cookies
-      
-      @verify_ssl = if options.keys.include?(:verify_ssl)
-        options[:verify_ssl]
-      else
-        DEFAULT_OPTIONS[:verify_ssl]
+      OPTIONS_KEYS.each do |k|
+        instance_variable_set "@#{k}".to_sym, options[k] || DEFAULT_OPTIONS[k]
       end
+      
+      @base_url ||= base_url
+      @logger ||= logger
+      @cookies ||= Api::post_login(self).cookies
     end
     
     def base_url
