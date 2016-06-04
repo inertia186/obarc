@@ -60,6 +60,34 @@ class OBarc::Test < MiniTest::Test
     end
   end
   
+  def stub_401_unauthorized ( method, pattern, & block )
+    @stub_401_error_odd_string_length ||= if defined? WebMock
+      stub_request(method, pattern).
+        to_return(status: 401, body: fixture('401_unauthorized.html'))
+    end
+    
+    if !!block
+      yield
+      if !!@stub_401_error_odd_string_length
+        assert_requested @stub_401_error_odd_string_length, times: 1 and remove_request_stub @stub_401_error_odd_string_length
+      end
+    end
+  end
+  
+  def stub_connection_refused ( method, pattern, & block )
+    @stub_connection_refused ||= if defined? WebMock
+      stub_request(method, pattern).
+        to_raise(Errno::ECONNREFUSED)
+    end
+    
+    if !!block
+      yield
+      if !!@stub_connection_refused
+        assert_requested @stub_connection_refused, times: 1 and remove_request_stub @stub_connection_refused
+      end
+    end
+  end
+  
   def method_missing(m, *args, &block)
     if m =~ /^stub_/
       if defined? WebMock
@@ -69,10 +97,16 @@ class OBarc::Test < MiniTest::Test
         action = args[0][:as] if !!args[0] && !!args[0][:as]
         times = args[0][:times] if !!args[0] && !!args[0][:times]
         
+        status = if !!args[0] && !!args[0][:status]
+          args[0][:status]
+        else
+          200
+        end
+        
         stub = if m =~ /get_image/
           hash = args[0][:hash]
           options = if !!image = fixture("#{hash}.jpg")
-            {status: 200, body: image}
+            {status: status, body: image}
           else
             {status: 404}
           end
@@ -80,7 +114,7 @@ class OBarc::Test < MiniTest::Test
           stub_request(method, /get_image\?hash=#{hash.to_s}/).to_return(options)
         else
           options = if !!json = fixture("#{json_file}.json")
-            {status: 200, body: json}
+            {status: status, body: json}
           else
             {status: 404}
           end

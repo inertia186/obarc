@@ -34,6 +34,55 @@ module OBarc
       end
     end
 
+    def test_method_missing_invalid_argument
+      begin
+        OBarc::Api.get_image(nil)
+        fail 'did not expect missing method with invalid argument to execute'
+      rescue OBarc::Utils::Exceptions::OBarcError => _
+        # success
+      end
+    end
+    
+    def test_method_missing_invalid_session
+      begin
+        OBarc::Api.post_login([])
+        fail 'did not expect missing method with invalid argument to execute'
+      rescue OBarc::Utils::Exceptions::OBarcError => _
+        # success
+      end
+    end
+    
+    def test_all_respond_to
+      OBarc::Api::VALID_ACTIONS.keys.each do |rest_method|
+        OBarc::Api::VALID_ACTIONS[rest_method].each do |action|
+          method = "#{rest_method}_#{action}"
+          assert OBarc::Api.respond_to? method, "expect api respond to #{method}"
+        end
+      end
+    end
+
+    def test_all_valid_actions
+      unless defined? WebMock
+        skip 'This test cannot run against testnet.  It is only here to help locate newly added actions.'
+      end
+      
+      OBarc::Api::VALID_ACTIONS.keys.each do |rest_method|
+        OBarc::Api::VALID_ACTIONS[rest_method].each do |action|
+          method = "#{rest_method}_#{action}"
+          begin
+            assert OBarc::Api.send method
+            fail 'did not expect method with invalid argument to execute'
+          rescue WebMock::NetConnectNotAllowedError => _
+            # success
+          rescue ArgumentError => _
+            # success
+          rescue OBarc::Utils::Exceptions::OBarcError => _
+            # success
+          end
+        end
+      end
+    end
+
     def test_login
       response = OBarc::Api.post_login(@session)
       assert response.body['success'], response.body
