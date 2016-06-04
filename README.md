@@ -102,6 +102,12 @@ To run tests against a testnet server:
 
 ## Docmentation
   * [Session](http://www.rubydoc.info/github/inertia186/obarc/master/OBarc/Session) - Most of what you need in your app is explained here.
+  
+## Requirements
+
+* `ruby 2.1.5`
+* `bundler 1.11`
+* `OpenBazaar-Server 1.1.15`
 
 ## Get in touch!
 
