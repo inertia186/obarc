@@ -107,30 +107,32 @@ module OBarc
         end
       end
       
-      unless listings === all_listings
-        start = Time.now.to_i
-        @cache_timestamp = if (start - (@cache_timestamp ||= 0)) > 300
-          @contracts_cache = {}
-          start
-        else
-          @cache_timestamp
-        end
-        @contracts_cache ||= {}
-        (all_listings['listings'] - listings).each do |listing|
-          contract_hash = listing['contract_hash']
-          contract = @contracts_cache[contract_hash] ||= contracts(options.merge(id: listing['contract_hash']))
-          next unless !!contract
-          
-          l = contract['vendor_offer']['listing']
-          
-          if [l['metadata']['expiry'], l['item']['category'], l['item']['sku'],
-            l['item']['description'], l['item']['process_time'],
-            l['item']['keywords'].join].join(' ') =~ pattern
-            listings << listing && next
-          end
-        end
+      return {'listings' => listings} if listings === all_listings
+      
+      start = Time.now.to_i
+      
+      @cache_timestamp = if (start - (@cache_timestamp ||= 0)) > 300
+        @contracts_cache = {}
+        start
+      else
+        @cache_timestamp
       end
       
+      @contracts_cache ||= {}
+      (all_listings['listings'] - listings).each do |listing|
+        contract_hash = listing['contract_hash']
+        contract = @contracts_cache[contract_hash] ||= contracts(options.merge(id: listing['contract_hash']))
+        next unless !!contract
+        
+        l = contract['vendor_offer']['listing']
+        
+        if [l['metadata']['expiry'], l['item']['category'], l['item']['sku'],
+          l['item']['description'], l['item']['process_time'],
+          l['item']['keywords'].join].join(' ') =~ pattern
+          listings << listing && next
+        end
+      end
+    
       {'listings' => listings}
     end
     

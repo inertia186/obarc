@@ -188,6 +188,22 @@ module OBarc
       end
     end
     
+    def test_query_listings_by_sku
+      response = stub_get_listings do
+        stub_get_contracts times: 2 do
+          @session.query_listings(pattern: /#{TEST_SKU}/i)
+        end
+      end
+        
+      assert response['listings'], response
+      
+      if defined? WebMock
+        assert response['listings'].any?, response
+      else
+        refute response['listings'].any?, response
+      end
+    end
+    
     def test_query_listings_empty
       response  = stub_get_listings do
         @session.query_listings
