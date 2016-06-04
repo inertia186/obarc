@@ -92,7 +92,7 @@ module OBarc
     # @param options [Hash] containing:
     #     * guid: of the target node, optional
     #         *If the guid is omitted, the server will look for listings in your own node’s database.
-    #     * pattern: [String] search phrase
+    #     * pattern: [Regex] search phrase
     # @return [Hash]
     def query_listings(options = {})
       pattern = options.delete(:pattern)
@@ -100,14 +100,10 @@ module OBarc
       listings = all_listings['listings']
       
       if !!pattern
-        listings = listings.select do |listing|
-          listing['contract_hash'] =~ pattern ||
-          listing['category'] =~ pattern ||
-          listing['title'] =~ pattern ||
-          listing['price'].to_s =~ pattern ||
-          listing['origin'] =~ pattern ||
-          listing['currency_code'] =~ pattern ||
-          listing['ships_to'].join =~ pattern
+        listings = listings.select do |l|
+          [l['contract_hash'], l['category'], l['title'],
+            l['price'].to_s, l['origin'], l['currency_code'],
+            l['ships_to'].join].join(' ') =~ pattern
         end
       end
       
@@ -125,14 +121,11 @@ module OBarc
           contract = @contracts_cache[contract_hash] ||= contracts(options.merge(id: listing['contract_hash']))
           next unless !!contract
           
-          contract_listing = contract['vendor_offer']['listing']
+          l = contract['vendor_offer']['listing']
           
-          if contract_listing['metadata']['expiry'] =~ pattern ||
-            contract_listing['item']['category'] =~ pattern ||
-            contract_listing['item']['sku'] =~ pattern ||
-            contract_listing['item']['description'] =~ pattern ||
-            contract_listing['item']['process_time'] =~ pattern ||
-            contract_listing['item']['keywords'].join =~ pattern
+          if [l['metadata']['expiry'], l['item']['category'], l['item']['sku'],
+            l['item']['description'], l['item']['process_time'],
+            l['item']['keywords'].join].join(' ') =~ pattern
             listings << listing && next
           end
         end
