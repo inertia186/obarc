@@ -10,6 +10,20 @@ module OBarc
     
     DEFAULT_TIMEOUT = 60 * 60 * 1
     
+    VALID_ACTIONS = {
+      get: %i(image profile listings followers following contracts shutdown
+        settings connected_peers routing_table notifications chat_messages
+        chat_conversations sales purchases order cases order_messages ratings
+        btc_price),
+      post: %i(login follow unfollow profile social_accounts
+        contract make_moderator unmake_moderator purchase_contract
+        confirm_order upload_image complete_order settings
+        mark_notification_as_read broadcast mark_chat_message_as_read
+        check_for_payment dispute_contract close_dispute release_funds refund
+        mark_discussion_as_read),
+      delete: %i(social_accounts contract chat_conversation)
+    }.freeze
+    
     # POST api/v1/login
     def post_login(options = {})
       url = "#{build_base_url(options)}/login"
@@ -27,7 +41,20 @@ module OBarc
         headers: build_headers(options), verify_ssl: build_verify_ssl(options))
     end
     
+    def respond_to_missing?(m, include_private = false)
+      verb = m.to_s.split('_')
+      rest_method = verb[0].to_sym
+      return false unless VALID_ACTIONS.keys.include?(rest_method)
+      
+      endpoint = verb[1..-1].join('_')
+      return false if endpoint.nil?
+      
+      VALID_ACTIONS[rest_method].include?(endpoint.to_sym)
+    end
+    
     def method_missing(m, *args, &block)
+      super unless respond_to_missing?(m)
+      
       # Many of the calls to restapi.py are uniform enough for DRY code, but the
       # ones that aren't are mapped here.
       
@@ -63,7 +90,7 @@ module OBarc
           verify_ssl: build_verify_ssl(options)
       end
           
-      super
+      raise Utils::Exceptions::OBarcError, "Did not handle #{m} as expected, arguments: #{args}"
     end
     
     # POST api/v1/upload_image
@@ -136,11 +163,17 @@ module OBarc
           # complicated due to the presense of an Array.  Note that these
           # parameters go # outside the header.
           options[:url] += "?#{URI::encode_www_form params}"
-        elsif params.values.map(&:class).any? { |c| [Tempfile, File].include?(c) }
+        elsif params.values.map(&:class).any? { |c| [Tempfile, File, StringIO].include?(c) }
           # Handling (possibly) large files.
           options[:payload] = {multipart: true}
           params.each do |k, v|
-            options[:payload][k] = Base64.strict_encode64(v.read)
+            if v.respond_to? :read
+              options[:payload][k] = Base64.strict_encode64(v.read)
+            else
+              options[:payload][k] = v
+              # FIXME Might want to warn that we are possibly mixing multipart
+              # with simple payload.
+            end
           end
         else
           options[:headers][:params] = params
@@ -161,8 +194,10 @@ module OBarc
     def build_base_url(options = {})
       if options.kind_of? Session
         options.base_url
-      else
+      elsif options.kind_of? Hash
         options[:base_url]
+      else
+        raise Utils::Exceptions::OBarcError, "Unable to build base URL using: #{options.inspect}, expected a OBarc::Session or Hash."
       end
     end
     

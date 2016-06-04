@@ -1,10 +1,11 @@
 require 'obarc/api'
 require 'open-uri'
+require 'logging'
 
 module OBarc
   class Session
     attr_accessor :cookies, :username, :password, :verify_ssl
-    attr_writer :base_url
+    attr_writer :base_url, :logger
     
     DEFAULT_OPTIONS = {
       protocol: 'http',
@@ -22,6 +23,7 @@ module OBarc
       @username = options[:username]
       @password = options[:password]
       @base_url = options[:base_url] || base_url
+      @logger = options[:logger] || logger
       @cookies = options[:cookies] || Api::post_login(self).cookies
       
       @verify_ssl = if options.keys.include?(:verify_ssl)
@@ -35,14 +37,18 @@ module OBarc
       @base_url ||= "#{@protocol}://#{@server_host}:#{@server_port}/api/#{@api_version}"
     end
     
+    def logger
+      @logger ||= Logging.logger(STDOUT)
+    end
+    
     # Check if there's a valid session.
     #
     # @return [Boolean] True if the session is valid.
     def ping
       return false if !(json = Api::ping(self))
       !!JSON[json]['num_peers']
-    rescue
-      # TODO log?
+    rescue RestClient::Unauthorized => e
+      logger.warn(e)
       false
     end
     
@@ -71,7 +77,7 @@ module OBarc
     def social_accounts(profile = nil)
       result = JSON[Api::get_profile(profile, self)]
       
-      if !!result && !!result['profile']
+      if !!result && !!result['profile'] && !!result['profile']['social_accounts']
         result['profile']['social_accounts']
       else
         []
@@ -509,7 +515,7 @@ module OBarc
       begin
         Api::get_shutdown(self)
       rescue Errno::ECONNREFUSED => e
-        # TODO Add logging.
+        logger.warn(e)
       end
     end
   end
