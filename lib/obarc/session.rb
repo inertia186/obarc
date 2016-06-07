@@ -20,7 +20,13 @@ module OBarc
     
     def initialize(options = {})
       OPTIONS_KEYS.each do |k|
-        instance_variable_set "@#{k}".to_sym, options[k] || DEFAULT_OPTIONS[k]
+        value = if options.key?(k)
+          options[k]
+        else
+          DEFAULT_OPTIONS[k]
+        end
+        
+        instance_variable_set "@#{k}".to_sym, value
       end
       
       @base_url ||= base_url
