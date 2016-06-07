@@ -20,6 +20,18 @@ module OBarc
         stub_post_login
         OBarc::Session.new(username: 'username', password: 'password', logger: @logger)
       end
+      
+      if ENV["TEST_NET"]
+        # This will ensure we're on testnet becasue only testnet bitcoin
+        # addresses are allowed.
+        begin
+          test_close_dispute_bogus
+        rescue Minitest::Assertion => e
+          if e.inspect =~ /Bitcoin address is not a mainnet address/
+            flunk 'Detected mainnet!  Please do not run these tests against outside of testnet.'
+          end
+        end
+      end
     end
     
     def test_method_missing
@@ -200,7 +212,7 @@ module OBarc
       if defined? WebMock
         assert response['listings'].any?, response
       else
-        refute response['listings'].any?, response
+        skip "Don't worry about these responses."
       end
     end
     
@@ -706,11 +718,14 @@ module OBarc
     def test_shutdown
       skip "Decided not to test shutdown in testnet mode." if ENV["TEST_NET"]
       
-      response = stub_connection_refused :get, /shutdown/ do
-        @session.shutdown!
+      stub_timeout :get, /shutdown/ do
+        begin
+          response = @session.shutdown!
+          fail "did not expect response after shutdown, got: #{response}"
+        rescue RestClient::RequestTimeout => _
+          # success
+        end
       end
-      
-      assert response.nil? || response.empty?, "did not expect response after shutdown, got: #{response}"
     end
     
     def test_make_moderator
@@ -1082,13 +1097,14 @@ module OBarc
     end
     
     def test_close_dispute_empty
-      response = stub_post_generic_failure as: :close_dispute do
+      @ensure_testnet = response = stub_post_generic_failure as: :close_dispute do
         @session.close_dispute
       end
       
       refute response['success'], response
     end
     
+    # This method pulls double-duty.  It is used by setup to detect mainnet.
     def test_close_dispute_bogus
       response = stub_post_generic_failure as: :close_dispute do
         @session.close_dispute(
@@ -1109,6 +1125,8 @@ module OBarc
       else
         assert_equal "", response['reason'], response
       end
+      
+      response
     end
     
     def test_release_funds_bogus

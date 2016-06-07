@@ -88,6 +88,19 @@ class OBarc::Test < MiniTest::Test
     end
   end
   
+  def stub_timeout ( method, pattern, & block )
+    @stub_timeout ||= if defined? WebMock
+      stub_request(method, pattern).to_timeout
+    end
+    
+    if !!block
+      yield
+      if !!@stub_timeout
+        assert_requested @stub_timeout, times: 1 and remove_request_stub @stub_timeout
+      end
+    end
+  end
+  
   def method_missing(m, *args, &block)
     if m =~ /^stub_/
       if defined? WebMock
