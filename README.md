@@ -88,17 +88,16 @@ session.create_contract(
 
 ## Tests
 
-Basic tests can be invoked as follows:
-
-    rake
-
-To run tests with parallelization and local code coverage:
-
-    HELL_ENABLED=true rake
-    
-To run tests against a testnet server:
-
-    TEST_NET=true OB_SERVER_HOST=localhost OB_USERNAME=username OB_PASSWORD=password rake
+* Clone the client repository into a directory of your choice:
+  * `git clone https://github.com/inertia186/obarc.git`
+* Navigate into the new folder
+  * `cd obarc`
+* Basic tests can be invoked as follows:
+  * `rake`
+* To run tests with parallelization and local code coverage:
+  * `HELL_ENABLED=true rake`
+* To run tests against a testnet server:
+  * `TEST_NET=true OB_SERVER_HOST=localhost OB_USERNAME=username OB_PASSWORD=password rake`
 
 ## Docmentation
   * [Session](http://www.rubydoc.info/github/inertia186/obarc/master/OBarc/Session) - Most of what you need in your app is explained here.

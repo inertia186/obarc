@@ -104,6 +104,12 @@
   
     <dl class="constants">
       
+        <dt id="OPTIONS_KEYS-constant" class="">OPTIONS_KEYS =
+          
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_protocol'>protocol</span> <span class='id identifier rubyid_server_host'>server_host</span> <span class='id identifier rubyid_server_port'>server_port</span> <span class='id identifier rubyid_api_version'>api_version</span> <span class='id identifier rubyid_username'>username</span>
+<span class='id identifier rubyid_password'>password</span> <span class='id identifier rubyid_base_url'>base_url</span> <span class='id identifier rubyid_logger'>logger</span> <span class='id identifier rubyid_cookies'>cookies</span> <span class='id identifier rubyid_verify_ssl'>verify_ssl</span></pre></dd>
+      
         <dt id="DEFAULT_OPTIONS-constant" class="">DEFAULT_OPTIONS =
           
         </dt>
@@ -1513,9 +1519,6 @@ visible to other nodes.</p>
       <pre class="lines">
 
 
-18
-19
-20
 21
 22
 23
@@ -1529,27 +1532,26 @@ visible to other nodes.</p>
 31
 32
 33
-34</pre>
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='ivar'>@protocol</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:protocol</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='const'>DEFAULT_OPTIONS</span><span class='lbracket'>[</span><span class='symbol'>:protocol</span><span class='rbracket'>]</span>
-  <span class='ivar'>@server_host</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:server_host</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='const'>DEFAULT_OPTIONS</span><span class='lbracket'>[</span><span class='symbol'>:server_host</span><span class='rbracket'>]</span>
-  <span class='ivar'>@server_port</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:server_port</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='const'>DEFAULT_OPTIONS</span><span class='lbracket'>[</span><span class='symbol'>:server_port</span><span class='rbracket'>]</span>
-  <span class='ivar'>@api_version</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:api_version</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='const'>DEFAULT_OPTIONS</span><span class='lbracket'>[</span><span class='symbol'>:api_version</span><span class='rbracket'>]</span>
-  <span class='ivar'>@username</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:username</span><span class='rbracket'>]</span>
-  <span class='ivar'>@password</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:password</span><span class='rbracket'>]</span>
-  <span class='ivar'>@base_url</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:base_url</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_base_url'>base_url</span>
-  <span class='ivar'>@logger</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:logger</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_logger'>logger</span>
-  <span class='ivar'>@cookies</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:cookies</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_login'>post_login</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_cookies'>cookies</span>
-  
-  <span class='ivar'>@verify_ssl</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='symbol'>:verify_ssl</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:verify_ssl</span><span class='rbracket'>]</span>
-  <span class='kw'>else</span>
-    <span class='const'>DEFAULT_OPTIONS</span><span class='lbracket'>[</span><span class='symbol'>:verify_ssl</span><span class='rbracket'>]</span>
+  <span class='const'>OPTIONS_KEYS</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='op'>|</span>
+    <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='id identifier rubyid_k'>k</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='id identifier rubyid_k'>k</span><span class='rbracket'>]</span>
+    <span class='kw'>else</span>
+      <span class='const'>DEFAULT_OPTIONS</span><span class='lbracket'>[</span><span class='id identifier rubyid_k'>k</span><span class='rbracket'>]</span>
+    <span class='kw'>end</span>
+    
+    <span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>@</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_k'>k</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span>
   <span class='kw'>end</span>
+  
+  <span class='ivar'>@base_url</span> <span class='op'>||=</span> <span class='id identifier rubyid_base_url'>base_url</span>
+  <span class='ivar'>@logger</span> <span class='op'>||=</span> <span class='id identifier rubyid_logger'>logger</span>
+  <span class='ivar'>@cookies</span> <span class='op'>||=</span> <span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_login'>post_login</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_cookies'>cookies</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1578,12 +1580,12 @@ visible to other nodes.</p>
       <pre class="lines">
 
 
-36
 37
-38</pre>
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_base_url'>base_url</span>
   <span class='ivar'>@base_url</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@protocol</span><span class='embexpr_end'>}</span><span class='tstring_content'>://</span><span class='embexpr_beg'>#{</span><span class='ivar'>@server_host</span><span class='embexpr_end'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='ivar'>@server_port</span><span class='embexpr_end'>}</span><span class='tstring_content'>/api/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@api_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -1621,12 +1623,12 @@ visible to other nodes.</p>
       <pre class="lines">
 
 
-7
-8
-9</pre>
+10
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cookies'>cookies</span>
   <span class='ivar'>@cookies</span>
@@ -1653,12 +1655,12 @@ visible to other nodes.</p>
       <pre class="lines">
 
 
-40
 41
-42</pre>
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logger'>logger</span>
   <span class='ivar'>@logger</span> <span class='op'>||=</span> <span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='lparen'>(</span><span class='const'>STDOUT</span><span class='rparen'>)</span>
@@ -1696,12 +1698,12 @@ visible to other nodes.</p>
       <pre class="lines">
 
 
-7
-8
-9</pre>
+10
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_password'>password</span>
   <span class='ivar'>@password</span>
@@ -1739,12 +1741,12 @@ visible to other nodes.</p>
       <pre class="lines">
 
 
-7
-8
-9</pre>
+10
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_username'>username</span>
   <span class='ivar'>@username</span>
@@ -1782,12 +1784,12 @@ visible to other nodes.</p>
       <pre class="lines">
 
 
-7
-8
-9</pre>
+10
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_verify_ssl'>verify_ssl</span>
   <span class='ivar'>@verify_ssl</span>
@@ -1877,10 +1879,10 @@ visible to other nodes.</p>
       <pre class="lines">
 
 
-195</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 195</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 191</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_social_account'>add_social_account</span><span class='lparen'>(</span><span class='id identifier rubyid_social_account'>social_account</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_social_accounts'>post_social_accounts</span><span class='lparen'>(</span><span class='id identifier rubyid_social_account'>social_account</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1945,10 +1947,10 @@ you.  This call can take a while to complete.</p>
       <pre class="lines">
 
 
-446</pre>
+442</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 446</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 442</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_broadcast'>broadcast</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_broadcast'>post_broadcast</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1995,10 +1997,10 @@ you.  This call can take a while to complete.</p>
       <pre class="lines">
 
 
-451</pre>
+447</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 451</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 447</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_btc_price'>btc_price</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_btc_price'>get_btc_price</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2045,10 +2047,10 @@ you.  This call can take a while to complete.</p>
       <pre class="lines">
 
 
-418</pre>
+414</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 418</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 414</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cases'>cases</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_cases'>get_cases</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2102,10 +2104,10 @@ you.  This call can take a while to complete.</p>
       <pre class="lines">
 
 
-391</pre>
+387</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 391</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 387</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_chat_conversations'>chat_conversations</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_chat_conversations'>get_chat_conversations</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2188,10 +2190,10 @@ you.  This call can take a while to complete.</p>
       <pre class="lines">
 
 
-385</pre>
+381</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 385</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 381</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_chat_messages'>chat_messages</span><span class='lparen'>(</span><span class='id identifier rubyid_chat_messages'>chat_messages</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_chat_messages'>get_chat_messages</span><span class='lparen'>(</span><span class='id identifier rubyid_chat_messages'>chat_messages</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2276,10 +2278,10 @@ you.  This call can take a while to complete.</p>
       <pre class="lines">
 
 
-474</pre>
+470</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 474</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 470</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_check_for_payment'>check_for_payment</span><span class='lparen'>(</span><span class='id identifier rubyid_check_for_payment'>check_for_payment</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_check_for_payment'>post_check_for_payment</span><span class='lparen'>(</span><span class='id identifier rubyid_check_for_payment'>check_for_payment</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2359,10 +2361,10 @@ you.  This call can take a while to complete.</p>
       <pre class="lines">
 
 
-493</pre>
+489</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 493</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 489</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_close_dispute'>close_dispute</span><span class='lparen'>(</span><span class='id identifier rubyid_close_dispute'>close_dispute</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_close_dispute'>post_close_dispute</span><span class='lparen'>(</span><span class='id identifier rubyid_close_dispute'>close_dispute</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2439,10 +2441,10 @@ escrow to the Vendor as well as review data.</p>
       <pre class="lines">
 
 
-346</pre>
+342</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 346</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 342</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_complete_order'>complete_order</span><span class='lparen'>(</span><span class='id identifier rubyid_complete_order'>complete_order</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_complete_order'>post_complete_order</span><span class='lparen'>(</span><span class='id identifier rubyid_complete_order'>complete_order</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2520,10 +2522,10 @@ the status of the order in the database.</p>
       <pre class="lines">
 
 
-326</pre>
+322</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 326</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 322</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_confirm_order'>confirm_order</span><span class='lparen'>(</span><span class='id identifier rubyid_confirm_order'>confirm_order</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_confirm_order'>post_confirm_order</span><span class='lparen'>(</span><span class='id identifier rubyid_confirm_order'>confirm_order</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2570,10 +2572,10 @@ the status of the order in the database.</p>
       <pre class="lines">
 
 
-364</pre>
+360</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 364</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 360</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_connected_peers'>connected_peers</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_connected_peers'>get_connected_peers</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2656,10 +2658,10 @@ the API will search for a contract ID created by your own node</p>
       <pre class="lines">
 
 
-209</pre>
+205</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 209</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 205</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_contracts'>contracts</span><span class='lparen'>(</span><span class='id identifier rubyid_contracts'>contracts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_contracts'>get_contracts</span><span class='lparen'>(</span><span class='id identifier rubyid_contracts'>contracts</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2847,19 +2849,19 @@ Example: “size”, “color”</p>
       <pre class="lines">
 
 
+260
+261
+262
+263
 264
 265
 266
 267
 268
-269
-270
-271
-272
-273</pre>
+269</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 264</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 260</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_contract'>create_contract</span><span class='lparen'>(</span><span class='id identifier rubyid_contract'>contract</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='comment'># Note, passing contract_id appears to create a clone that re-uses the
@@ -2915,10 +2917,10 @@ Example: “size”, “color”</p>
       <pre class="lines">
 
 
-396</pre>
+392</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 396</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 392</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_chat_conversation'>delete_chat_conversation</span><span class='lparen'>(</span><span class='id identifier rubyid_delete_chat_conversation'>delete_chat_conversation</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_delete_chat_conversation'>delete_chat_conversation</span><span class='lparen'>(</span><span class='id identifier rubyid_delete_chat_conversation'>delete_chat_conversation</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2965,10 +2967,10 @@ Example: “size”, “color”</p>
       <pre class="lines">
 
 
-290</pre>
+286</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 286</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_contract'>delete_contract</span><span class='lparen'>(</span><span class='id identifier rubyid_contract'>contract</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_delete_contract'>delete_contract</span><span class='lparen'>(</span><span class='id identifier rubyid_contract'>contract</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -3015,10 +3017,10 @@ Example: “size”, “color”</p>
       <pre class="lines">
 
 
-200</pre>
+196</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 200</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 196</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_social_account'>delete_social_account</span><span class='lparen'>(</span><span class='id identifier rubyid_social_account'>social_account</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_delete_social_accounts'>delete_social_accounts</span><span class='lparen'>(</span><span class='id identifier rubyid_social_account'>social_account</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -3090,10 +3092,10 @@ Example: “size”, “color”</p>
       <pre class="lines">
 
 
-481</pre>
+477</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 481</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 477</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dispute_contract'>dispute_contract</span><span class='lparen'>(</span><span class='id identifier rubyid_dispute_contract'>dispute_contract</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_dispute_contract'>post_dispute_contract</span><span class='lparen'>(</span><span class='id identifier rubyid_dispute_contract'>dispute_contract</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -3174,10 +3176,10 @@ some metadata (in future).</p>
       <pre class="lines">
 
 
-172</pre>
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 172</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 168</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_follow'>follow</span><span class='lparen'>(</span><span class='id identifier rubyid_follow'>follow</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_follow'>post_follow</span><span class='lparen'>(</span><span class='id identifier rubyid_follow'>follow</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -3257,10 +3259,10 @@ node’s database.</p>
       <pre class="lines">
 
 
-155</pre>
+151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 155</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 151</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_followers'>followers</span><span class='lparen'>(</span><span class='id identifier rubyid_followers'>followers</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_followers'>get_followers</span><span class='lparen'>(</span><span class='id identifier rubyid_followers'>followers</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -3340,10 +3342,10 @@ node’s database.</p>
       <pre class="lines">
 
 
-163</pre>
+159</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 163</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_following'>following</span><span class='lparen'>(</span><span class='id identifier rubyid_following'>following</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_following'>get_following</span><span class='lparen'>(</span><span class='id identifier rubyid_following'>following</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -3422,10 +3424,10 @@ node’s database.</p>
       <pre class="lines">
 
 
-59</pre>
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_image'>image</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_image'>get_image</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -3505,10 +3507,10 @@ node’s database.</p>
       <pre class="lines">
 
 
-93</pre>
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_listings'>listings</span><span class='lparen'>(</span><span class='id identifier rubyid_listings'>listings</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_listings'>get_listings</span><span class='lparen'>(</span><span class='id identifier rubyid_listings'>listings</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -3567,10 +3569,10 @@ node’s database.</p>
       <pre class="lines">
 
 
-296</pre>
+292</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 296</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 292</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_make_moderator'>make_moderator</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_make_moderator'>post_make_moderator</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -3655,10 +3657,10 @@ node’s database.</p>
       <pre class="lines">
 
 
-465</pre>
+461</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 465</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 461</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_mark_chat_message_as_read'>mark_chat_message_as_read</span><span class='lparen'>(</span><span class='id identifier rubyid_mark_chat_message_as_read'>mark_chat_message_as_read</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_mark_chat_message_as_read'>post_mark_chat_message_as_read</span><span class='lparen'>(</span><span class='id identifier rubyid_mark_chat_message_as_read'>mark_chat_message_as_read</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -3705,10 +3707,10 @@ node’s database.</p>
       <pre class="lines">
 
 
-508</pre>
+504</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 508</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 504</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_mark_discussion_as_read'>mark_discussion_as_read</span><span class='lparen'>(</span><span class='id identifier rubyid_mark_discussion_as_read'>mark_discussion_as_read</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_mark_discussion_as_read'>post_mark_discussion_as_read</span><span class='lparen'>(</span><span class='id identifier rubyid_mark_discussion_as_read'>mark_discussion_as_read</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -3795,10 +3797,10 @@ read</p>
       <pre class="lines">
 
 
-437</pre>
+433</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 437</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 433</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_mark_notification_as_read'>mark_notification_as_read</span><span class='lparen'>(</span><span class='id identifier rubyid_notification'>notification</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_mark_notification_as_read'>post_mark_notification_as_read</span><span class='lparen'>(</span><span class='id identifier rubyid_notification'>notification</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -3883,10 +3885,10 @@ Notifications can be sent due to:</p>
       <pre class="lines">
 
 
-375</pre>
+371</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 375</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 371</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_notifications'>notifications</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_notifications'>get_notifications</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -3933,10 +3935,10 @@ Notifications can be sent due to:</p>
       <pre class="lines">
 
 
-413</pre>
+409</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 413</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 409</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='id identifier rubyid_order'>order</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_order'>get_order</span><span class='lparen'>(</span><span class='id identifier rubyid_order'>order</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -3983,10 +3985,10 @@ Notifications can be sent due to:</p>
       <pre class="lines">
 
 
-423</pre>
+419</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 423</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 419</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_order_messages'>order_messages</span><span class='lparen'>(</span><span class='id identifier rubyid_order_messages'>order_messages</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_order_messages'>get_order_messages</span><span class='lparen'>(</span><span class='id identifier rubyid_order_messages'>order_messages</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -4038,16 +4040,16 @@ Notifications can be sent due to:</p>
       <pre class="lines">
 
 
-47
 48
 49
 50
 51
 52
-53</pre>
+53
+54</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ping'>ping</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='op'>!</span><span class='lparen'>(</span><span class='id identifier rubyid_json'>json</span> <span class='op'>=</span> <span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_ping'>ping</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -4135,10 +4137,10 @@ get the profile data from</p>
       <pre class="lines">
 
 
-68</pre>
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_profile'>profile</span><span class='lparen'>(</span><span class='id identifier rubyid_profile'>profile</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_profile'>get_profile</span><span class='lparen'>(</span><span class='id identifier rubyid_profile'>profile</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -4225,10 +4227,10 @@ If successful, the Buyer needs to fund the direct or multisig address.</p>
       <pre class="lines">
 
 
-317</pre>
+313</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 317</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 313</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_purchase_contract'>purchase_contract</span><span class='lparen'>(</span><span class='id identifier rubyid_purchase_contract'>purchase_contract</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_purchase_contract'>post_purchase_contract</span><span class='lparen'>(</span><span class='id identifier rubyid_purchase_contract'>purchase_contract</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -4282,10 +4284,10 @@ If successful, the Buyer needs to fund the direct or multisig address.</p>
       <pre class="lines">
 
 
-408</pre>
+404</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 408</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 404</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_purchases'>purchases</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_purchases'>get_purchases</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -4333,7 +4335,7 @@ If successful, the Buyer needs to fund the direct or multisig address.</p>
 
 <pre class="code ruby"><code class="ruby">*If the guid is omitted, the server will look for listings in your own node’s database.</code></pre>
 </li><li>
-<p>pattern: [String] search phrase</p>
+<p>pattern: [Regex] search phrase</p>
 </li></ul>
 </div>
       
@@ -4361,7 +4363,6 @@ If successful, the Buyer needs to fund the direct or multisig address.</p>
       <pre class="lines">
 
 
-102
 103
 104
 105
@@ -4402,14 +4403,10 @@ If successful, the Buyer needs to fund the direct or multisig address.</p>
 140
 141
 142
-143
-144
-145
-146
-147</pre>
+143</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 103</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query_listings'>query_listings</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_pattern'>pattern</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:pattern</span><span class='rparen'>)</span>
@@ -4417,44 +4414,39 @@ If successful, the Buyer needs to fund the direct or multisig address.</p>
   <span class='id identifier rubyid_listings'>listings</span> <span class='op'>=</span> <span class='id identifier rubyid_all_listings'>all_listings</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>listings</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   
   <span class='kw'>if</span> <span class='op'>!</span><span class='op'>!</span><span class='id identifier rubyid_pattern'>pattern</span>
-    <span class='id identifier rubyid_listings'>listings</span> <span class='op'>=</span> <span class='id identifier rubyid_listings'>listings</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_listing'>listing</span><span class='op'>|</span>
-      <span class='id identifier rubyid_listing'>listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>contract_hash</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span> <span class='op'>||</span>
-      <span class='id identifier rubyid_listing'>listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>category</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span> <span class='op'>||</span>
-      <span class='id identifier rubyid_listing'>listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>title</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span> <span class='op'>||</span>
-      <span class='id identifier rubyid_listing'>listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>price</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span> <span class='op'>||</span>
-      <span class='id identifier rubyid_listing'>listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>origin</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span> <span class='op'>||</span>
-      <span class='id identifier rubyid_listing'>listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>currency_code</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span> <span class='op'>||</span>
-      <span class='id identifier rubyid_listing'>listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ships_to</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span>
+    <span class='id identifier rubyid_listings'>listings</span> <span class='op'>=</span> <span class='id identifier rubyid_listings'>listings</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_l'>l</span><span class='op'>|</span>
+      <span class='lbracket'>[</span><span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>contract_hash</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>category</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>title</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+        <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>price</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>origin</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>currency_code</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+        <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ships_to</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
   
-  <span class='kw'>unless</span> <span class='id identifier rubyid_listings'>listings</span> <span class='op'>===</span> <span class='id identifier rubyid_all_listings'>all_listings</span>
-    <span class='id identifier rubyid_start'>start</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
-    <span class='ivar'>@cache_timestamp</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_start'>start</span> <span class='op'>-</span> <span class='lparen'>(</span><span class='ivar'>@cache_timestamp</span> <span class='op'>||=</span> <span class='int'>0</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>&gt;</span> <span class='int'>300</span>
-      <span class='ivar'>@contracts_cache</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-      <span class='id identifier rubyid_start'>start</span>
-    <span class='kw'>else</span>
-      <span class='ivar'>@cache_timestamp</span>
-    <span class='kw'>end</span>
-    <span class='ivar'>@contracts_cache</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-    <span class='lparen'>(</span><span class='id identifier rubyid_all_listings'>all_listings</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>listings</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>-</span> <span class='id identifier rubyid_listings'>listings</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_listing'>listing</span><span class='op'>|</span>
-      <span class='id identifier rubyid_contract_hash'>contract_hash</span> <span class='op'>=</span> <span class='id identifier rubyid_listing'>listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>contract_hash</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
-      <span class='id identifier rubyid_contract'>contract</span> <span class='op'>=</span> <span class='ivar'>@contracts_cache</span><span class='lbracket'>[</span><span class='id identifier rubyid_contract_hash'>contract_hash</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='id identifier rubyid_contracts'>contracts</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_listing'>listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>contract_hash</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='rparen'>)</span>
-      <span class='kw'>next</span> <span class='kw'>unless</span> <span class='op'>!</span><span class='op'>!</span><span class='id identifier rubyid_contract'>contract</span>
-      
-      <span class='id identifier rubyid_contract_listing'>contract_listing</span> <span class='op'>=</span> <span class='id identifier rubyid_contract'>contract</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>vendor_offer</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>listing</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
-      
-      <span class='kw'>if</span> <span class='id identifier rubyid_contract_listing'>contract_listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>metadata</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>expiry</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span> <span class='op'>||</span>
-        <span class='id identifier rubyid_contract_listing'>contract_listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>item</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>category</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span> <span class='op'>||</span>
-        <span class='id identifier rubyid_contract_listing'>contract_listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>item</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>sku</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span> <span class='op'>||</span>
-        <span class='id identifier rubyid_contract_listing'>contract_listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>item</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>description</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span> <span class='op'>||</span>
-        <span class='id identifier rubyid_contract_listing'>contract_listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>item</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>process_time</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span> <span class='op'>||</span>
-        <span class='id identifier rubyid_contract_listing'>contract_listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>item</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>keywords</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span>
-        <span class='id identifier rubyid_listings'>listings</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_listing'>listing</span> <span class='op'>&amp;&amp;</span> <span class='kw'>next</span>
-      <span class='kw'>end</span>
-    <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>listings</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_listings'>listings</span><span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_listings'>listings</span> <span class='op'>===</span> <span class='id identifier rubyid_all_listings'>all_listings</span>
+  
+  <span class='id identifier rubyid_start'>start</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+  
+  <span class='ivar'>@cache_timestamp</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_start'>start</span> <span class='op'>-</span> <span class='lparen'>(</span><span class='ivar'>@cache_timestamp</span> <span class='op'>||=</span> <span class='int'>0</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>&gt;</span> <span class='int'>300</span>
+    <span class='ivar'>@contracts_cache</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+    <span class='id identifier rubyid_start'>start</span>
+  <span class='kw'>else</span>
+    <span class='ivar'>@cache_timestamp</span>
   <span class='kw'>end</span>
   
+  <span class='ivar'>@contracts_cache</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='lparen'>(</span><span class='id identifier rubyid_all_listings'>all_listings</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>listings</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>-</span> <span class='id identifier rubyid_listings'>listings</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_listing'>listing</span><span class='op'>|</span>
+    <span class='id identifier rubyid_contract_hash'>contract_hash</span> <span class='op'>=</span> <span class='id identifier rubyid_listing'>listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>contract_hash</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_contract'>contract</span> <span class='op'>=</span> <span class='ivar'>@contracts_cache</span><span class='lbracket'>[</span><span class='id identifier rubyid_contract_hash'>contract_hash</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='id identifier rubyid_contracts'>contracts</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_listing'>listing</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>contract_hash</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>next</span> <span class='kw'>unless</span> <span class='op'>!</span><span class='op'>!</span><span class='id identifier rubyid_contract'>contract</span>
+    
+    <span class='id identifier rubyid_l'>l</span> <span class='op'>=</span> <span class='id identifier rubyid_contract'>contract</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>vendor_offer</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>listing</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+    
+    <span class='kw'>if</span> <span class='lbracket'>[</span><span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>metadata</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>expiry</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>item</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>category</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>item</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>sku</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>item</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>description</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>item</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>process_time</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>item</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>keywords</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>=~</span> <span class='id identifier rubyid_pattern'>pattern</span>
+      <span class='id identifier rubyid_listings'>listings</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_listing'>listing</span> <span class='op'>&amp;&amp;</span> <span class='kw'>next</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
   <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>listings</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_listings'>listings</span><span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -4501,10 +4493,10 @@ If successful, the Buyer needs to fund the direct or multisig address.</p>
       <pre class="lines">
 
 
-428</pre>
+424</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 428</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 424</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ratings'>ratings</span><span class='lparen'>(</span><span class='id identifier rubyid_ratings'>ratings</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_ratings'>get_ratings</span><span class='lparen'>(</span><span class='id identifier rubyid_ratings'>ratings</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -4551,10 +4543,10 @@ If successful, the Buyer needs to fund the direct or multisig address.</p>
       <pre class="lines">
 
 
-503</pre>
+499</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 503</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 499</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_refund'>refund</span><span class='lparen'>(</span><span class='id identifier rubyid_refund'>refund</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_refund'>post_refund</span><span class='lparen'>(</span><span class='id identifier rubyid_refund'>refund</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -4601,10 +4593,10 @@ If successful, the Buyer needs to fund the direct or multisig address.</p>
       <pre class="lines">
 
 
-498</pre>
+494</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 498</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 494</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_release_funds'>release_funds</span><span class='lparen'>(</span><span class='id identifier rubyid_release_funds'>release_funds</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_release_funds'>post_release_funds</span><span class='lparen'>(</span><span class='id identifier rubyid_release_funds'>release_funds</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -4651,10 +4643,10 @@ If successful, the Buyer needs to fund the direct or multisig address.</p>
       <pre class="lines">
 
 
-456</pre>
+452</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 456</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 452</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_routing_table'>routing_table</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_routing_table'>get_routing_table</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -4708,10 +4700,10 @@ If successful, the Buyer needs to fund the direct or multisig address.</p>
       <pre class="lines">
 
 
-402</pre>
+398</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 402</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 398</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sales'>sales</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_sales'>get_sales</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -4765,10 +4757,10 @@ If successful, the Buyer needs to fund the direct or multisig address.</p>
       <pre class="lines">
 
 
-359</pre>
+355</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 359</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 355</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_settings'>settings</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_settings'>get_settings</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -4828,16 +4820,16 @@ OpenBazaar server component.</p>
       <pre class="lines">
 
 
+510
+511
+512
+513
 514
 515
-516
-517
-518
-519
-520</pre>
+516</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 514</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 510</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_shutdown!'>shutdown!</span>
   <span class='kw'>begin</span>
@@ -4926,7 +4918,6 @@ get the profile data from</p>
       <pre class="lines">
 
 
-77
 78
 79
 80
@@ -4934,10 +4925,11 @@ get the profile data from</p>
 82
 83
 84
-85</pre>
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 78</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_social_accounts'>social_accounts</span><span class='lparen'>(</span><span class='id identifier rubyid_profile'>profile</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_profile'>get_profile</span><span class='lparen'>(</span><span class='id identifier rubyid_profile'>profile</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span>
@@ -5025,10 +5017,10 @@ sharing metadata.</p>
       <pre class="lines">
 
 
-180</pre>
+176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 180</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 176</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unfollow'>unfollow</span><span class='lparen'>(</span><span class='id identifier rubyid_unfollow'>unfollow</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_unfollow'>post_unfollow</span><span class='lparen'>(</span><span class='id identifier rubyid_unfollow'>unfollow</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -5088,10 +5080,10 @@ network as a Moderator.</p>
       <pre class="lines">
 
 
-303</pre>
+299</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 303</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 299</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unmake_moderator'>unmake_moderator</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_unmake_moderator'>post_unmake_moderator</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -5168,10 +5160,10 @@ visible to other nodes.</p>
       <pre class="lines">
 
 
-188</pre>
+184</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 188</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 184</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_profile'>update_profile</span><span class='lparen'>(</span><span class='id identifier rubyid_profile'>profile</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_profile'>post_profile</span><span class='lparen'>(</span><span class='id identifier rubyid_profile'>profile</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -5247,10 +5239,10 @@ visible to other nodes.</p>
       <pre class="lines">
 
 
-353</pre>
+349</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 353</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 349</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_settings'>update_settings</span><span class='lparen'>(</span><span class='id identifier rubyid_settings'>settings</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_settings'>post_settings</span><span class='lparen'>(</span><span class='id identifier rubyid_settings'>settings</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -5273,20 +5265,20 @@ visible to other nodes.</p>
       <pre class="lines">
 
 
+271
+272
+273
+274
 275
 276
 277
 278
 279
 280
-281
-282
-283
-284
-285</pre>
+281</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 275</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 271</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_upload_contract_images_with'>upload_contract_images_with</span><span class='lparen'>(</span><span class='id identifier rubyid_symbol'>symbol</span><span class='comma'>,</span> <span class='id identifier rubyid_contract'>contract</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_contract'>contract</span><span class='lbracket'>[</span><span class='symbol'>:images</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_contract'>contract</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_symbol'>symbol</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_image'>image</span><span class='op'>|</span>
@@ -5390,10 +5382,10 @@ only, no base64 prefix)</p>
       <pre class="lines">
 
 
-338</pre>
+334</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 338</span>
+      <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 334</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_upload_image'>upload_image</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='const'>JSON</span><span class='lbracket'>[</span><span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_post_upload_image'>post_upload_image</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>cookies:</span> <span class='id identifier rubyid_cookies'>cookies</span><span class='comma'>,</span> <span class='label'>base_url:</span> <span class='id identifier rubyid_base_url'>base_url</span><span class='comma'>,</span> <span class='label'>verify_ssl:</span> <span class='id identifier rubyid_verify_ssl'>verify_ssl</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -5406,7 +5398,7 @@ only, no base64 prefix)</p>
 </div>
 
     <div id="footer">
-  Generated on Sat Jun  4 14:30:43 2016 by
+  Generated on Mon Jun  6 17:02:05 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.1.5).
 </div>
