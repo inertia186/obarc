@@ -29,7 +29,7 @@ module OBarc
       url = "#{build_base_url(options)}/login"
       auth = build_authentication(options)
       
-      raise Utils::Exceptions::OBarcError, 'Login username and password required.' if auth.empty?
+      raise Utils::Exceptions::MissingArgumentError, [:username, :password] if auth.empty?
 
       execute method: :post, url: url, headers: {params: auth},
         verify_ssl: build_verify_ssl(options)
@@ -111,9 +111,9 @@ module OBarc
       guid = contracts[:guid]
       
       if !!id && id.size != 40
-        raise Utils::Exceptions::OBarcError, "id must be 40 characters, if present (was: #{id.size})"
+        raise Utils::Exceptions::InvalidArgumentError, id: "must be 40 characters, if present (was: #{id.size})"
       elsif !!guid && guid.size != 40
-        raise Utils::Exceptions::OBarcError, "guid must be 40 characters, if present (was: #{guid.size})"
+        raise Utils::Exceptions::InvalidArgumentError, guid: "must be 40 characters, if present (was: #{guid.size})"
       end
       
       url = "#{build_base_url(options)}/contracts"
@@ -127,7 +127,7 @@ module OBarc
       guid = chat_messages[:guid]
       
       if guid.nil? || guid.size != 40
-        raise Utils::Exceptions::OBarcError, "guid must be present, 40 characters (was: #{guid.inspect})"
+        raise Utils::Exceptions::InvalidArgumentError, guid: "must be present, 40 characters (was: #{guid.inspect})"
       end
       
       url = "#{build_base_url(options)}/get_chat_messages"
@@ -141,7 +141,7 @@ module OBarc
       order_id = order[:order_id]
       
       if order_id.nil?
-        raise Utils::Exceptions::OBarcError, 'order_id must be present'
+        raise Utils::Exceptions::InvalidArgumentError, order_id: 'must be present'
       end
       
       url = "#{build_base_url(options)}/get_order"

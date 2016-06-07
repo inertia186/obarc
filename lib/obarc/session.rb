@@ -508,11 +508,7 @@ module OBarc
     # @return nil
     # @see https://gist.github.com/drwasho/742505589f62f6aa98b4#get-shutdown
     def shutdown!
-      begin
-        Api::get_shutdown(self)
-      rescue Errno::ECONNREFUSED => e
-        logger.warn(e)
-      end
+      Api::get_shutdown(self)
     end
   end
 end
