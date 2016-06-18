@@ -11,17 +11,20 @@ module OBarc
     def setup
       @logger = Logging.logger['test']
       @session = if ENV["TEST_NET"]
+        # :nocov:
         server_host = ENV["OB_SERVER_HOST"] || 'localhost'
         username = ENV["OB_USERNAME"] || 'username'
         password = ENV["OB_PASSWORD"] || 'password'
         
         OBarc::Session.new(server_host: server_host, username: username, password: password, logger: @logger)
+        # :nocov:
       else
         stub_post_login
         OBarc::Session.new(username: 'username', password: 'password', logger: @logger)
       end
       
       if ENV["TEST_NET"]
+        # :nocov:
         # This will ensure we're on testnet becasue only testnet bitcoin
         # addresses are allowed.
         begin
@@ -31,15 +34,13 @@ module OBarc
             flunk 'Detected mainnet!  Please do not run these tests against outside of testnet.'
           end
         end
+        # :nocov:
       end
     end
     
     def test_method_missing
-      begin
+      assert_raises NoMethodError do
         @session.bogus
-        fail 'did not expect missing method not to be missing'
-      rescue NoMethodError => _
-        # success
       end
     end
     
@@ -56,8 +57,6 @@ module OBarc
           refute bad_session.ping, 'did not expect ping to work'
         end
       end
-    rescue RestClient::Unauthorized => _
-        # success
     end
 
     def test_ping_verify_ssl
@@ -79,24 +78,25 @@ module OBarc
     end
 
     def test_image
-      begin
-        response = stub_get_image(hash: '04192728d0fd8dfe6663f429a5c03a7faf907930') do
-          @session.image hash: '04192728d0fd8dfe6663f429a5c03a7faf907930'
-        end
-          
-        assert response, response
-      rescue RestClient::ResourceNotFound => e
-        fail e.inspect if defined? WebMock
+      response = stub_get_image(hash: '04192728d0fd8dfe6663f429a5c03a7faf907930') do
+        @session.image hash: '04192728d0fd8dfe6663f429a5c03a7faf907930'
       end
+        
+      assert response, response
+    rescue RestClient::ResourceNotFound => e
+      # :nocov:
+      if defined? WebMock
+        fail "did not expect webmock to return 404: #{e.inspect}"
+      end
+      # :nocov:
+      
+      # conditional success if testnet because image doesn't exist
     end
     
     def test_image_wrong_hash
       stub_get_image(hash: 'WRONG') do
-        begin
+        assert_raises RestClient::ResourceNotFound do
           _ = @session.image(hash: 'WRONG')
-          fail 'Should be 404'
-        rescue RestClient::ResourceNotFound => _
-          # success
         end
       end
     end
@@ -109,7 +109,9 @@ module OBarc
       if defined? WebMock
         assert response['profile'], response
       else
+        # :nocov:
         skip "Don't worry about these responses."
+        # :nocov:
       end
     end
     
@@ -129,7 +131,9 @@ module OBarc
       if defined? WebMock
         assert response.any?, response
       else
+        # :nocov:
         skip "Don't worry about these responses."
+        # :nocov:
       end
     end
     
@@ -142,13 +146,10 @@ module OBarc
     end
     
     def test_social_accounts_invalid
-      begin
+      assert_raises RestClient::InternalServerError do
         stub_500_error_odd_string_length :get, /profile/ do
           @session.social_accounts(guid: 'INVALID')
-          fail 'did not expect short guid to work'
         end
-      rescue RestClient::InternalServerError => _
-        # success
       end
     end
     
@@ -160,7 +161,9 @@ module OBarc
       if defined? WebMock
         assert response.any?, response
       else
+        # :nocov:
         skip "Don't worry about these responses."
+        # :nocov:
       end
     end
     
@@ -172,7 +175,9 @@ module OBarc
       if defined? WebMock
         assert response['listings'], response
       else
+        # :nocov:
         skip "Don't worry about these responses."
+        # :nocov:
       end
     end
     
@@ -196,7 +201,9 @@ module OBarc
       if defined? WebMock
         assert response['listings'].any?, response
       else
+        # :nocov:
         refute response['listings'].any?, response
+        # :nocov:
       end
     end
     
@@ -212,7 +219,9 @@ module OBarc
       if defined? WebMock
         assert response['listings'].any?, response
       else
+        # :nocov:
         skip "Don't worry about these responses."
+        # :nocov:
       end
     end
     
@@ -225,7 +234,9 @@ module OBarc
         assert response['listings'], response
         assert response['listings'].any?, response
       else
+        # :nocov:
         skip "Don't worry about these responses."
+        # :nocov:
       end
     end
     
@@ -239,7 +250,9 @@ module OBarc
         assert response['listings'], response
         assert response['listings'].any?, response
       else
+        # :nocov:
         skip "Don't worry about these responses."
+        # :nocov:
       end
     end
     
@@ -251,7 +264,9 @@ module OBarc
       if defined? WebMock
         assert response['followers'], response
       else
+        # :nocov:
         skip "Don't worry about these responses."
+        # :nocov:
       end
     end
     
@@ -271,7 +286,9 @@ module OBarc
       if defined? WebMock
         assert response['following'], response
       else
+        # :nocov:
         refute response['following'], response
+        # :nocov:
       end
     end
     
@@ -283,7 +300,9 @@ module OBarc
       if defined? WebMock
         assert response['following'], response
       else
+        # :nocov:
         refute response['following'], response
+        # :nocov:
       end
     end
     
@@ -295,7 +314,9 @@ module OBarc
       if defined? WebMock
         assert response['success'], response
       else
+        # :nocov:
         refute response['success'], response
+        # :nocov:
       end
     end
     
@@ -307,7 +328,9 @@ module OBarc
       if defined? WebMock
         assert response['success'], response
       else
+        # :nocov:
         refute response['success'], response
+        # :nocov:
       end
     end
     
@@ -393,7 +416,9 @@ module OBarc
       if defined? WebMock
         refute response['success'], response
       else
+        # :nocov:
         assert response['success'], response
+        # :nocov:
       end
     end
     
@@ -405,7 +430,9 @@ module OBarc
       if defined? WebMock
         assert response['vendor_offer'], response
       else
+        # :nocov:
         refute response['vendor_offer'], response
+        # :nocov:
       end
     end
     
@@ -417,7 +444,9 @@ module OBarc
       if defined? WebMock
         refute response.empty?, response
       else
+        # :nocov:
         assert response.empty?, response
+        # :nocov:
       end
     end
     
@@ -431,22 +460,16 @@ module OBarc
     
     def test_contracts_short_id
       stub_get_generic_empty_hash as: :contracts, times: 0 do
-        begin
+        assert_raises OBarc::Utils::Exceptions::OBarcError do
           _ = @session.contracts(id: '123')
-          fail 'did not expect short id to work'
-        rescue OBarc::Utils::Exceptions::OBarcError => _
-          # success
         end
       end
     end
     
     def test_contracts_short_guid
       stub_get_generic_empty_hash as: :contracts, times: 0 do
-        begin
+        assert_raises OBarc::Utils::Exceptions::OBarcError do
           _ = @session.contracts(guid: '123')
-          fail 'did not expect short guid to work'
-        rescue OBarc::Utils::Exceptions::OBarcError => _
-          # success
         end
       end
     end
@@ -659,6 +682,7 @@ module OBarc
       refute response['success'], response
       skip 'api currently responds incorrectly with an empty id' if defined? WebMock
       
+      # :nocov:
       if !!response['id']
         fail "Issue 329 fixed!  Please review this condition."
         # Once fixed, maybe we'll do this to verify.
@@ -669,6 +693,7 @@ module OBarc
         # Once fixed, we'll do this to detect regression.
         fail "Regression for issue 329 detected!"
       end
+      # :nocov:
     end
     
     def test_create_contract_empty
@@ -687,7 +712,9 @@ module OBarc
       if defined? WebMock
         assert response['success'], response
       else
+        # :nocov:
         refute response['success'], response
+        # :nocov:
       end
     end
     
@@ -719,11 +746,11 @@ module OBarc
       skip "Decided not to test shutdown in testnet mode." if ENV["TEST_NET"]
       
       stub_timeout :get, /shutdown/ do
-        begin
+        assert_raises RestClient::RequestTimeout do
           response = @session.shutdown!
+          # :nocov:
           fail "did not expect response after shutdown, got: #{response}"
-        rescue RestClient::RequestTimeout => _
-          # success
+          # :nocov:
         end
       end
     end
@@ -754,7 +781,9 @@ module OBarc
       if defined? WebMock
         assert response['success'], response
       else
+        # :nocov:
         refute response['success'], response
+        # :nocov:
       end
     end
     
@@ -773,7 +802,9 @@ module OBarc
       if defined? WebMock
         assert response['success'], response
       else
+        # :nocov:
         refute response['success'], response
+        # :nocov:
       end
     end
     
@@ -950,11 +981,8 @@ module OBarc
     end
     
     def test_chat_messages_invalid
-      begin
+      assert_raises OBarc::Utils::Exceptions::OBarcError do
         @session.chat_messages(guid: 'WRONG')
-        fail 'bad guid should cause exception'
-      rescue OBarc::Utils::Exceptions::OBarcError => _
-        #success
       end
     end
     
@@ -999,11 +1027,8 @@ module OBarc
     end
     
     def test_order_empty
-      begin
+      assert_raises OBarc::Utils::Exceptions::OBarcError do
         @session.order({})
-        fail 'missing order_id should cause exception'
-      rescue OBarc::Utils::Exceptions::OBarcError => _
-        #success
       end
     end
     
@@ -1048,7 +1073,9 @@ module OBarc
       if defined? WebMock
         refute response['success'], response
       else
+        # :nocov:
         assert response['success'], response
+        # :nocov:
       end
     end
     
@@ -1060,7 +1087,9 @@ module OBarc
       if defined? WebMock
         refute response['success'], response
       else
+        # :nocov:
         assert response['success'], response
+        # :nocov:
       end
     end
     
@@ -1123,7 +1152,9 @@ module OBarc
         # Generic failure is a little crude.
         assert_equal "RTFM!!", response['message'], response
       else
+        # :nocov:
         assert_equal "", response['reason'], response
+        # :nocov:
       end
       
       response
@@ -1139,7 +1170,9 @@ module OBarc
         # Generic failure is a little crude.
         assert_equal "RTFM!!", response['message'], response
       else
+        # :nocov:
         assert_equal "local variable 'file_path' referenced before assignment", response['reason'], response
+        # :nocov:
       end
     end
     
@@ -1153,7 +1186,9 @@ module OBarc
         # Generic failure is a little crude.
         assert_equal "RTFM!!", response['message'], response
       else
+        # :nocov:
         assert_equal "expected string or buffer", response['reason'], response
+        # :nocov:
       end
     end
     
