@@ -21,6 +21,11 @@ require 'pry'
 
 if ENV["HELL_ENABLED"]
   require "minitest/hell"
+  
+  class Minitest::Test
+    # See: https://gist.github.com/chrisroos/b5da6c6a37ac8af5fe78
+    parallelize_me! unless defined? WebMock
+  end
 else
   require "minitest/pride"
 end
@@ -33,70 +38,70 @@ using OBarc::Utils::Helper::ObjectExtensions
 
 class OBarc::Test < MiniTest::Test
   def stub_post_login ( & block )
-    @stub_login ||= if defined? WebMock
+    stub_login = if defined? WebMock
       stub_request(:post, /login/).
         to_return(status: 200, body: '{"success": true}', headers: {'Set-Cookie' => 'TWISTED_SESSION=e564e3329ec7a205ee588bfc32c98ac3; Path=/'})
     end
       
     if !!block
       yield
-      if !!@stub_login
-        assert_requested @stub_login, times: 1 and remove_request_stub @stub_login
+      if !!stub_login
+        assert_requested stub_login, times: 1 and remove_request_stub stub_login
       end
     end
   end
   
   def stub_500_error_odd_string_length ( method, pattern, & block )
-    @stub_500_error_odd_string_length ||= if defined? WebMock
+    stub_500_error_odd_string_length = if defined? WebMock
       stub_request(method, pattern).
         to_return(status: 500, body: fixture('500_error_odd_string_length.html'))
     end
     
     if !!block
       yield
-      if !!@stub_500_error_odd_string_length
-        assert_requested @stub_500_error_odd_string_length, times: 1 and remove_request_stub @stub_500_error_odd_string_length
+      if !!stub_500_error_odd_string_length
+        assert_requested stub_500_error_odd_string_length, times: 1 and remove_request_stub stub_500_error_odd_string_length
       end
     end
   end
   
   def stub_401_unauthorized ( method, pattern, & block )
-    @stub_401_error_odd_string_length ||= if defined? WebMock
+    stub_401_error_odd_string_length = if defined? WebMock
       stub_request(method, pattern).
         to_return(status: 401, body: fixture('401_unauthorized.html'))
     end
     
     if !!block
       yield
-      if !!@stub_401_error_odd_string_length
-        assert_requested @stub_401_error_odd_string_length, times: 1 and remove_request_stub @stub_401_error_odd_string_length
+      if !!stub_401_error_odd_string_length
+        assert_requested stub_401_error_odd_string_length, times: 1 and remove_request_stub stub_401_error_odd_string_length
       end
     end
   end
   
   def stub_connection_refused ( method, pattern, & block )
-    @stub_connection_refused ||= if defined? WebMock
+    stub_connection_refused = if defined? WebMock
       stub_request(method, pattern).
         to_raise(Errno::ECONNREFUSED)
     end
     
     if !!block
       yield
-      if !!@stub_connection_refused
-        assert_requested @stub_connection_refused, times: 1 and remove_request_stub @stub_connection_refused
+      if !!stub_connection_refused
+        assert_requested stub_connection_refused, times: 1 and remove_request_stub stub_connection_refused
       end
     end
   end
   
   def stub_timeout ( method, pattern, & block )
-    @stub_timeout ||= if defined? WebMock
+    stub_timeout = if defined? WebMock
       stub_request(method, pattern).to_timeout
     end
     
     if !!block
       yield
-      if !!@stub_timeout
-        assert_requested @stub_timeout, times: 1 and remove_request_stub @stub_timeout
+      if !!stub_timeout
+        assert_requested stub_timeout, times: 1 and remove_request_stub stub_timeout
       end
     end
   end
@@ -159,6 +164,6 @@ private
   end
   
   def fixture_path
-    @support_path ||= 'test/fixtures'
+    'test/fixtures'
   end
 end
