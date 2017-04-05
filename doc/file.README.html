@@ -62,7 +62,7 @@
     <iframe id="search_frame"></iframe>
 
     <div id="content"><div id='filecontents'>
-<h1 id="label-OpenBazaar+API+Ruby+Client">OpenBazaar API Ruby Client</h1>
+<h1 id="label-OpenBazaar+API+Ruby+Client"><a href="https://github.com/inertia186/obarc">OpenBazaar API Ruby Client</a></h1>
 
 <p><a href="https://travis-ci.org/inertia186/obarc"><img
 src="https://travis-ci.org/inertia186/obarc.svg?branch=master"></a> <a
@@ -73,11 +73,21 @@ src="https://codeclimate.com/github/inertia186/obarc/badges/coverage.svg"></a></
 
 <p>A simple OpenBazaar API client for Ruby.</p>
 
+<h4 id="label-Fixes+in+0.5.2">Fixes in 0.5.2</h4>
+<ul><li>
+<p>Support for gem release.</p>
+</li><li>
+<p>Dependency refresh.</p>
+</li><li>
+<p>Deprecation removal.</p>
+</li></ul>
+
 <h3 id="label-Installation">Installation</h3>
 
 <p>Add the gem to your Gemfile:</p>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>obarc</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>github:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>inertia186/obarc</span><span class='tstring_end'>&#39;</span></span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>obarc</span><span class='tstring_end'>&#39;</span></span>
+</code></pre>
 
 <p>Then:</p>
 
@@ -105,39 +115,54 @@ src="https://codeclimate.com/github/inertia186/obarc/badges/coverage.svg"></a></
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_session'>session</span><span class='period'>.</span><span class='id identifier rubyid_update_profile'>update_profile</span><span class='lparen'>(</span><span class='label'>email:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>big@vendor.com</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 </code></pre>
 
-<pre class="code ruby"><code class="ruby">{&quot;success&quot;: true}</code></pre>
+<pre class="code ruby"><code class="ruby"><span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>success</span><span class='label_end'>&quot;:</span> <span class='kw'>true</span><span class='rbrace'>}</span>
+</code></pre>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_session'>session</span><span class='period'>.</span><span class='id identifier rubyid_connected_peers'>connected_peers</span>
 </code></pre>
 
-<pre class="code ruby"><code class="ruby">{&quot;peers&quot;: [[&quot;5.37.3.8&quot;, 28467]], &quot;num_peers&quot;: 1}</code></pre>
+<pre class="code ruby"><code class="ruby"><span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>peers</span><span class='label_end'>&quot;:</span> <span class='lbracket'>[</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>5.37.3.8</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>28467</span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>num_peers</span><span class='label_end'>&quot;:</span> <span class='int'>1</span><span class='rbrace'>}</span>
+</code></pre>
 
 <p>If you want to manually upload an image, this will return the image hash.
 <code>ruby session.upload_image(image:
 &#39;iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAVlpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KTMInWQAAC91JREFUWAktl3mQHOV5xn99zH3u7K1d7Uq7CEkIpNVZRhagQDjKCcaxSIJNIJTjI5XCuakKceXyHy5XnJSr&#39;)
 </code> <code>json {&quot;image_hashes&quot;:
 [&quot;a89810619833ef29d373c124ce05f362a313929e&quot;],
-&quot;success&quot;: true} </code> You can also add a new listing with
-image URLs in the hash. The client will upload them and save the image
-hashes to the contract. <code>ruby session.create_contract(  
-expiration_date: &#39;&#39;,   metadata_category: &#39;physical good&#39;, 
-title: &#39;Black Dress&#39;,   description: &#39;A pretty black
-dress.&#39;,   currency_code: &#39;USD&#39;,   price: &#39;19.95&#39;,  
-process_time: &#39;3 Business Days&#39;,   nsfw: &#39;false&#39;,  
-shipping_origin: &#39;UNITED_STATES&#39;,   ships_to:
-&#39;UNITED_STATES&#39;,   est_delivery_domestic: &#39;5-7 Business
-Days&#39;,   est_delivery_international: &#39;&#39;,   terms_conditions:
-&quot;We cannot ship to PO Boxes/APO&#39;s\n * We cannot combine
-shipping.\n * No Local Pickup.&quot;,   returns: &quot;Your satisfaction is
-guaranteed! If for any reason you are unhappy with your item, we can
-arrange a return within 14 days for a full refund, minus shipping cost.
-Please contact us prior to initiating a return so that we can issue you a
-refund authorization.&quot;,   shipping_currency_code: &#39;USD&#39;,  
-shipping_domestic: true,   shipping_international: false,   keywords:
-&#39;dress&#39;,   category: &#39;&#39;,   condition: &#39;New&#39;,   sku:
-&#39;123456789&#39;,   image_urls:
-[&#39;http://i.imgur.com/2KXXHSt.jpg&#39;],   free_shipping: true ) </code>
-<code>json {&quot;success&quot;: true} </code></p>
+&quot;success&quot;: true} </code></p>
+
+<p>You can also add a new listing with image URLs in the hash. The client will
+upload them and save the image hashes to the contract.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_session'>session</span><span class='period'>.</span><span class='id identifier rubyid_create_contract'>create_contract</span><span class='lparen'>(</span>
+  <span class='label'>expiration_date:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>metadata_category:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>physical good</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>title:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Black Dress</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>description:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>A pretty black dress.</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>currency_code:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>USD</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>price:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>19.95</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>process_time:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>3 Business Days</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>nsfw:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>false</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>shipping_origin:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>UNITED_STATES</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>ships_to:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>UNITED_STATES</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>est_delivery_domestic:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>5-7 Business Days</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>est_delivery_international:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>terms_conditions:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>We cannot ship to PO Boxes/APO&#39;s\n * We cannot combine shipping.\n * No Local Pickup.</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>returns:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Your satisfaction is guaranteed! If for any reason you are unhappy with your item, we can arrange a return within 14 days for a full refund, minus shipping cost. Please contact us prior to initiating a return so that we can issue you a refund authorization.</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>shipping_currency_code:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>USD</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>shipping_domestic:</span> <span class='kw'>true</span><span class='comma'>,</span>
+  <span class='label'>shipping_international:</span> <span class='kw'>false</span><span class='comma'>,</span>
+  <span class='label'>keywords:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>dress</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>category:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>condition:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>New</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>sku:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>123456789</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>image_urls:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>http://i.imgur.com/2KXXHSt.jpg</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='label'>free_shipping:</span> <span class='kw'>true</span>
+<span class='rparen'>)</span>
+</code></pre>
+
+<pre class="code ruby"><code class="ruby"><span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>success</span><span class='label_end'>&quot;:</span> <span class='kw'>true</span><span class='rbrace'>}</span>
+</code></pre>
 
 <h2 id="label-Tests">Tests</h2>
 <ul><li>
@@ -179,11 +204,13 @@ href="http://www.rubydoc.info/github/inertia186/obarc/master/OBarc/Session">Sess
 <p><code>OpenBazaar-Server 1.1.15</code></p>
 </li></ul>
 
-<h2 id="label-Get+in+touch%21">Get in touch!</h2>
+<h2 id="label-Get+in+touch-21">Get in touch!</h2>
 
 <p>If you&#39;re using OBarc, I&#39;d love to hear from you. Drop me a line
 and tell me what you think!</p>
-
+<center>
+  <img src="https://cl.ly/233t0q0v2j0p/obarc-logo.png" />
+</center>
 <h2 id="label-Licence">Licence</h2>
 
 <p>I don&#39;t believe in intellectual “property”. If you do, consider OBarc
@@ -193,9 +220,9 @@ src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a> License.</p>
 </div></div>
 
     <div id="footer">
-  Generated on Mon Jun  6 17:02:04 2016 by
+  Generated on Tue Apr  4 17:29:29 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.1.5).
+  0.8.7.6 (ruby-2.2.5).
 </div>
 
   </body>

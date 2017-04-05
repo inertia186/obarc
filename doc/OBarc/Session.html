@@ -4822,21 +4822,13 @@ OpenBazaar server component.</p>
 
 510
 511
-512
-513
-514
-515
-516</pre>
+512</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/obarc/session.rb', line 510</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_shutdown!'>shutdown!</span>
-  <span class='kw'>begin</span>
-    <span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_shutdown'>get_shutdown</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
-  <span class='kw'>rescue</span> <span class='const'>Errno</span><span class='op'>::</span><span class='const'>ECONNREFUSED</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
-    <span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_warn'>warn</span><span class='lparen'>(</span><span class='id identifier rubyid_e'>e</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
+  <span class='const'>Api</span><span class='op'>::</span><span class='id identifier rubyid_get_shutdown'>get_shutdown</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -5282,10 +5274,10 @@ visible to other nodes.</p>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_upload_contract_images_with'>upload_contract_images_with</span><span class='lparen'>(</span><span class='id identifier rubyid_symbol'>symbol</span><span class='comma'>,</span> <span class='id identifier rubyid_contract'>contract</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_contract'>contract</span><span class='lbracket'>[</span><span class='symbol'>:images</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_contract'>contract</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_symbol'>symbol</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_image'>image</span><span class='op'>|</span>
-    <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_image'>image</span> <span class='op'>=~</span> <span class='const'>URI</span><span class='op'>::</span><span class='id identifier rubyid_regexp'>regexp</span>
+    <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&lt;</span> <span class='int'>2000</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_image'>image</span> <span class='op'>=~</span> <span class='const'>URI</span><span class='op'>::</span><span class='const'>ABS_URI</span>
       <span class='id identifier rubyid_upload_image'>upload_image</span><span class='lparen'>(</span><span class='label'>image:</span> <span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>rb</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
     <span class='kw'>else</span>
-      <span class='id identifier rubyid_upload_image'>upload_image</span><span class='lparen'>(</span><span class='label'>image:</span> <span class='id identifier rubyid_image'>image</span> <span class='rparen'>)</span>
+      <span class='id identifier rubyid_upload_image'>upload_image</span><span class='lparen'>(</span><span class='label'>image:</span> <span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span>
     <span class='kw'>end</span>
              
     <span class='id identifier rubyid_response'>response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>image_hashes</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_response'>response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>success</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
@@ -5398,9 +5390,9 @@ only, no base64 prefix)</p>
 </div>
 
     <div id="footer">
-  Generated on Mon Jun  6 17:02:05 2016 by
+  Generated on Tue Apr  4 17:29:30 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.1.5).
+  0.8.7.6 (ruby-2.2.5).
 </div>
 
   </body>

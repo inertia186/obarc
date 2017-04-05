@@ -1,42 +1,44 @@
 PATH
   remote: .
   specs:
-    obarc (0.5.1)
-      logging (~> 2.1.0)
-      rest-client (~> 1.8.0)
+    obarc (0.5.2)
+      logging (~> 2.1, >= 2.1.0)
+      rest-client (~> 1.8, >= 1.8.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.4.0)
+    addressable (2.5.1)
+      public_suffix (~> 2.0, >= 2.0.2)
     codeclimate-test-reporter (0.5.2)
       simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.1)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     docile (1.1.5)
-    domain_name (0.5.20160615)
+    domain_name (0.5.20170223)
       unf (>= 0.0.5, < 1.0.0)
-    hashdiff (0.3.0)
-    http-cookie (1.0.2)
+    hashdiff (0.3.2)
+    http-cookie (1.0.3)
       domain_name (~> 0.5)
-    json (1.8.3)
+    json (1.8.6)
     little-plugger (1.1.4)
-    logging (2.1.0)
+    logging (2.2.0)
       little-plugger (~> 1.1)
       multi_json (~> 1.10)
     method_source (0.8.2)
-    mime-types (2.99.2)
-    minitest (5.9.0)
+    mime-types (2.99.3)
+    minitest (5.10.1)
     minitest-line (0.6.3)
       minitest (~> 5.0)
     multi_json (1.12.1)
     netrc (0.11.0)
-    pry (0.10.3)
+    pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    rake (11.2.2)
+    public_suffix (2.0.5)
+    rake (11.3.0)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -51,7 +53,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
-    webmock (2.1.0)
+    webmock (2.3.2)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
@@ -63,14 +65,14 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.11)
   codeclimate-test-reporter (~> 0.5.2)
-  minitest (~> 5.9.0)
+  minitest (~> 5.9, >= 5.9.0)
   minitest-line (~> 0.6.3)
   obarc!
   pry (~> 0.10.3)
-  rake (~> 11.2.2)
+  rake (~> 11.2, >= 11.2.2)
   simplecov (~> 0.11.2)
-  webmock (~> 2.1.0)
+  webmock (~> 2.1, >= 2.1.0)
   yard (~> 0.8.7.6)
 
 BUNDLED WITH
-   1.12.5
+   1.14.3

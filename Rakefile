@@ -18,3 +18,22 @@ YARD::Rake::YardocTask.new do |t|
 end
 
 task default: :test
+
+task :console do
+  exec "irb -r obarc -I ./lib"
+end
+
+task :build do
+  exec 'gem build obarc.gemspec'
+end
+
+task :push do
+  exec "gem push obarc-#{OBarc::VERSION}.gem"
+end
+
+# We're not going to yank on a regular basis, but this is how it's done if you
+# really want a task for that for some reason.
+
+# task :yank do
+#   exec "gem yank obarc -v #{OBarc::VERSION}"
+# end

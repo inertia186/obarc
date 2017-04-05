@@ -1,19 +1,29 @@
-OpenBazaar API Ruby Client
+[OpenBazaar API Ruby Client](https://github.com/inertia186/obarc)
 ==========================
  
 [![Build Status](https://travis-ci.org/inertia186/obarc.svg?branch=master)](https://travis-ci.org/inertia186/obarc) [![Code Climate](https://codeclimate.com/github/inertia186/obarc/badges/gpa.svg)](https://codeclimate.com/github/inertia186/obarc) [![Test Coverage](https://codeclimate.com/github/inertia186/obarc/badges/coverage.svg)](https://codeclimate.com/github/inertia186/obarc)
 
 A simple OpenBazaar API client for Ruby.
 
+#### Fixes in 0.5.2
+
+* Support for gem release.
+* Dependency refresh.
+* Deprecation removal.
+
 ### Installation
 
 Add the gem to your Gemfile:
 
-    gem 'obarc', github: 'inertia186/obarc'
+```ruby
+gem 'obarc'
+```
     
 Then:
 
-    $ bundle install
+```bash
+$ bundle install
+```
 
 ### Usage
 
@@ -54,7 +64,9 @@ session.upload_image(image: 'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXN
 ```json
 {"image_hashes": ["a89810619833ef29d373c124ce05f362a313929e"], "success": true}
 ```
+
 You can also add a new listing with image URLs in the hash.  The client will upload them and save the image hashes to the contract.
+
 ```ruby
 session.create_contract(
   expiration_date: '',
@@ -111,6 +123,10 @@ session.create_contract(
 ## Get in touch!
 
 If you're using OBarc, I'd love to hear from you.  Drop me a line and tell me what you think!
+
+<center>
+  <img src="https://cl.ly/233t0q0v2j0p/obarc-logo.png" />
+</center>
 
 ## Licence
 

@@ -270,10 +270,10 @@ module OBarc
 
     def upload_contract_images_with(symbol, contract = {})
       contract[:images] = [contract.delete(symbol)].flatten.map do |image|
-        response = if image =~ URI::regexp
+        response = if image.size < 2000 && image =~ URI::ABS_URI
           upload_image(image: open(image, 'rb'))
         else
-          upload_image(image: image )
+          upload_image(image: image)
         end
                  
         response['image_hashes'] if response['success']
